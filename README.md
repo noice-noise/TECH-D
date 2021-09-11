@@ -1,5 +1,5 @@
 # TECH-D
-** Technologian Electronic Help Desk** (TECH-D) made with Unity for our CPEPE361 Software Development course.
+**Technologian Electronic Help Desk** (TECH-D) made with Unity for our CPEPE361 Software Development course.
  
  
 **Members**:
