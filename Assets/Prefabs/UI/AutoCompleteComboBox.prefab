@@ -634,14 +634,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disabledTextColor: {r: 0, g: 0, b: 0, a: 0}
-  AvailableOptions:
-  - FFF
-  - F
-  - F
-  - SDSD
-  - DF
+  AvailableOptions: []
   _scrollBarWidth: 1
-  _itemsToDisplay: 5
+  _itemsToDisplay: 10
   SelectFirstItemOnStart: 0
   _ChangeInputTextColorBasedOnMatchingItems: 1
   ValidSelectionTextColor: {r: 0.7254902, g: 0.39607847, b: 0.41960788, a: 1}
@@ -686,7 +681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cefa4ce7bb9877440ab9ed1655423610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  list: []
 --- !u!1 &3631738976095769914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,7 +1043,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 20
+  m_CharacterLimit: 50
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []

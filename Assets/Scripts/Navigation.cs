@@ -78,11 +78,14 @@ public class Navigation : Singleton<Navigation>
     }
 
     public void SelectFromButton(Transform targetTransform) {
+        Debug.Log("Target: " + targetTransform.name);
         var focusableTransform = targetTransform.Find("Focus");
         
         if (focusableTransform == null) {
-            Debug.LogError("After button clicked, no focusable transform detected.");
-            return;
+            Debug.LogError("After button clicked, no focusable transform detected. " + targetTransform.name);
+            // return;
+        } else {
+
         }
 
         currentlyFocusedBuilding = targetTransform;

@@ -28,10 +28,14 @@ public class UIManager : Singleton<UIManager>
     public GameObject roomsButtonPrefab;
     public GameObject quickSearchPrefab;
 
-    private Transform currentlySelectedBuilding;
+    public Transform currentlySelectedBuilding;
     private IEnumerable<Transform> worldChildren;
 
+    public MapData mapData;
+
+
     private void Start() {
+        worldChildren = world.transform.Cast<Transform>();
         DisplayBuildingPane();
         InitQuickSearch();
     }
@@ -51,8 +55,23 @@ public class UIManager : Singleton<UIManager>
     }
 
     private void UpdateHeader() {
-        var text = leftNavTitle.GetComponent<TextMeshProUGUI>();
-        text.SetText(currentlySelectedBuilding.transform.name);
+        var title = leftNavTitle.GetComponent<TextMeshProUGUI>();
+        string buildingName = currentlySelectedBuilding.transform.name;
+        title.SetText(buildingName);
+
+        var description = leftNavDescription.GetComponent<TextMeshProUGUI>();
+        bool descriptionAvailable = false;
+
+        foreach (var item in mapData.buildingData) {
+            if (item.buildingName.Trim().Equals(buildingName.Trim())) {
+                description.SetText(item.description);
+                descriptionAvailable = true;
+            }
+        }
+
+        if (!descriptionAvailable) {
+            description.SetText("");
+        }
     }
 
     private void UpdateRoomContents() {
@@ -103,7 +122,7 @@ public class UIManager : Singleton<UIManager>
             .Find("Text")
             .GetComponent<TextMeshProUGUI>()
             .SetText(transformSource.transform.name);
-        newButton.GetComponent<Room>().buildingReference = transformSource;
+        newButton.GetComponent<RoomButton>().buildingReference = transformSource;
     }
 
     private void ClearChildren(Transform uiContents) {
@@ -118,17 +137,47 @@ public class UIManager : Singleton<UIManager>
 
     public void InitQuickSearch() {
         var prefab = quickSearchPrefab;
-        
-        List<string> list = new List<string>();
 
-        foreach(Transform child in worldChildren) {
-            if (child.CompareTag("SelectableBuilding")) {
-                list.Add(child.name);
+        List<string> searchList = new List<string>();
+
+        foreach(Transform gameObject in worldChildren) {
+            if (gameObject.CompareTag("SelectableBuilding")) {
+                searchList.Add(gameObject.name);
+
+                List<string> focusableServices = Parse(gameObject, "FocusableServices");
+                searchList.AddRange(focusableServices);
+
+                List<string> focusableRooms = Parse(gameObject, "FocusableRooms");
+                searchList.AddRange(focusableRooms);
             }
         }
 
-        prefab.GetComponent<AutoCompleteComboBox>().AvailableOptions = list;
+        List<string> availableOptions = prefab.GetComponent<AutoCompleteComboBox>().AvailableOptions = searchList;    
         GameObject search = Instantiate(quickSearchPrefab, searchParent, false);
+
+        // Transform itemsList = search.transform.Find("Overlay").transform.Find("ScrollPanel").transform.Find("Items");
+        // transform.Find("Items");
+        // Debug.Log(itemsList.name);
+
+        // // foreach(Transform item in itemsList) {
+        // //     item.GetComponentInChildren<RoomButton>().buildingReference 
+        // //     Debug.Log(item.name);
+        // // }
+    }
+
+    private List<string> Parse(Transform source, string focusableStringID) {
+        var focusable = source.transform.Find(focusableStringID);
+    
+        List<string> list = new List<string>();
+
+        if (focusable != null) {
+            IEnumerable<Transform> focusableRooms = focusable.Cast<Transform>();
+            foreach (Transform room in focusableRooms) {
+                list.Add(room.name);
+            }
+        }
+
+        return list;
     }
 
     public void DisplayBuildingPane() {
@@ -138,8 +187,6 @@ public class UIManager : Singleton<UIManager>
         ClearChildren(listInServicesList);
         listInServicesList.parent.transform.parent.transform.Find("Title").GetComponentInChildren<TextMeshProUGUI>().SetText("Building");
 
-        
-        worldChildren = world.transform.Cast<Transform>();
 
         foreach(Transform child in worldChildren) {
             if (child.CompareTag("SelectableBuilding")) {
