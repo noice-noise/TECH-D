@@ -466,7 +466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &359063877780057161
 RectTransform:
   m_ObjectHideFlags: 0
@@ -515,7 +515,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -545,9 +545,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9803922, g: 0.79215693, b: 0.0627451, a: 1}
+    m_PressedColor: {r: 0.9843138, g: 0.8588236, b: 0.37254903, a: 1}
+    m_SelectedColor: {r: 0.9843138, g: 0.8588236, b: 0.37254903, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -643,10 +643,10 @@ MonoBehaviour:
   _scrollBarWidth: 1
   _itemsToDisplay: 5
   SelectFirstItemOnStart: 0
-  _ChangeInputTextColorBasedOnMatchingItems: 0
-  ValidSelectionTextColor: {r: 0, g: 1, b: 0, a: 1}
-  MatchingItemsRemainingTextColor: {r: 0, g: 0, b: 0, a: 1}
-  NoItemsRemainingTextColor: {r: 1, g: 0, b: 0, a: 1}
+  _ChangeInputTextColorBasedOnMatchingItems: 1
+  ValidSelectionTextColor: {r: 0.7254902, g: 0.39607847, b: 0.41960788, a: 1}
+  MatchingItemsRemainingTextColor: {r: 0.5921569, g: 0.098039225, b: 0.12941177, a: 1}
+  NoItemsRemainingTextColor: {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 1}
   autocompleteSearchType: 1
   OnSelectionTextChanged:
     m_PersistentCalls:

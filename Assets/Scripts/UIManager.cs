@@ -43,6 +43,9 @@ public class UIManager : Singleton<UIManager>
     }
 
     private void UpdateBody() {
+        listInRoomsList.parent.parent.gameObject.SetActive(true);
+        listInServicesList.parent.transform.parent.transform.Find("Title").GetComponentInChildren<TextMeshProUGUI>().SetText("Services");
+
         UpdateServiceContents();
         UpdateRoomContents();
     }
@@ -130,8 +133,12 @@ public class UIManager : Singleton<UIManager>
 
     public void DisplayBuildingPane() {
         ClearChildren(listInRoomsList);
-        ClearChildren(listInServicesList);
+        listInRoomsList.parent.parent.gameObject.SetActive(false);
 
+        ClearChildren(listInServicesList);
+        listInServicesList.parent.transform.parent.transform.Find("Title").GetComponentInChildren<TextMeshProUGUI>().SetText("Building");
+
+        
         worldChildren = world.transform.Cast<Transform>();
 
         foreach(Transform child in worldChildren) {
