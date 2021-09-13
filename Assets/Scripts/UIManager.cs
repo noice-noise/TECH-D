@@ -50,8 +50,11 @@ public class UIManager : Singleton<UIManager>
         listInRoomsList.parent.parent.gameObject.SetActive(true);
         listInServicesList.parent.transform.parent.transform.Find("Title").GetComponentInChildren<TextMeshProUGUI>().SetText("Services");
 
-        UpdateServiceContents();
-        UpdateRoomContents();
+        UpdatePanelContents(listInServicesList, "FocusableServices");
+        UpdatePanelContents(listInRoomsList, "FocusableRooms");
+
+        // UpdateServiceContents();
+        // UpdateRoomContents();
     }
 
     private void UpdateHeader() {
@@ -74,44 +77,79 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    private void UpdateRoomContents() {
-        var focusTransform = currentlySelectedBuilding.Find("FocusableRooms");
+    private void UpdatePanelContents(Transform list, string transformName) {
+
+        var focusTransform = currentlySelectedBuilding.Find(transformName);
 
         if (focusTransform == null) {
-            Debug.Log("No focusable rooms.");
-            return;
-        }
-
-        List<Transform> focusableLectureRooms = focusTransform.Cast<Transform>().ToList();
-
-        if (focusableLectureRooms != null && focusableLectureRooms.Count == 0)
-            return;
-        
-        ClearChildren(listInRoomsList);
-
-        for (int i = 0; i < focusableLectureRooms.Count; i++) {
-            CreateButton(focusableLectureRooms[i], listInRoomsList, roomsButtonPrefab);
-        }
-    }
-
-    private void UpdateServiceContents() {
-        var focusTransform = currentlySelectedBuilding.Find("FocusableServices");
-
-        if (focusTransform == null) {
-            Debug.Log("No focusable services.");
+            SetListParentActive(list, false);
+            Debug.Log("No FocusableServices transform.");
             return;
         }
 
         List<Transform> focusableServiceRooms = focusTransform.Cast<Transform>().ToList();
 
-        if (focusableServiceRooms != null && focusableServiceRooms.Count == 0)
+        if (focusableServiceRooms != null && focusableServiceRooms.Count == 0) {
+            SetListParentActive(list, false);
+            Debug.Log("No focusable services.");
             return;
+        }
         
-        ClearChildren(listInServicesList);
+        ClearChildren(list);
 
         for (int i = 0; i < focusableServiceRooms.Count; i++) {
-            CreateButton(focusableServiceRooms[i], listInServicesList, roomsButtonPrefab);
+            CreateButton(focusableServiceRooms[i], list, roomsButtonPrefab);
         }
+    }
+
+    // private void UpdateRoomContents() {
+    //     var focusTransform = currentlySelectedBuilding.Find("FocusableRooms");
+
+    //     if (focusTransform == null) {
+    //         Debug.Log("No focusable rooms.");
+    //         return;
+    //     }
+
+    //     List<Transform> focusableLectureRooms = focusTransform.Cast<Transform>().ToList();
+
+    //     if (focusableLectureRooms != null && focusableLectureRooms.Count == 0)
+    //         return;
+        
+    //     ClearChildren(listInRoomsList);
+
+    //     for (int i = 0; i < focusableLectureRooms.Count; i++) {
+    //         CreateButton(focusableLectureRooms[i], listInRoomsList, roomsButtonPrefab);
+    //     }
+    // }
+
+    // private void UpdateServiceContents() {
+
+    //     var focusTransform = currentlySelectedBuilding.Find("FocusableServices");
+
+    //     if (focusTransform == null) {
+    //         SetListParentActive(listInServicesList, false);
+    //         Debug.Log("No FocusableServices transform.");
+    //         return;
+    //     }
+
+    //     List<Transform> focusableServiceRooms = focusTransform.Cast<Transform>().ToList();
+
+    //     if (focusableServiceRooms != null && focusableServiceRooms.Count == 0) {
+    //         SetListParentActive(listInServicesList, false);
+    //         Debug.Log("No focusable services.");
+    //         return;
+    //     }
+
+        
+    //     ClearChildren(listInServicesList);
+
+    //     for (int i = 0; i < focusableServiceRooms.Count; i++) {
+    //         CreateButton(focusableServiceRooms[i], listInServicesList, roomsButtonPrefab);
+    //     }
+    // }
+
+    private void SetListParentActive(Transform list, bool parentState) {
+        list.parent.parent.gameObject.SetActive(parentState);
     }
 
     private void CreateButton(Transform transformSource, Transform targetParent, GameObject buttonPrefab) {
