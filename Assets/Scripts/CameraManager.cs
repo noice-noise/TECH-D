@@ -25,17 +25,12 @@ public class CameraManager : Singleton<CameraManager>
 
     private Animator animator;
 
-    private void Update() {
-
-    }
-
     private void Awake() {
         animator = GetComponent<Animator>();
     }
 
     public void SwitchCameraMode(int stateNumber) {
         CameraState newState = currentCameraState;
-        Debug.Log(stateNumber);
 
         switch (stateNumber) {
             case 0:
@@ -52,8 +47,9 @@ public class CameraManager : Singleton<CameraManager>
                 break;
         }
 
-        if (newState != currentCameraState)
+        if (newState != currentCameraState) {
             SwitchCameraMode(newState);
+        }
     }
 
     public void SwitchCameraMode(CameraState cameraState) {
