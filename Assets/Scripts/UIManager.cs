@@ -36,7 +36,7 @@ public class UIManager : Singleton<UIManager>
 
     private void Start() {
         worldChildren = world.transform.Cast<Transform>();
-        DisplayBuildingPane();
+        HandleBuildingPane();
         InitQuickSearch();
     }
 
@@ -218,13 +218,22 @@ public class UIManager : Singleton<UIManager>
         return list;
     }
 
-    public void DisplayBuildingPane() {
+    public void HandleBuildingPane() {
+        DisplayBuildingPane();
+        CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.MapView);
+    }
+
+    private void DisplayBuildingPane() {
         ClearChildren(listInRoomsList);
-        listInRoomsList.parent.parent.gameObject.SetActive(false);
+        // SetListParentActive(listInRoomsList, true);
 
         ClearChildren(listInServicesList);
-        listInServicesList.parent.transform.parent.transform.Find("Title").GetComponentInChildren<TextMeshProUGUI>().SetText("Building");
+        SetListParentActive(listInServicesList, true);
 
+        leftNavTitle.GetComponent<TextMeshProUGUI>().SetText("CIT University");
+        leftNavDescription.GetComponentInChildren<TextMeshProUGUI>().SetText("All Buildings");
+
+        listInServicesList.parent.transform.parent.transform.Find("Title").GetComponentInChildren<TextMeshProUGUI>().SetText("Building");
 
         foreach(Transform child in worldChildren) {
             if (child.CompareTag("SelectableBuilding")) {
