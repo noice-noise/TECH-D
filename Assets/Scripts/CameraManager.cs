@@ -47,8 +47,9 @@ public class CameraManager : Singleton<CameraManager>
                 break;
         }
 
-        if (newState != currentCameraState)
+        if (newState != currentCameraState) {
             SwitchCameraMode(newState);
+        }
     }
 
     public void SwitchCameraMode(CameraState cameraState) {

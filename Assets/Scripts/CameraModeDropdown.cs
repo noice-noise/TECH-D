@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using System;
 
 public class CameraModeDropdown : MonoBehaviour {
     public int currentValue;
@@ -8,6 +9,27 @@ public class CameraModeDropdown : MonoBehaviour {
 
     private void Awake() {
         dropdown = GetComponent<TMP_Dropdown>();
+    }
+
+    private void Update() {
+        HandleCameraState();
+    }
+
+    private void HandleCameraState() {
+        CameraManager.CameraState camState = CameraManager.Instance.currentCameraState;
+        switch (camState) {
+            case CameraManager.CameraState.MapView:
+                dropdown.value = 0;
+                break;
+            case CameraManager.CameraState.TopView:
+                dropdown.value = 1;
+                break;
+            case CameraManager.CameraState.FocusedView:
+                dropdown.value = 2;
+                break;
+            default:
+                break;
+        }
     }
 
     public void OnValueChanged() {

@@ -24,6 +24,8 @@ public class UIManager : Singleton<UIManager>
     public Transform listInRoomsList;
     public Transform searchParent;
 
+    public GameObject cameraModeDropdown;
+
     [Header("Instantiation")]
     public GameObject roomsButtonPrefab;
     public GameObject quickSearchPrefab;
@@ -53,8 +55,6 @@ public class UIManager : Singleton<UIManager>
         UpdatePanelContents(listInServicesList, "FocusableServices");
         UpdatePanelContents(listInRoomsList, "FocusableRooms");
 
-        // UpdateServiceContents();
-        // UpdateRoomContents();
     }
 
     private void UpdateHeader() {
