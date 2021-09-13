@@ -18,7 +18,7 @@ public class UIManager : Singleton<UIManager>
     public Transform leftNavTitle;
     public Transform leftNavDescription;
 
-    public Transform listInBuilding;
+    // public Transform listInBuilding;
 
     public Transform listInServicesList;
     public Transform listInRoomsList;
@@ -49,7 +49,11 @@ public class UIManager : Singleton<UIManager>
     }
 
     private void UpdateBody() {
-        listInRoomsList.parent.parent.gameObject.SetActive(true);
+
+        SetListParentActive(listInServicesList, true);
+        SetListParentActive(listInRoomsList, true);
+
+        // reset services name (from building)
         listInServicesList.parent.transform.parent.transform.Find("Title").GetComponentInChildren<TextMeshProUGUI>().SetText("Services");
 
         UpdatePanelContents(listInServicesList, "FocusableServices");
@@ -149,7 +153,12 @@ public class UIManager : Singleton<UIManager>
     // }
 
     private void SetListParentActive(Transform list, bool parentState) {
-        list.parent.parent.gameObject.SetActive(parentState);
+        // if (list.childCount == 0) {
+        //     return;
+        // }
+
+        var obj = list.parent.parent.gameObject;
+        obj.SetActive(parentState);
     }
 
     private void CreateButton(Transform transformSource, Transform targetParent, GameObject buttonPrefab) {
@@ -225,7 +234,7 @@ public class UIManager : Singleton<UIManager>
 
     private void DisplayBuildingPane() {
         ClearChildren(listInRoomsList);
-        // SetListParentActive(listInRoomsList, true);
+        SetListParentActive(listInRoomsList, false);
 
         ClearChildren(listInServicesList);
         SetListParentActive(listInServicesList, true);

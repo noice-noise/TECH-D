@@ -53,7 +53,6 @@ public class CameraManager : Singleton<CameraManager>
     }
 
     public void SwitchCameraMode(CameraState cameraState) {
-        Debug.Log("wtoch");
         animator.Play(cameraState.ToString());
         currentCameraState = cameraState;
     }

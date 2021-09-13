@@ -58,7 +58,10 @@ public class Navigation : Singleton<Navigation>
                 SetCursorSelectable();
                 if (selectButtonPressed) {
 
-                    var toFocus = hit.transform.parent.transform.parent.transform.Find("Focus");
+                    // var toFocus = hit.transform.parent.transform.parent.transform.Find("Focus");
+                    var toFocus = FindParentBuilding(hit.transform).Find("Focus");
+                    // var toFocus = FindParentBuilding(hit.transform).Find("Model").GetChild(0).transform;
+                    // var toFocus = hit.transform.Find("Model").GetChild(0).transform;
                     if (toFocus == null) {
                         Debug.Log("No focusable object.");
                         return;
@@ -72,25 +75,50 @@ public class Navigation : Singleton<Navigation>
     }
 
     private void Select(Transform targetTransform) {
-        currentlyFocusedBuilding = targetTransform.parent;
+        this.currentlyFocusedBuilding = targetTransform.parent;
         CameraManager.Instance.SwitchCameraTarget(targetTransform);
         UIManager.Instance.UpdateMapUI();
     }
 
     public void SelectFromButton(Transform targetTransform) {
-        Debug.Log("Target: " + targetTransform.name);
-        var focusableTransform = targetTransform.Find("Focus");
-        
-        if (focusableTransform == null) {
-            Debug.LogError("After button clicked, no focusable transform detected. " + targetTransform.name);
-            // return;
-        } else {
 
-        }
+        // Debug.Log(targetTransform.name);
+        // Transform toFocus = targetTransform;
+        // toFocus = FindParentBuilding(targetTransform);
+        // var focusableTransform = toFocus.Find("Focus");
 
-        currentlyFocusedBuilding = targetTransform;
+        // Debug.Log(toFocus.name);
+        // Debug.Log(focusableTransform.name);
+
+        // Debug.Log("Target: " + toFocus.name);
+        // var focusableTransform = toFocus.Find("Focus");
+        // Debug.Log("FocusableTransform: " + focusableTransform.name);
+
+        // if (focusableTransform != null) {
+        //     toFocus = focusableTransform;
+        // } else {
+
+        // }
+
+        // if (focusableTransform == null) {
+        //     Debug.LogError("No focusable transform.");
+        //     return;
+        // }
+
+
+        this.currentlyFocusedBuilding = targetTransform;
         CameraManager.Instance.SwitchCameraTarget(targetTransform);
         UIManager.Instance.UpdateMapUI();
+    }
+ 
+    private Transform FindParentBuilding (Transform targetTransform) {
+        Debug.Log("trans" + targetTransform.name);
+
+        while (!targetTransform.CompareTag("SelectableBuilding")) {
+            targetTransform = targetTransform.parent;
+        }
+        Debug.Log("exit trans" + targetTransform.name);
+        return targetTransform;
     }
 
     public void SetCursorSelectable() {
@@ -123,10 +151,6 @@ public class Navigation : Singleton<Navigation>
 
         if (Input.GetMouseButtonUp(0)) {
             selectButtonPressed = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.F)) {
-            UIManager.Instance.InitQuickSearch();
         }
     }
 
