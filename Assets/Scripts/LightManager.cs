@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightManager : MonoBehaviour
-{
+public class LightManager : MonoBehaviour {
 
-    public Quaternion offset;
-    public Vector3 degrees;
-    public Transform original;
 
     public bool handleLightSource;
+    public Vector3 offset;
+    private Vector3 baseRotation;
 
-    private void Start() {
-        original = transform;
+    public float smoothingRate = 0.2f;
+
+    private void Awake() {
+        baseRotation = transform.rotation.eulerAngles;
     }
 
     private void Update() {
@@ -22,23 +22,20 @@ public class LightManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles Light rotation adjustment based on a target transform.
+    /// </summary>
     private void HandleLightSource() {
         if (CameraManager.Instance.currentCameraState == CameraManager.CameraState.FocusedView) {
-            Debug.Log("Looking...");
-            // transform.rotation = CameraManager.Instance.currentTarget.rotation;
-            // transform.rotation = offset;
 
-            // transform.position = CameraManager.Instance.focusedViewCamera .transform.position;
-            // transform.LookAt(CameraManager.Instance.currentTarget);
-            // transform.LookAt()
-            Quaternion source = Camera.main.transform.rotation;
-            // transform.rotation = 
-            // new Quaternion(source.x + offset.x, source.y + offset.y, source.z + offset.z, source.w + offset.w);
+            Transform camera = CameraManager.Instance.focusedViewCamera.m_Follow;
+            Transform focusTransform = camera.transform;
+            Vector3 targetLightRotation = focusTransform.rotation.eulerAngles + offset;
 
-            transform.localRotation = Quaternion.Euler(Camera.main.transform.forward + degrees);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetLightRotation), smoothingRate * Time.deltaTime);
 
         } else {
-            transform.localRotation = original.localRotation;
+            transform.rotation = Quaternion.Euler(baseRotation);
         }
     }
 }
