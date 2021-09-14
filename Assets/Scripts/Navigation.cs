@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class Navigation : Singleton<Navigation>
-{
+public class Navigation : Singleton<Navigation> {
 
 
     private Camera mainCamera;
@@ -81,43 +80,17 @@ public class Navigation : Singleton<Navigation>
     }
 
     public void SelectFromButton(Transform targetTransform) {
-
-        // Debug.Log(targetTransform.name);
-        // Transform toFocus = targetTransform;
-        // toFocus = FindParentBuilding(targetTransform);
-        // var focusableTransform = toFocus.Find("Focus");
-
-        // Debug.Log(toFocus.name);
-        // Debug.Log(focusableTransform.name);
-
-        // Debug.Log("Target: " + toFocus.name);
-        // var focusableTransform = toFocus.Find("Focus");
-        // Debug.Log("FocusableTransform: " + focusableTransform.name);
-
-        // if (focusableTransform != null) {
-        //     toFocus = focusableTransform;
-        // } else {
-
-        // }
-
-        // if (focusableTransform == null) {
-        //     Debug.LogError("No focusable transform.");
-        //     return;
-        // }
-
-
         this.currentlyFocusedBuilding = targetTransform;
         CameraManager.Instance.SwitchCameraTarget(targetTransform);
         UIManager.Instance.UpdateMapUI();
     }
  
     private Transform FindParentBuilding (Transform targetTransform) {
-        Debug.Log("trans" + targetTransform.name);
 
         while (!targetTransform.CompareTag("SelectableBuilding")) {
             targetTransform = targetTransform.parent;
         }
-        Debug.Log("exit trans" + targetTransform.name);
+
         return targetTransform;
     }
 
