@@ -6,6 +6,7 @@ using System.Linq;
 using System;
 using UnityEngine.UIElements;
 using UnityEngine.UI.Extensions;
+using DG.Tweening;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -34,6 +35,13 @@ public class UIManager : Singleton<UIManager>
     private IEnumerable<Transform> worldChildren;
 
     public MapData mapData;
+    public bool uIFullscreen = false;
+
+    [Header("Tweening")]
+
+    public Ease ease;
+    public float duration;
+    public float distance;
 
 
     private void Start() {
@@ -106,6 +114,24 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
+    public void HandleUIFullscreen() {
+        uIFullscreen = !uIFullscreen;
+
+
+        // if (uIFullscreen) {
+
+        // } else {
+
+        // }
+
+        // distance = leftNav.GetComponent<RectTransform>().rect.xMin * -1;
+        leftNav
+            .DOMoveX(distance, duration)
+            .SetEase(ease);
+
+        distance *= -1;
+    }
+
     // private void UpdateRoomContents() {
     //     var focusTransform = currentlySelectedBuilding.Find("FocusableRooms");
 
@@ -118,7 +144,7 @@ public class UIManager : Singleton<UIManager>
 
     //     if (focusableLectureRooms != null && focusableLectureRooms.Count == 0)
     //         return;
-        
+
     //     ClearChildren(listInRoomsList);
 
     //     for (int i = 0; i < focusableLectureRooms.Count; i++) {
@@ -144,7 +170,7 @@ public class UIManager : Singleton<UIManager>
     //         return;
     //     }
 
-        
+
     //     ClearChildren(listInServicesList);
 
     //     for (int i = 0; i < focusableServiceRooms.Count; i++) {

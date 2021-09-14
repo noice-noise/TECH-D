@@ -125,6 +125,10 @@ public class Navigation : Singleton<Navigation> {
         if (Input.GetMouseButtonUp(0)) {
             selectButtonPressed = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            UIManager.Instance.HandleUIFullscreen();
+        }
     }
 
     private void SwitchFocusedView() {
