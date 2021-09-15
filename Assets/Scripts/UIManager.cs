@@ -19,11 +19,11 @@ public class UIManager : Singleton<UIManager>
     public Transform leftNavTitle;
     public Transform leftNavDescription;
 
-    // public Transform listInBuilding;
-
+    public Transform buildingContainer;
     public Transform listInServicesList;
     public Transform listInRoomsList;
-    public Transform searchParent;
+
+    public Transform searchContainer;
 
     public GameObject cameraModeDropdown;
 
@@ -124,59 +124,12 @@ public class UIManager : Singleton<UIManager>
 
         // }
 
-        // distance = leftNav.GetComponent<RectTransform>().rect.xMin * -1;
         leftNav
             .DOMoveX(distance, duration)
             .SetEase(ease);
 
         distance *= -1;
     }
-
-    // private void UpdateRoomContents() {
-    //     var focusTransform = currentlySelectedBuilding.Find("FocusableRooms");
-
-    //     if (focusTransform == null) {
-    //         Debug.Log("No focusable rooms.");
-    //         return;
-    //     }
-
-    //     List<Transform> focusableLectureRooms = focusTransform.Cast<Transform>().ToList();
-
-    //     if (focusableLectureRooms != null && focusableLectureRooms.Count == 0)
-    //         return;
-
-    //     ClearChildren(listInRoomsList);
-
-    //     for (int i = 0; i < focusableLectureRooms.Count; i++) {
-    //         CreateButton(focusableLectureRooms[i], listInRoomsList, roomsButtonPrefab);
-    //     }
-    // }
-
-    // private void UpdateServiceContents() {
-
-    //     var focusTransform = currentlySelectedBuilding.Find("FocusableServices");
-
-    //     if (focusTransform == null) {
-    //         SetListParentActive(listInServicesList, false);
-    //         Debug.Log("No FocusableServices transform.");
-    //         return;
-    //     }
-
-    //     List<Transform> focusableServiceRooms = focusTransform.Cast<Transform>().ToList();
-
-    //     if (focusableServiceRooms != null && focusableServiceRooms.Count == 0) {
-    //         SetListParentActive(listInServicesList, false);
-    //         Debug.Log("No focusable services.");
-    //         return;
-    //     }
-
-
-    //     ClearChildren(listInServicesList);
-
-    //     for (int i = 0; i < focusableServiceRooms.Count; i++) {
-    //         CreateButton(focusableServiceRooms[i], listInServicesList, roomsButtonPrefab);
-    //     }
-    // }
 
     private void SetListParentActive(Transform list, bool parentState) {
         // if (list.childCount == 0) {
@@ -208,9 +161,17 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    public void InitQuickSearch() {
-        var prefab = quickSearchPrefab;
+    public void HandleButtonClick() {
+        ToggleSearchVisibility(searchContainer);
+        ToggleSearchVisibility(buildingContainer);
+    }
 
+    private void ToggleSearchVisibility(Transform targetTransform) {
+        bool inversedState = !targetTransform.gameObject.activeSelf;
+        targetTransform.gameObject.SetActive(inversedState);
+    }
+
+    public void InitQuickSearch() {
         List<string> searchList = new List<string>();
 
         foreach(Transform gameObject in worldChildren) {
@@ -225,17 +186,9 @@ public class UIManager : Singleton<UIManager>
             }
         }
 
-        List<string> availableOptions = prefab.GetComponent<AutoCompleteComboBox>().AvailableOptions = searchList;    
-        GameObject search = Instantiate(quickSearchPrefab, searchParent, false);
-
-        // Transform itemsList = search.transform.Find("Overlay").transform.Find("ScrollPanel").transform.Find("Items");
-        // transform.Find("Items");
-        // Debug.Log(itemsList.name);
-
-        // // foreach(Transform item in itemsList) {
-        // //     item.GetComponentInChildren<RoomButton>().buildingReference 
-        // //     Debug.Log(item.name);
-        // // }
+        List<string> availableOptions = quickSearchPrefab.GetComponent<AutoCompleteComboBox>().AvailableOptions = searchList;    
+        GameObject search = Instantiate(quickSearchPrefab, searchContainer, false);
+        // search.SetActive(false);
     }
 
     private List<string> Parse(Transform source, string focusableStringID) {
