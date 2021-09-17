@@ -61,8 +61,10 @@ public class UIManager : Singleton<UIManager>
         SetListParentActive(listInServicesList, true);
         SetListParentActive(listInRoomsList, true);
 
-        // reset services name (from building)
+
         listInServicesList.parent.transform.parent.transform.Find("Title").GetComponentInChildren<TextMeshProUGUI>().SetText("Services");
+
+        listInRoomsList.parent.transform.parent.transform.Find("Title").GetComponentInChildren<TextMeshProUGUI>().SetText("Rooms");
 
         UpdatePanelContents(listInServicesList, "FocusableServices");
         UpdatePanelContents(listInRoomsList, "FocusableRooms");
@@ -222,7 +224,7 @@ public class UIManager : Singleton<UIManager>
 
     private void DisplayBuildingPane() {
         ClearChildren(listInRoomsList);
-        SetListParentActive(listInRoomsList, false);
+        SetListParentActive(listInRoomsList, true);
 
         ClearChildren(listInServicesList);
         SetListParentActive(listInServicesList, true);
@@ -232,10 +234,18 @@ public class UIManager : Singleton<UIManager>
 
         listInServicesList.parent.transform.parent.transform.Find("Title").GetComponentInChildren<TextMeshProUGUI>().SetText("Building");
 
+        listInRoomsList.parent.transform.parent.transform.Find("Title").GetComponentInChildren<TextMeshProUGUI>().SetText("Vicinity");
+
         foreach(Transform child in worldChildren) {
             if (child.CompareTag("SelectableBuilding")) {
-                CreateButton(child, listInServicesList, roomsButtonPrefab);
-            }
+
+                if (child.Find("FocusableRooms") != null) {
+                    CreateButton(child, listInServicesList, roomsButtonPrefab);
+                } else {
+                    CreateButton(child, listInRoomsList, roomsButtonPrefab);
+                }
+
+            } 
         }
     }
 }
