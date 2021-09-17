@@ -12,6 +12,7 @@ public class MapData : ScriptableObject{
 [System.Serializable]
 public class Building {
     public string buildingName;
+    [TextArea]
     public string description;
     public List<Room> roomChildren;
 }
@@ -19,5 +20,6 @@ public class Building {
 [System.Serializable]
 public class Room {
     public string roomName;
+    [TextArea]
     public string roomDescription;
 }

@@ -79,7 +79,11 @@ public class Navigation : Singleton<Navigation> {
     /// while camera will get the "Focus" as a target.
     /// </summary>
     public void SelectAndUpdateUI(Transform targetTransform) {
-        this.currentlyFocusedBuilding = targetTransform.parent;
+        if (targetTransform.parent.CompareTag("SelectableBuilding")) {
+            this.currentlyFocusedBuilding = targetTransform.parent;
+        } else {
+            this.currentlyFocusedBuilding = targetTransform;
+        }
         CameraManager.Instance.SwitchCameraTarget(targetTransform);
         UIManager.Instance.UpdateMapUI();
     }
