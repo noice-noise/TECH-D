@@ -8,24 +8,17 @@ public class RoomButton : MonoBehaviour {
 
     private void Start() {
         if (buildingReference == null) {
-
             uiText = transform.Find("Text").GetComponent<Text>();
 
             // first letter of needs to be upper because UI.Extensions.AutoCompleteBox displays options in all lowercase for some reason, thus our code needs to adjust
             string capitalizedBuildingName = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(uiText.text.ToLower());
 
-            // Transform targetBuilding = UIManager.Instance.world.transform.Find(capitalizedBuildingName);
-            Debug.Log("To find: " + capitalizedBuildingName);
             Transform targetBuilding = GameObject.Find(capitalizedBuildingName).transform;
             
-            // Debug.Log(targetBuilding.name);
-
             if (targetBuilding == null) {
                 Debug.Log("NULL!!");
                 Building building = FindRoom(uiText.text);
                 targetBuilding = GameObject.Find(building.buildingName).transform;
-                Debug.Log(targetBuilding.name);
-                // targetBuilding = GameObject.Find(building.buildingName).transform.Find(uiText.text);
             }
 
             if (targetBuilding != null) {
@@ -34,6 +27,16 @@ public class RoomButton : MonoBehaviour {
             } else {
                 Debug.LogError("Building reference not found.");
             }
+        }
+
+        HandleSelectableBuildingTag();
+    }
+
+    // If the current transform reference is the primary Building transform with "SelectableTag"
+    // change it to Focus as it ensures clean FocusedView
+    private void HandleSelectableBuildingTag() {
+        if (buildingReference.CompareTag("SelectableBuilding")) {
+            buildingReference = buildingReference.Find("Focus");
         }
     }
 
@@ -50,6 +53,6 @@ public class RoomButton : MonoBehaviour {
     }
 
     public void SwitchCameraTarget() {
-        Navigation.Instance.SelectFromButton(buildingReference);
+        Navigation.Instance.SelectAndUpdateUI(buildingReference);
     }
 }

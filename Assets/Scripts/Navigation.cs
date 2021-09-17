@@ -65,7 +65,7 @@ public class Navigation : Singleton<Navigation> {
                         Debug.Log("No focusable object.");
                         return;
                     }
-                    Select(toFocus);
+                    SelectAndUpdateUI(toFocus);
                 }
             } else {
                 SetCursorNormal();
@@ -73,17 +73,22 @@ public class Navigation : Singleton<Navigation> {
         }
     }
 
-    private void Select(Transform targetTransform) {
+    /// <summary>
+    /// Selects a new targetTransform to prompt focus.
+    /// All navigation-related target will get the primary parent "Building" as reference, 
+    /// while camera will get the "Focus" as a target.
+    /// </summary>
+    public void SelectAndUpdateUI(Transform targetTransform) {
         this.currentlyFocusedBuilding = targetTransform.parent;
         CameraManager.Instance.SwitchCameraTarget(targetTransform);
         UIManager.Instance.UpdateMapUI();
     }
 
-    public void SelectFromButton(Transform targetTransform) {
-        this.currentlyFocusedBuilding = targetTransform;
-        CameraManager.Instance.SwitchCameraTarget(targetTransform);
-        UIManager.Instance.UpdateMapUI();
-    }
+    // public void SelectFromButton(Transform targetTransform) {
+    //     this.currentlyFocusedBuilding = targetTransform.parent;
+    //     CameraManager.Instance.SwitchCameraTarget(targetTransform);
+    //     UIManager.Instance.UpdateMapUI();
+    // }
  
     private Transform FindParentBuilding (Transform targetTransform) {
 
