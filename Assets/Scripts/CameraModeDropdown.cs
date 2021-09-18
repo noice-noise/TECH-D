@@ -11,12 +11,17 @@ public class CameraModeDropdown : MonoBehaviour {
         dropdown = GetComponent<TMP_Dropdown>();
     }
 
+    private void Start() {
+        dropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+    }
+
     private void Update() {
         HandleCameraState();
     }
 
     private void HandleCameraState() {
         CameraManager.CameraState camState = CameraManager.Instance.currentCameraState;
+        
         switch (camState) {
             case CameraManager.CameraState.MapView:
                 dropdown.value = 0;
@@ -28,11 +33,13 @@ public class CameraModeDropdown : MonoBehaviour {
                 dropdown.value = 2;
                 break;
             default:
+                Debug.LogError("Invalid camera state.");
                 break;
         }
     }
 
-    public void OnValueChanged() {
+
+    public void DropdownValueChanged() {
         CameraManager.Instance.SwitchCameraMode(dropdown.value);
     }
 }
