@@ -3,20 +3,25 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class RoomButton : MonoBehaviour {
+
+    public Button button;
     public Transform buildingReference;
     private Text uiText;
 
     private void Start() {
+
+        button = this.GetComponent<Button>();
+        button.onClick.AddListener(OnClick);
+
+
         if (buildingReference == null) {
             uiText = transform.Find("Text").GetComponent<Text>();
 
-            // first letter of needs to be upper because UI.Extensions.AutoCompleteBox displays options in all lowercase for some reason, thus our code needs to adjust
-            string capitalizedBuildingName = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(uiText.text.ToLower());
+            string titleCaseBuildingName = ToTitleCase();
 
-            Transform targetBuilding = GameObject.Find(capitalizedBuildingName).transform;
+            Transform targetBuilding = GameObject.Find(titleCaseBuildingName).transform;
             
             if (targetBuilding == null) {
-                Debug.Log("NULL!!");
                 Building building = FindRoom(uiText.text);
                 targetBuilding = GameObject.Find(building.buildingName).transform;
             }
@@ -52,7 +57,14 @@ public class RoomButton : MonoBehaviour {
         return null;
     }
 
-    public void SwitchCameraTarget() {
-        Navigation.Instance.SelectAndUpdateUI(buildingReference);
+    /// <summary>
+    /// first letter of needs to be upper because UI.Extensions.AutoCompleteBox displays options in all lowercase for some reason, thus our code needs to adjust
+    /// </summary>
+    private string ToTitleCase() {
+        return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(uiText.text.ToLower());
+    }
+
+    private void OnClick() {
+        UIManager.Instance.HandleButtonClick(transform);
     }
 }

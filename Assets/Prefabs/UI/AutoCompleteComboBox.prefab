@@ -590,7 +590,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1372074224641109222}
   - component: {fileID: 6719508638983366358}
-  - component: {fileID: 4925568068771063485}
   m_Layer: 5
   m_Name: AutoCompleteComboBox
   m_TagString: Untagged
@@ -669,18 +668,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Extensions.AutoCompleteComboBox+SelectionChangedEvent,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
---- !u!114 &4925568068771063485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3459513908578654327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cefa4ce7bb9877440ab9ed1655423610, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3631738976095769914
 GameObject:
   m_ObjectHideFlags: 0

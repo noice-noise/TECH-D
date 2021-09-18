@@ -164,22 +164,29 @@ public class UIManager : Singleton<UIManager>
     }
 
     public void HandleButtonClick(Transform button) {
+
         if (button.name.Equals("Building")) {
+
             HandleBuildingPane();
             ToggleSearchVisibility(buildingContainer, true);
             ToggleSearchVisibility(searchContainer, false);
-        }
 
-        if (button.name.Equals("Search")) {
+        } else if (button.name.Equals("Search")) {
+
             ToggleSearchVisibility(searchContainer, true);
             ToggleSearchVisibility(buildingContainer, false);
+
+        } else {
+
+            var targetTransform = button.GetComponent<RoomButton>().buildingReference;
+            Navigation.Instance.SelectAndUpdateUI(targetTransform); 
         }
+
+        
     }
 
     private void ToggleSearchVisibility(Transform targetTransform, bool targetState) {
         targetTransform.gameObject.SetActive(targetState);
-        // bool inversedState = !targetTransform.gameObject.activeSelf;
-        // targetTransform.gameObject.SetActive(inversedState);
     }
 
     public void InitQuickSearch() {

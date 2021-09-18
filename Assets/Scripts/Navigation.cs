@@ -87,12 +87,6 @@ public class Navigation : Singleton<Navigation> {
         CameraManager.Instance.SwitchCameraTarget(targetTransform);
         UIManager.Instance.UpdateMapUI();
     }
-
-    // public void SelectFromButton(Transform targetTransform) {
-    //     this.currentlyFocusedBuilding = targetTransform.parent;
-    //     CameraManager.Instance.SwitchCameraTarget(targetTransform);
-    //     UIManager.Instance.UpdateMapUI();
-    // }
  
     private Transform FindParentBuilding (Transform targetTransform) {
 
