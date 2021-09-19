@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
+
 public class CameraManager : Singleton<CameraManager>
 {
     public enum CameraState {
@@ -11,9 +12,9 @@ public class CameraManager : Singleton<CameraManager>
     }
 
     [Header("Cameras")]
-    public Cinemachine.CinemachineVirtualCamera mapViewCamera;
-    public Cinemachine.CinemachineVirtualCamera topViewCamera;
-    public Cinemachine.CinemachineVirtualCamera focusedViewCamera;
+    public CinemachineVirtualCamera mapViewCamera;
+    public CinemachineVirtualCamera topViewCamera;
+    public CinemachineVirtualCamera focusedViewCamera;
 
     [Header("Camera Flags")]
     public Transform centerTarget;
@@ -27,9 +28,10 @@ public class CameraManager : Singleton<CameraManager>
 
     private void Awake() {
         animator = GetComponent<Animator>();
+        
     }
 
-    public void SwitchCameraMode(int stateNumber) {
+    public void SwitchCameraModeWith(int stateNumber) {
         CameraState newState = currentCameraState;
 
         switch (stateNumber) {
@@ -64,9 +66,12 @@ public class CameraManager : Singleton<CameraManager>
         if (autoSwitchCameraMode && currentCameraState == CameraState.MapView)
             SwitchCameraMode(CameraState.TopView);
 
+        currentTarget = newTarget;
         topViewCamera.m_Follow = newTarget;
         topViewCamera.m_LookAt = newTarget;
         focusedViewCamera.m_Follow = newTarget;
         focusedViewCamera.m_LookAt = newTarget;
     }
+
+
 }

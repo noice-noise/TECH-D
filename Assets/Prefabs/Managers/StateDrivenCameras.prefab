@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2464077778424379904}
   - component: {fileID: 2464077778424379911}
-  - component: {fileID: 2464077778424379905}
   m_Layer: 8
   m_Name: CMFocusedView
   m_TagString: Untagged
@@ -25,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2464077778424379910}
-  m_LocalRotation: {x: -0.017028121, y: 0.98296183, z: 0.12715328, w: 0.13163637}
-  m_LocalPosition: {x: -15, y: -15, z: 55}
+  m_LocalRotation: {x: -0.1765343, y: -0.096974745, z: -0.017480342, w: 0.9793498}
+  m_LocalPosition: {x: -10, y: 1, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2464077778609935931}
@@ -62,7 +61,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7773585, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -73,36 +72,6 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2464077778609935931}
---- !u!114 &2464077778424379905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2464077778424379910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CollideAgainst:
-    serializedVersion: 2
-    m_Bits: 1025
-  m_IgnoreTag: 
-  m_TransparentLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_MinimumDistanceFromTarget: 0.1
-  m_AvoidObstacles: 1
-  m_DistanceLimit: 0
-  m_MinimumOcclusionTime: 0
-  m_CameraRadius: 0.1
-  m_Strategy: 1
-  m_MaximumEffort: 4
-  m_SmoothingTime: 0
-  m_Damping: 0
-  m_DampingWhenOccluded: 0
-  m_OptimalTargetDistance: 0
 --- !u!1 &2464077778609935930
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
+  m_TrackedObjectOffset: {x: -20, y: 20, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 30
   m_LookaheadIgnoreY: 0
@@ -188,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: -15, y: -15, z: 55}
+  m_FollowOffset: {x: -10, y: 1, z: -50}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -282,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 200, y: 450, z: -100}
+  m_FollowOffset: {x: 100, y: 200, z: -100}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -302,7 +271,6 @@ GameObject:
   - component: {fileID: 2464077778977626084}
   - component: {fileID: 2464077778977626091}
   - component: {fileID: 2464077778977626085}
-  - component: {fileID: 2464077778977626086}
   m_Layer: 8
   m_Name: CMMapView
   m_TagString: Untagged
@@ -317,8 +285,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2464077778977626090}
-  m_LocalRotation: {x: 0.5784735, y: -0.25726742, z: 0.19894265, w: 0.7480667}
-  m_LocalPosition: {x: 200, y: 450, z: -100}
+  m_LocalRotation: {x: 0.4247082, y: -0.33985114, z: 0.17591989, w: 0.82047325}
+  m_LocalPosition: {x: 100, y: 200, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2464077778631559249}
@@ -354,7 +322,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7773585, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -384,36 +352,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2464077778977626086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2464077778977626090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CollideAgainst:
-    serializedVersion: 2
-    m_Bits: 1025
-  m_IgnoreTag: 
-  m_TransparentLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_MinimumDistanceFromTarget: 0.1
-  m_AvoidObstacles: 1
-  m_DistanceLimit: 0
-  m_MinimumOcclusionTime: 0
-  m_CameraRadius: 0.1
-  m_Strategy: 1
-  m_MaximumEffort: 4
-  m_SmoothingTime: 0
-  m_Damping: 0
-  m_DampingWhenOccluded: 0
-  m_OptimalTargetDistance: 0
 --- !u!1 &2464077779209962351
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
+  m_TrackedObjectOffset: {x: -15, y: 0, z: -15}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 30
   m_LookaheadIgnoreY: 0
@@ -499,7 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 200, y: 200, z: -150}
+  m_FollowOffset: {x: 50, y: 60, z: -50}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -518,7 +456,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2464077779262806514}
   - component: {fileID: 2464077779262806513}
-  - component: {fileID: 2464077779262806515}
   m_Layer: 8
   m_Name: CMTopView
   m_TagString: Untagged
@@ -533,8 +470,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2464077779262806512}
-  m_LocalRotation: {x: 0.4375352, y: -0.16482443, z: 0.081935614, w: 0.88016045}
-  m_LocalPosition: {x: 200, y: 200, z: -150}
+  m_LocalRotation: {x: 0.28730044, y: -0.48322105, z: 0.17160286, w: 0.80901694}
+  m_LocalPosition: {x: 50, y: 60, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2464077779209962344}
@@ -570,7 +507,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7773585, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -581,36 +518,6 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2464077779209962344}
---- !u!114 &2464077779262806515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2464077779262806512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CollideAgainst:
-    serializedVersion: 2
-    m_Bits: 1025
-  m_IgnoreTag: 
-  m_TransparentLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_MinimumDistanceFromTarget: 0.1
-  m_AvoidObstacles: 1
-  m_DistanceLimit: 0
-  m_MinimumOcclusionTime: 0
-  m_CameraRadius: 0.1
-  m_Strategy: 1
-  m_MaximumEffort: 4
-  m_SmoothingTime: 0
-  m_Damping: 0
-  m_DampingWhenOccluded: 0
-  m_OptimalTargetDistance: 0
 --- !u!1 &2464077779755446308
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,13 +623,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 200742ae43ff9b84293a2716d2c3c1ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerTarget: {fileID: 0}
-  currentTarget: {fileID: 0}
   mapViewCamera: {fileID: 2464077778977626091}
   topViewCamera: {fileID: 2464077779262806513}
   focusedViewCamera: {fileID: 2464077778424379911}
-  CurrentCameraState: 
-  switchingTime: 2
+  centerTarget: {fileID: 0}
+  currentTarget: {fileID: 0}
+  currentCameraState: 0
+  autoSwitchCameraMode: 1
 --- !u!95 &2464077779755446304
 Animator:
   serializedVersion: 3

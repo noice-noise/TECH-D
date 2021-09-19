@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -97,7 +97,7 @@ public class UIManager : Singleton<UIManager>
 
         if (focusTransform == null) {
             SetListParentActive(list, false);
-            Debug.Log("No FocusableServices transform.");
+            // Debug.Log("No FocusableServices transform.");
             return;
         }
 
@@ -105,7 +105,7 @@ public class UIManager : Singleton<UIManager>
 
         if (focusableServiceRooms != null && focusableServiceRooms.Count == 0) {
             SetListParentActive(list, false);
-            Debug.Log("No focusable services.");
+            // Debug.Log("No focusable services.");
             return;
         }
         
@@ -196,10 +196,10 @@ public class UIManager : Singleton<UIManager>
             if (gameObject.CompareTag("SelectableBuilding")) {
                 searchList.Add(gameObject.name);
 
-                List<string> focusableServices = Parse(gameObject, "FocusableServices");
+                List<string> focusableServices = GetChildTransforms(gameObject, "FocusableServices");
                 searchList.AddRange(focusableServices);
 
-                List<string> focusableRooms = Parse(gameObject, "FocusableRooms");
+                List<string> focusableRooms = GetChildTransforms(gameObject, "FocusableRooms");
                 searchList.AddRange(focusableRooms);
             }
         }
@@ -209,7 +209,7 @@ public class UIManager : Singleton<UIManager>
         // search.SetActive(false);
     }
 
-    private List<string> Parse(Transform source, string focusableStringID) {
+    private List<string> GetChildTransforms(Transform source, string focusableStringID) {
         var focusable = source.transform.Find(focusableStringID);
     
         List<string> list = new List<string>();
