@@ -40,6 +40,6 @@ public class CameraModeDropdown : MonoBehaviour {
 
 
     public void DropdownValueChanged() {
-        CameraManager.Instance.SwitchCameraMode(dropdown.value);
+        CameraManager.Instance.SwitchCameraModeWith(dropdown.value);
     }
 }
