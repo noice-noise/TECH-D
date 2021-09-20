@@ -31,6 +31,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject roomsButtonPrefab;
     public GameObject quickSearchPrefab;
 
+    public Transform currentlyActivePanel;  // TODO: delegate to NAV
     public Transform currentlySelectedBuilding;
     private IEnumerable<Transform> worldChildren;
 
