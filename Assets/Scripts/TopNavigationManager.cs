@@ -5,18 +5,30 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TopNavigationManager : MonoBehaviour {
-
-    public Transform leftNav;
+    
+    public Transform homePanel;
+    public Transform mapPanel;
     public Transform queriesPanel;
 
     public TopNavButtons navButton;
 
-    public Transform currentlyActivePanel;  //TODO implement currently active panel
+    public Transform currentlyActivePanel; 
 
     private void Awake() {
+
         InitListeners(navButton.Home);
         InitListeners(navButton.Map);
         InitListeners(navButton.Queries);
+    }
+
+    private void Start() {
+        InitPanel();
+    }
+
+    private void InitPanel() {
+        homePanel.gameObject.SetActive(false);
+        mapPanel.gameObject.SetActive(true);
+        queriesPanel.gameObject.SetActive(false);
     }
 
     private void InitListeners(GameObject navButton) {
@@ -25,18 +37,26 @@ public class TopNavigationManager : MonoBehaviour {
     }
 
     public void SelectionHandler(GameObject button) {
-        Debug.Log("Click: ");
 
         if (button != null) {
-
-            if (button == navButton.Home) {
-                Debug.Log("Home!");
-            } else if (button == navButton.Map) {
-                Debug.Log("MAP!");
-            } else if (button == navButton.Queries) {
-                Debug.Log("QUERIES!");
+            if (button.Equals(navButton.Home)) {
+                SetCurrentActivePanel(homePanel);
+            } else if (button.Equals(navButton.Map)) {
+                SetCurrentActivePanel(mapPanel);
+            } else if (button.Equals(navButton.Queries)) {
+                SetCurrentActivePanel(queriesPanel);
             }
         }
+    }
+
+    private void SetCurrentActivePanel(Transform newCurrentPanel) {
+        if (currentlyActivePanel == null || newCurrentPanel == null) {
+            currentlyActivePanel = mapPanel;
+        }
+
+        currentlyActivePanel.gameObject.SetActive(false);
+        newCurrentPanel.gameObject.SetActive(true);
+        currentlyActivePanel = newCurrentPanel;
     }
 }
 

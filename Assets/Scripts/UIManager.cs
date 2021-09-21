@@ -8,8 +8,8 @@ using UnityEngine.UIElements;
 using UnityEngine.UI.Extensions;
 using DG.Tweening;
 
-public class UIManager : Singleton<UIManager>
-{
+public class UIManager : Singleton<UIManager> {
+    
     [Header("Hierarchy")]
     public GameObject mainCanvas;
     public GameObject world;
