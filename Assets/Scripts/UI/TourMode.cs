@@ -70,9 +70,10 @@ public class TourMode : MonoBehaviour {
 
             if (!onTourMode) {
                 StopNextTourTargetCoroutine();
+                CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
             } else if (onTourMode) {
-                CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
                 SelectCurrentTourTarget();
+                CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
             }
         }
     }
@@ -90,7 +91,6 @@ public class TourMode : MonoBehaviour {
     private void SelectCurrentTourTarget() {
         currentlySelected = tourList[tourCounter];
         Navigation.Instance.SelectAndUpdateUI(currentlySelected);
-        Debug.Log(currentlySelected.name + " " + tourCounter.ToString());
     }
 
     /// <summary>
