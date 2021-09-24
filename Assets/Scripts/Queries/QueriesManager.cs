@@ -6,21 +6,44 @@ using UnityEngine.UI;
 using TMPro;
 
 public class QueriesManager : MonoBehaviour {
-    public QueriesData queriesData;
-    public GameObject queryCategoriesPrefab;
 
-    public Transform categoryPane;
+    public QueriesData queriesData;
+
+    public GameObject queryCategoriesPrefab;
+    public GameObject queryPrefab;
+    public GameObject sectionPrefab;
+
+    public Transform queriesPanel;
+
+    private Transform categoryList;
+    private Transform queriesList;
 
     private void Awake() {
+        InitList();
         InitCategory();
     }
 
-    private void InitCategory() {
-        var categoryList = categoryPane.Find("List");
+    private void InitList() {
+        categoryList = FindListFrom("Categories");
+
         if (categoryList == null) {
             Debug.LogError("List in categoryPane not found.");
             return;
         }
+
+        queriesList = FindListFrom("Queries");
+        
+        if (categoryList == null) {
+            Debug.LogError("List in categoryPane not found.");
+            return;
+        }
+    }
+
+    private Transform FindListFrom(string source) {
+        return queriesPanel.Find("Frame").transform.Find(source).transform.Find("List");
+    }
+
+    private void InitCategory() {
 
         foreach (Category category in queriesData.categories) {
             CreateCategory(category, categoryList, queryCategoriesPrefab);
@@ -41,12 +64,60 @@ public class QueriesManager : MonoBehaviour {
             delegate { OnCategoryClicked(newCategory.transform); });
     }
 
-    public void OnCategoryClicked(Transform category) {
-        Debug.Log(category.name);
-        DisplayCategory(category);
+    public void OnCategoryClicked(Transform categoryButton) {
+        Debug.Log(categoryButton.name);
+        CreateQueriesFrom(categoryButton);
     }
 
-    private void DisplayCategory(Transform category) {
+    private void CreateQueriesFrom(Transform source) {
+        Category catSource = GetCategoryEquivalent(source);
+
+        Category category = queriesData.categories.Find(c => c.title == catSource.title);
+
+        if (category == null) {
+            Debug.LogError("Category not found.");
+            return;
+        }
+
+        foreach (var query in category.queries) {
+            CreateQuery(query, queriesList, queryPrefab);
+        }
+    }
+
+    private Category GetCategoryEquivalent(Transform source) {
+        Category category = new Category();
+        category.title = source.name;
+        return category;
+    }
+
+    private void CreateQuery(Query query, Transform targetParentList, GameObject prefab) {
+
+        GameObject newQuery = Instantiate(prefab, targetParentList, false);
+        newQuery.transform.SetParent(targetParentList);
+        newQuery.transform.name = query.title;
+        newQuery.transform
+            .Find("Title")
+            .GetComponent<TextMeshProUGUI>()
+            .SetText(query.title);
+
+        foreach (var section in query.sections) {
+            CreateSection(section, newQuery.transform, sectionPrefab);
+        }
+    }
+
+    private void CreateSection(Section section, Transform targetParentList, GameObject prefab) {
+
+        GameObject newSection = Instantiate(prefab, targetParentList, false);
+        newSection.transform.SetParent(targetParentList);
+        newSection.transform.name = section.title;
+        newSection.transform
+            .Find("Title")
+            .GetComponent<TextMeshProUGUI>()
+            .SetText(section.title);
         
+        newSection.transform
+            .Find("Contents")
+            .GetComponent<TextMeshProUGUI>()
+            .SetText(section.contents);
     }
 }
