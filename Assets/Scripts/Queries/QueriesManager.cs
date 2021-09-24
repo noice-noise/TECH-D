@@ -27,22 +27,26 @@ public class QueriesManager : MonoBehaviour {
         }
     }
 
-    private void CreateCategory(Category categoryInfo, Transform targetParent, GameObject prefab) {
+    private void CreateCategory(Category categoryInfo, Transform targetParentList, GameObject prefab) {
 
-        GameObject newButton = Instantiate(prefab, targetParent, false);
-        newButton.transform.SetParent(targetParent);
-        newButton.transform.name = categoryInfo.title;
-        newButton.transform
+        GameObject newCategory = Instantiate(prefab, targetParentList, false);
+        newCategory.transform.SetParent(targetParentList);
+        newCategory.transform.name = categoryInfo.title;
+        newCategory.transform
             .Find("Text")
             .GetComponent<TextMeshProUGUI>()
             .SetText(categoryInfo.title);
 
-
-        newButton.GetComponent<Button>().onClick.AddListener( 
-            delegate { OnCategoryClicked(newButton.transform); });
+        newCategory.GetComponent<Button>().onClick.AddListener( 
+            delegate { OnCategoryClicked(newCategory.transform); });
     }
 
-    public void OnCategoryClicked(Transform source) {
-        Debug.Log(source.name);
+    public void OnCategoryClicked(Transform category) {
+        Debug.Log(category.name);
+        DisplayCategory(category);
+    }
+
+    private void DisplayCategory(Transform category) {
+        
     }
 }
