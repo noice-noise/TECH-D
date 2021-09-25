@@ -21,6 +21,7 @@ public class QueriesManager : MonoBehaviour {
     private void Awake() {
         InitList();
         InitCategory();
+        
     }
 
     private void InitList() {
