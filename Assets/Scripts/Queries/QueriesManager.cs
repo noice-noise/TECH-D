@@ -21,7 +21,14 @@ public class QueriesManager : MonoBehaviour {
     private void Awake() {
         InitList();
         InitCategory();
-        
+    }
+
+    private void Start() {
+        SelectFirstCategory();
+    }
+
+    private void SelectFirstCategory(){
+        categoryList.transform.GetChild(0).GetComponent<Button>().onClick.Invoke();
     }
 
     private void InitList() {
