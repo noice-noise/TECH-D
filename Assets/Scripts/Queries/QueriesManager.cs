@@ -66,6 +66,7 @@ public class QueriesManager : MonoBehaviour {
 
     public void OnCategoryClicked(Transform categoryButton) {
         Debug.Log(categoryButton.name);
+        ClearChildren(queriesList);
         CreateQueriesFrom(categoryButton);
     }
 
@@ -119,5 +120,15 @@ public class QueriesManager : MonoBehaviour {
             .Find("Contents")
             .GetComponent<TextMeshProUGUI>()
             .SetText(section.contents);
+    }
+
+    private void ClearChildren(Transform parent) {
+        if (parent.transform.childCount == 0) {
+            return;
+        }
+
+        foreach (Transform child in parent.transform) {
+            Destroy(child.gameObject);
+        }
     }
 }
