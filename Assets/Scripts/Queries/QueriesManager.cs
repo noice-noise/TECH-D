@@ -27,8 +27,10 @@ public class QueriesManager : MonoBehaviour {
         SelectFirstCategory();
     }
 
-    private void SelectFirstCategory(){
-        categoryList.transform.GetChild(0).GetComponent<Button>().onClick.Invoke();
+    private void SelectFirstCategory() {
+        var firstButton = categoryList.transform.GetChild(0).GetComponent<Button>();
+        firstButton.Select();
+        firstButton.onClick.Invoke();
     }
 
     private void InitList() {
