@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using System;
 
 public class TourMode : MonoBehaviour {
     private GameObject world;
@@ -11,9 +10,9 @@ public class TourMode : MonoBehaviour {
     private int tourCounter;
     private Transform currentlySelected;
 
-    [SerializeField] private bool onTourMode = false;
-    [SerializeField] private bool autoSwitch = true;
-    [SerializeField] private bool onCountdown = false;
+    public bool onTourMode = false;
+    public bool autoSwitch = true;
+    private bool onCountdown = false;
 
     [SerializeField] private float duration = 5f;
 
@@ -94,12 +93,12 @@ public class TourMode : MonoBehaviour {
         }
     }
 
-    private void NextTour() {
+    public void NextTour() {
         IncrementCounter();
         SelectCurrentTourTarget();
     }
 
-    private void PreviousTour() {
+    public void PreviousTour() {
         DecrementCounter();
         SelectCurrentTourTarget();
     }
