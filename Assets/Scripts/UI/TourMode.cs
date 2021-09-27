@@ -31,6 +31,16 @@ public class TourMode : MonoBehaviour {
         HandleTourAutoSwitch();
     }
 
+    private void HandleTourModeState() {
+        if (!onTourMode) {
+            StopNextTourTargetCoroutine();
+            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
+        } else if (onTourMode) {
+            SelectCurrentTourTarget();
+            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
+        }
+    }
+
     private void HandleTerminateConditions() {
         if (OnMapView()) {
             StopNextTourTargetCoroutine();
@@ -58,35 +68,40 @@ public class TourMode : MonoBehaviour {
     }
 
     private void HandleAllInputs() {
-        HandleTourModeToggle();
-        
-        if (onTourMode) {
-            HandleTourHotkeys();
+        OnTourModeKeyDown();
+        HandleTourHotkeys();
+    }
+
+    private void OnTourModeKeyDown() {
+        if (Input.GetKeyDown(tourModeHotKey)) {
+            HandleTourModeToggle();
         }
     }
 
-    private void HandleTourModeToggle() {
-        if (Input.GetKeyDown(tourModeHotKey)) {
-            onTourMode = !onTourMode;
+    public void HandleTourModeToggle() {
+        onTourMode = !onTourMode;
+        Debug.Log("TourMode: " + onTourMode);
+        HandleTourModeState();
+    }
 
-            if (!onTourMode) {
-                StopNextTourTargetCoroutine();
-                CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
-            } else if (onTourMode) {
-                SelectCurrentTourTarget();
-                CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
+    private void HandleTourHotkeys() {
+        if (onTourMode) {
+            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+                PreviousTour();
+            } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
+                NextTour();
             }
         }
     }
 
-    private void HandleTourHotkeys() {
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            DecrementCounter();
-            SelectCurrentTourTarget();
-        } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            IncrementCounter();
-            SelectCurrentTourTarget();
-        }
+    private void NextTour() {
+        IncrementCounter();
+        SelectCurrentTourTarget();
+    }
+
+    private void PreviousTour() {
+        DecrementCounter();
+        SelectCurrentTourTarget();
     }
 
     private void SelectCurrentTourTarget() {
