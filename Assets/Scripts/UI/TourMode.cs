@@ -11,12 +11,13 @@ public class TourMode : MonoBehaviour {
     private int tourCounter;
     private Transform currentlySelected;
 
-    public bool onTourMode = false;
-    public bool autoSwitch = true;
-    public bool onCountdown = false;
+    [SerializeField] private bool onTourMode = false;
+    [SerializeField] private bool autoSwitch = true;
+    [SerializeField] private bool onCountdown = false;
 
-    public float duration = 2f;
+    [SerializeField] private float duration = 5f;
 
+    public KeyCode tourModeHotKey = KeyCode.T;
 
     private void Awake() {
         world = GameObject.FindGameObjectWithTag("World");
@@ -51,7 +52,7 @@ public class TourMode : MonoBehaviour {
         onCountdown = false;
     }
 
-    public void StopNextTourTargetCoroutine() {
+    private void StopNextTourTargetCoroutine() {
         onCountdown = false;
         StopCoroutine("NextTourTargetCoroutine");
     }
@@ -65,7 +66,7 @@ public class TourMode : MonoBehaviour {
     }
 
     private void HandleTourModeToggle() {
-        if (Input.GetKeyDown(KeyCode.T)) {
+        if (Input.GetKeyDown(tourModeHotKey)) {
             onTourMode = !onTourMode;
 
             if (!onTourMode) {
