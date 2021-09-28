@@ -12,7 +12,7 @@ public class Navigation : Singleton<Navigation> {
     
     [Header("Variables")]
     public Transform currentlyFocusedBuilding; // note that camera focus and building focus are different
-    [SerializeField] private bool selectButtonPressed;
+    private bool selectButtonPressed;
 
     [Header("Cursor")]
     public Texture2D normalCursor;

@@ -44,7 +44,6 @@ public class UIManager : Singleton<UIManager> {
     public float duration;
     public float distance;
 
-
     private void Start() {
         worldChildren = world.transform.Cast<Transform>();
         HandleBuildingPane();
