@@ -104,5 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a10630f6d0dd845b1f607d3d9a5f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handleLightSource: 0
-  offset: {x: 25, y: 0, z: 0}
+  handleLightSource: 1
+  offset: {x: 25, y: 25, z: 0}
+  smoothingRate: 1.5
