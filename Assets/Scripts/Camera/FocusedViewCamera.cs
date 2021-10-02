@@ -47,7 +47,7 @@ public class FocusedViewCamera : MonoBehaviour {
     private void RestoreAimOffset(CinemachineVirtualCamera camera, Vector3 offset) {
         Debug.Log("Offset restored");
         var camTransposer = camera.GetCinemachineComponent<CinemachineTransposer>();
-        camTransposer.m_FollowOffset = offset;
+        camTransposer.m_FollowOffset = baseFollowOffset;
     }
 
     private void AdjustTrackedOffset(CinemachineVirtualCamera camera, Vector3 offset) {
@@ -59,6 +59,6 @@ public class FocusedViewCamera : MonoBehaviour {
     private void RestoreTrackedOffset(CinemachineVirtualCamera camera, Vector3 offset) {
         Debug.Log("Offset restored");
         var camComposer = camera.GetCinemachineComponent<CinemachineComposer>();
-        camComposer.m_TrackedObjectOffset = offset;
+        camComposer.m_TrackedObjectOffset = baseTrackedObjectOffset;
     }
 }
