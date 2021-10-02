@@ -30,9 +30,16 @@ public class TourMode : MonoBehaviour {
     }
 
     private void Update() {
+        HandleSelectionUpdates();
         HandleTerminateConditions();
         HandleAllInputs();
         HandleTourAutoSwitch();
+    }
+
+    private void HandleSelectionUpdates() {
+        if (UIManager.Instance.currentlySelectedBuilding != null) {
+            
+        }
     }
 
     private void HandleTourModeState() {
