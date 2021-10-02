@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class TourMode : MonoBehaviour {
     private GameObject world;
@@ -19,6 +20,10 @@ public class TourMode : MonoBehaviour {
     public KeyCode tourModeHotKey = KeyCode.T;
 
     private void Awake() {
+        UpdateTourList();
+    }
+
+    public void UpdateTourList() {
         world = GameObject.FindGameObjectWithTag("World");
         tourList = new List<Transform>();
         PopulateTourList();
