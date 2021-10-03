@@ -114,17 +114,17 @@ public class Navigation : Singleton<Navigation> {
     }
 
     private void HandleInputs() {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.LeftControl))
         {
             SwitchMapView();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && Input.GetKeyDown(KeyCode.LeftControl))
         {
             SwitchTopView();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3) && Input.GetKeyDown(KeyCode.LeftControl))
         {
             SwitchFocusedView();
         }
@@ -135,10 +135,6 @@ public class Navigation : Singleton<Navigation> {
 
         if (Input.GetMouseButtonUp(0)) {
             selectButtonPressed = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            UIManager.Instance.HandleUIFullscreen();
         }
     }
 
