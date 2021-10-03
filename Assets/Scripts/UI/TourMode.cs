@@ -17,7 +17,9 @@ public class TourMode : MonoBehaviour {
 
     [SerializeField] private float duration = 5f;
 
-    public KeyCode tourModeHotKey = KeyCode.T;
+    public KeyCode tourModeHotKey = KeyCode.F9;
+    public KeyCode nextTourModeHotKey = KeyCode.RightArrow;
+    public KeyCode prevTourModeHotKey = KeyCode.LeftArrow;
 
     private void Awake() {
         UpdateTourList();
@@ -97,9 +99,9 @@ public class TourMode : MonoBehaviour {
 
     private void HandleTourHotkeys() {
         if (onTourMode) {
-            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            if (Input.GetKeyDown(prevTourModeHotKey)) {
                 PreviousTour();
-            } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            } else if (Input.GetKeyDown(nextTourModeHotKey)) {
                 NextTour();
             }
         }
