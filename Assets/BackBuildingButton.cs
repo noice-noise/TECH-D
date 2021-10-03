@@ -5,19 +5,29 @@ using UnityEngine.UI;
 
 public class BackBuildingButton : MonoBehaviour {
     private Button button;
+    public Transform current;
 
     private void Awake() {
         button = GetComponent<Button>();
+        button.onClick.AddListener( delegate { OnBackButtonClicked(); } );
     }
 
     private void Update() {
-        var current = UIManager.Instance.currentlySelectedBuilding;
-        var parent = current.parent.transform.parent;
+        current = UIManager.Instance.currentlySelectedBuilding;
+    }
 
-        if (current != null && parent != null && parent.CompareTag("SelectableBuilding")) {
-            button.interactable = true;
-        } else {
-            button.interactable = false;
+    public void OnBackButtonClicked() {
+
+
+        if (current == null ) {
+            return;
         }
+
+        var parent = current.parent.transform.parent;
+        if (parent != null && parent.CompareTag("SelectableBuilding")) {
+            Navigation.Instance.SelectAndUpdateUI(parent);
+        } else {
+            UIManager.Instance.HandleBuildingPane();
+        } 
     }
 }
