@@ -225,11 +225,11 @@ public class UIManager : Singleton<UIManager> {
     }
 
     public void HandleBuildingPane() {
-        DisplayBuildingPane();
+        DisplayAllBuildingPane();
         CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.MapView);
     }
 
-    private void DisplayBuildingPane() {
+    private void DisplayAllBuildingPane() {
         ClearChildren(listInRoomsList);
         SetListParentActive(listInRoomsList, true);
 
@@ -253,6 +253,13 @@ public class UIManager : Singleton<UIManager> {
                 }
 
             } 
+        }
+    }
+
+    public void BackToParentBuilding() {
+        var parentBuilding = currentlySelectedBuilding.parent.transform.parent;
+        if (parentBuilding != null && parentBuilding.CompareTag("SelectableBuilding")) {
+            Navigation.Instance.SelectAndUpdateUI(parentBuilding);
         }
     }
 }
