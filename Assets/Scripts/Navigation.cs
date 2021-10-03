@@ -114,17 +114,17 @@ public class Navigation : Singleton<Navigation> {
     }
 
     private void HandleInputs() {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.F1))
         {
             SwitchMapView();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.F2))
         {
             SwitchTopView();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3) && Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.F3))
         {
             SwitchFocusedView();
         }
