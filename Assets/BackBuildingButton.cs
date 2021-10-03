@@ -11,12 +11,8 @@ public class BackBuildingButton : MonoBehaviour {
     }
 
     private void Update() {
-        Debug.Log("Update?");
         var current = UIManager.Instance.currentlySelectedBuilding;
-
         var parent = current.parent.transform.parent;
-
-
 
         if (current != null && parent != null && parent.CompareTag("SelectableBuilding")) {
             button.interactable = true;
