@@ -179,7 +179,8 @@ public class UIManager : Singleton<UIManager> {
         } else {
 
             var targetTransform = button.GetComponent<RoomButton>().buildingReference;
-            Navigation.Instance.SelectAndUpdateUI(targetTransform); 
+            Navigation.Instance.SelectAndUpdateUI(targetTransform);
+            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
         }
 
         
