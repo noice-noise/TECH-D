@@ -75,7 +75,6 @@ public class QueriesManager : MonoBehaviour {
     }
 
     public void OnCategoryClicked(Transform categoryButton) {
-        Debug.Log(categoryButton.name);
         ClearChildren(queriesList);
         CreateQueriesFrom(categoryButton);
     }
