@@ -106,11 +106,11 @@ public class Navigation : Singleton<Navigation> {
     }
 
     public void SetCursorSelectable() {
-        Cursor.SetCursor(selectableCursor, Vector2.zero, CursorMode.ForceSoftware);
+        Cursor.SetCursor(selectableCursor, Vector2.zero, CursorMode.Auto);
     }
 
     public void SetCursorNormal() {
-        Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.ForceSoftware);
+        Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
     }
 
     private void HandleInputs() {

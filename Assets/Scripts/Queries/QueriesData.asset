@@ -19,22 +19,42 @@ MonoBehaviour:
       sections:
       - title: Getting started
         contents: Click the category of your concern at the right.
-  - title: Locate
-    queries: []
+  - title: Location
+    queries:
+    - title: University
+      sections:
+      - title: Mailing Address
+        contents: "\tCebu Institute of Technology \u2013 University\r\n\tN. Bacalso
+          Avenue\r\n\tCebu City, Philippines \r\n\tTelephone Numbers: +63322617741\r\n\tFax
+          Number: +63322617743\r\n\tEmail Address: info@cit.edu\r\n\tWebsite: https://www.cit.edu\r\n"
   - title: Enrolment
     queries:
-    - title: How to self-enroll online?
+    - title: Online Enrollment For Freshmen
       sections:
-      - title: Continuing Students
-        contents: " 1. Log on to AIMS using your student account.\r\n 2. Select on
-          your available subjects on your desired schedule.\r\n 3. Verify all your
-          subjects and schedule.\r\n 4. Confirm your plotted schedule by clicking
-          \"Assess\"\r\n 5. Confirm your assessment for the current semester by clicking
-          \"Confirm\"\r\n 6. Done.\r\n\r\nLive demo is available on CIT University's
-          Youtube channel\r\nFor more inquiries, please contact Enrollment Technical
-          Office (ETO)."
-      - title: Transferee Students
-        contents: "Live demo on CIT University's Youtube channel\r\n\n"
+      - title: 
+        contents: "Applicant must have the following documents:\r\n\u2022 NSO certified
+          birth certificate\r\n\u2022 Certificate of good moral character.\r\n\u2022
+          Report Card\r\n\u2022 NCAE result\r\n\n1. Go to https://www.cit.edu. Click
+          \"Enroll Here\".\r\n2. Applicant will be directed to AIMS. Click apply for
+          new applicants.\r\n3. Fill-up the necessary details.\r\n4. Applicant will
+          be directed to PROFILE. Fill-up the necessary details for the applicant's
+          profile.\r\n5. Applicant will be directed to REGISTRATION. Applicant will
+          now select his/her schedule based on his/her course enrolled.\r\n6. Applicant
+          must verify his/her plotted schedules. Then, applicant will now proceed
+          to ASSESSMENT.\r\n7. In ASSESSMENT, applicant must select between FULLPAYMENT
+          or INSTALLMENT as mode of payment.\r\n8. Applicant will now be \u201CTemporarily
+          Enrolled\u201D. To be officially enrolled, applicant will pay the amount
+          of 800 as a registration fee.\r\n9. The needed document will be sent through
+          mail.\r\n10. A confirmation mail will be sent to the applicant."
+    - title: Online Enrollment For Continuing
+      sections:
+      - title: 
+        contents: "1. Go to citweb.pinnacle.com.ph or AIMS\r\n2. Go to REGISTRATION.\r\n3.
+          Select your preferred schedule of subject. And verify the plotted schedules.\r\n4.
+          Student will be now directed to ASSESSMENT. Student will now select between
+          FULLPAYMENT or INSTALLMENT as a mode of payment.\r\n5. In INSTALLMENT, student
+          must pay the amount of 800 as a down payment to be officially enrolled.\r\n6.
+          A confirmation mail will be sent to the applicant."
   - title: Payments
     queries: []
   - title: Refunds
@@ -57,7 +77,68 @@ MonoBehaviour:
   - title: Faculty
     queries: []
   - title: Staff
-    queries: []
+    queries:
+    - title: Academic Deans
+      sections:
+      - title: 
+        contents: "Academic Matters\r\nCurriculum Offerings\r\nSubject Loading/Withdrawal\r\nCHED
+          Provisions\r\nScholarships\r\n\nE-mail Addresses:\r\nCollege of Engineering
+          and Architecture \u2013 cea@cit.edu\r\nCollege of Computer Studies \u2013
+          ccs@cit.edu\r\nCollege of Nursing \u2013 con@cit.edu\r\nCollege of Arts
+          and Sciences \u2013 cas@cit.edu\r\nCollege of  Management, Business and
+          Accountancy  \u2013 coc@cit.edu\r\nCollege of Education \u2013 coe@cit.edu\r\n"
+    - title: Registrar
+      sections:
+      - title: 
+        contents: "Student Admission\r\nCatalogues & Prospectus\r\nAcademic Grades\r\nTranscript
+          of Records/Diploma\r\nEvaluation of Subjects\r\nStudent Clearance\r\nE-mail
+          Address: registrar@cit.edu\r"
+    - title: Head, Guidance Center
+      sections:
+      - title: 
+        contents: "Admission Procedures\r\nGuidance & Counselling\r\nPsychological/Educational
+          Testing\r\nOccupational/Vocational Information\r\nStudent Development\r\nE-mail
+          Address: guidance@cit.edu\r\n"
+    - title: Head, Student Affairs Office
+      sections:
+      - title: 
+        contents: "Attendance Excuse Slips\r\nDisciplinary Matters\r\nStudent Activities\r\nUniform
+          Exemption\r\nLost and Found Section\r\nE-mail Address: sao@cit.edu\r\n"
+    - title: Head, Office of Admissions and Scholarships
+      sections:
+      - title: 
+        contents: "Scholarships\r\nExternal Linkage\r\nJob Placement\r\nE-mail Address:
+          oas@cit.edu\r\n"
+    - title: Head, Medical and Dental Services
+      sections:
+      - title: 
+        contents: "Medical & Dental Consultations\r\nEmergency Treatment\r\nReferrals\r\nE-mail
+          Address: medical@cit.edu\r\n"
+    - title: Head, Library Services
+      sections:
+      - title: 
+        contents: "Library Orientation\r\nBook Search\r\nBook Lending\r\nBibliography\r\nNon-print
+          Materials\r\nE-mail Address: library@cit.edu\r"
+    - title: Department Heads
+      sections:
+      - title: 
+        contents: "Subject Validation\r\nAcademic Load Advice\r\nSubject Offerings
+          & Laboratory, Room Assignments\r\nInstructors Load\r\nSupervision of Departmental
+          Academic Matters\r\nContinuing Academic Advising\r"
+    - title: Accountant
+      sections:
+      - title: 
+        contents: "Assessment & Payment of School Fees\r\nExamination Admission Slips\r\nDiscounts
+          and Refunds\r\nE-mail Address: finance@cit.edu\r"
+    - title: Alumni Affairs Director
+      sections:
+      - title: 
+        contents: "Alumni Affairs\r\nE-mail Address: alumni@cit.edu\r\n"
+    - title: Safety and Security Officer
+      sections:
+      - title: 1
+        contents: "Vehicle Permits/Regulations\r\nCampus Security\r\nE-mail Address:
+          ssd@cit.edu\r"
   - title: Student Organizations
     queries: []
   - title: Suggestions
