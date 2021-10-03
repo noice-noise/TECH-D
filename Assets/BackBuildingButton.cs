@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BackBuildingButton : MonoBehaviour {
     private Button button;
-    public Transform current;
+    private Transform current;
+    public KeyCode backHotKey = KeyCode.Escape;
+
 
     private void Awake() {
         button = GetComponent<Button>();
@@ -14,6 +17,13 @@ public class BackBuildingButton : MonoBehaviour {
 
     private void Update() {
         current = UIManager.Instance.currentlySelectedBuilding;
+        HandleHotKey();
+    }
+
+    private void HandleHotKey() {
+        if (Input.GetKeyDown(backHotKey)) {
+            button.onClick.Invoke();
+        }
     }
 
     public void OnBackButtonClicked() {
