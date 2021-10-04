@@ -100,7 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2528687230747114325}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: VicinityBuilding
   m_TagString: SelectableBuilding
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845556070152566198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 78140440020466420}
@@ -134,7 +134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5106376698787155465}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FocusableServices
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,9 +164,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 78140440020466420}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Focus
-  m_TagString: Untagged
+  m_TagString: FocusedViewTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,13 +178,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7155890650708295352}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.4768585, y: 0.26041883, z: -0.15035288, w: 0.8259431}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2528687230747114325}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 35, z: 0}
 --- !u!1 &7457129556539575803
 GameObject:
   m_ObjectHideFlags: 0
