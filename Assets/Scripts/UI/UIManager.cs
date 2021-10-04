@@ -238,7 +238,7 @@ public class UIManager : Singleton<UIManager> {
         SetListParentActive(listInServicesList, true);
 
         leftNavTitle.GetComponent<TextMeshProUGUI>().SetText("CIT University");
-        leftNavDescription.GetComponentInChildren<TextMeshProUGUI>().SetText("All Buildings");
+        leftNavDescription.GetComponentInChildren<TextMeshProUGUI>().SetText("Cebu Institute of Technology University is a private non-sectarian academic institution in Cebu City, Philippines.");
 
         listInServicesList.parent.transform.parent.transform.Find("Title").GetComponentInChildren<TextMeshProUGUI>().SetText("Building");
 
