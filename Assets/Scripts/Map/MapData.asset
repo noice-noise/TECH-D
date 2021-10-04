@@ -41,9 +41,8 @@ MonoBehaviour:
     - roomName: Software/Multi-Media Development And Training Center
       roomDescription: 
   - buildingName: Science And Technology Building
-    description: Opened in 1971, this building was the first to be built in the school's
-      N. Bacalso campus. The building was renamed in 2018 to honor Gregorio Escario,
-      the school's third president.
+    description: Science and Technology Building where legendary Computer Engineering
+      students attend.
     roomChildren:
     - roomName: ATM Machine
       roomDescription: BPI ATM Machine
@@ -62,3 +61,17 @@ MonoBehaviour:
       roomDescription: 
     - roomName: Technical Support Group
       roomDescription: 
+  - buildingName: College Canteen
+    description: Offers various canteen services, meals, snacks, and school supplies.
+    roomChildren: []
+  - buildingName: Main Canteen
+    description: Offers various canteen services, meals, snacks, and school supplies.
+    roomChildren: []
+  - buildingName: New Academic Building
+    description: Houses a number of lecture rooms and facilities conducive for students
+      with drafting courses, kitchen courses, and others.
+    roomChildren: []
+  - buildingName: College Library
+    description: Offers quality library services as well as lounge, study halls, meeting
+      rooms, and others.
+    roomChildren: []
