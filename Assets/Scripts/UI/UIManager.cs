@@ -258,6 +258,10 @@ public class UIManager : Singleton<UIManager> {
     }
 
     public void BackToParentBuilding() {
+        if (currentlySelectedBuilding == null) {
+            return;
+        }
+
         var parentBuilding = currentlySelectedBuilding.parent.transform.parent;
         if (parentBuilding != null && parentBuilding.CompareTag("SelectableBuilding")) {
             Navigation.Instance.SelectAndUpdateUI(parentBuilding);
