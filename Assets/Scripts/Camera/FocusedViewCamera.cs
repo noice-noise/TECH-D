@@ -4,7 +4,7 @@ using System;
 
 public class FocusedViewCamera : MonoBehaviour {
 
-    public Vector3 adjustedFollowOffset = Vector3.zero;
+    public Vector3 adjustedFollowOffset = new Vector3(-10, 0, 0);
     public Vector3 baseFollowOffset;
 
     public Vector3 adjustedTrackedObjectOffset = Vector3.zero;
@@ -12,7 +12,7 @@ public class FocusedViewCamera : MonoBehaviour {
 
     private CinemachineVirtualCamera focusedViewCamera;
     private Transform currentTarget;
-    public bool allowOffset;
+    public bool allowOffset = true;
 
     private void Awake() {
         focusedViewCamera = GetComponent<CinemachineVirtualCamera>();
