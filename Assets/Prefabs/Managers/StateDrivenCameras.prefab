@@ -62,7 +62,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7757847, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2464077778609935926}
   - component: {fileID: 2464077778609935925}
   - component: {fileID: 2464077778609935924}
-  - component: {fileID: 31571149}
+  - component: {fileID: 1101073708}
   m_Layer: 8
   m_Name: cm
   m_TagString: Untagged
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_YawDamping: 2
   m_RollDamping: 0
   m_AngularDamping: 0
---- !u!114 &31571149
+--- !u!114 &1101073708
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 2464077778631559244}
   - component: {fileID: 2464077778631559251}
   - component: {fileID: 2464077778631559250}
-  - component: {fileID: 1966887298}
+  - component: {fileID: 1168291231}
   m_Layer: 8
   m_Name: cm
   m_TagString: Untagged
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_YawDamping: 2
   m_RollDamping: 0
   m_AngularDamping: 0
---- !u!114 &1966887298
+--- !u!114 &1168291231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -309,10 +309,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
+  m_NoiseProfile: {fileID: 11400000, guid: 20a705aea2d80e0478fb89b6f43d8530, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 0.3
-  m_FrequencyGain: 0.5
+  m_FrequencyGain: 0.3
   mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &2464077778977626090
 GameObject:
@@ -376,7 +376,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7757847, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 2464077779209962347}
   - component: {fileID: 2464077779209962346}
   - component: {fileID: 2464077779209962345}
-  - component: {fileID: 1854785240}
+  - component: {fileID: 1481190059}
   m_Layer: 8
   m_Name: cm
   m_TagString: Untagged
@@ -501,7 +501,7 @@ MonoBehaviour:
   m_YawDamping: 0
   m_RollDamping: 0
   m_AngularDamping: 0
---- !u!114 &1854785240
+--- !u!114 &1481190059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -579,7 +579,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7757847, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
