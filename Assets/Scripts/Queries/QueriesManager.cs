@@ -9,6 +9,9 @@ public class QueriesManager : MonoBehaviour {
 
     public QueriesData queriesData;
 
+    public Transform referenceButton;
+    private string referenceButtonString;
+
     public GameObject queryCategoriesPrefab;
     public GameObject queryPrefab;
     public GameObject sectionPrefab;
@@ -77,6 +80,19 @@ public class QueriesManager : MonoBehaviour {
     public void OnCategoryClicked(Transform categoryButton) {
         ClearChildren(queriesList);
         CreateQueriesFrom(categoryButton);
+        SetReferenceButton(referenceButtonString);
+    }
+
+    private void SetReferenceButton(string referenceButtonString) {
+        // Setting the text of RoomButtons are special cases, thus you need to manual set the text for this case
+        var refText = referenceButton.Find("Text").GetComponent<TextMeshProUGUI>();
+        if (referenceButtonString == null || referenceButtonString.Trim().Length == 0) {
+            refText.SetText("None");
+            return;
+        }
+
+        refText.SetText(referenceButtonString);
+        referenceButton.GetComponent<RoomButton>().UpdateRoomReferenceWith(referenceButtonString);
     }
 
     private void CreateQueriesFrom(Transform source) {
@@ -88,6 +104,8 @@ public class QueriesManager : MonoBehaviour {
             Debug.LogError("Category not found.");
             return;
         }
+
+        referenceButtonString = category.referenceTransformString;
 
         foreach (var query in category.queries) {
             CreateQuery(query, queriesList, queryPrefab);
