@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories:
   - title: FAQs
+    referenceTransformString: Executive Office
     queries:
     - title: Welcome to TECH-D Queries
       sections:
       - title: Getting started
         contents: Click the category of your concern at the right.
   - title: Location
+    referenceTransformString: Main Building
     queries:
     - title: University
       sections:
@@ -28,6 +30,7 @@ MonoBehaviour:
           Avenue\r\n\tCebu City, Philippines \r\n\tTelephone Numbers: +63322617741\r\n\tFax
           Number: +63322617743\r\n\tEmail Address: info@cit.edu\r\n\tWebsite: https://www.cit.edu\r\n"
   - title: Enrolment
+    referenceTransformString: Enrolment Technical Office
     queries:
     - title: Online Enrollment For Freshmen
       sections:
@@ -56,10 +59,13 @@ MonoBehaviour:
           must pay the amount of 800 as a down payment to be officially enrolled.\r\n6.
           A confirmation mail will be sent to the applicant."
   - title: Payments
+    referenceTransformString: Accounting
     queries: []
   - title: Refunds
+    referenceTransformString: Accounting
     queries: []
   - title: Made4Learning
+    referenceTransformString: Enrollment Technical Office
     queries:
     - title: Where can I access my AIMS account?
       sections:
@@ -75,8 +81,10 @@ MonoBehaviour:
 
           3. Done.'
   - title: Faculty
+    referenceTransformString: Main Building
     queries: []
   - title: Staff
+    referenceTransformString: Main Building
     queries:
     - title: Academic Deans
       sections:
@@ -140,6 +148,7 @@ MonoBehaviour:
         contents: "Vehicle Permits/Regulations\r\nCampus Security\r\nE-mail Address:
           ssd@cit.edu\r"
   - title: Student Organizations
+    referenceTransformString: 
     queries:
     - title: Organizations
       sections:
@@ -165,6 +174,8 @@ MonoBehaviour:
         contents: "Peer Mentors Club\r\nTechnologian Press\r\nTechnologian Leaders
           Academy\r\nRotaract Club of Metro Cebu CIT \u2013 U chapter"
   - title: Suggestions
+    referenceTransformString: 
     queries: []
   - title: Complaints
+    referenceTransformString: 
     queries: []
