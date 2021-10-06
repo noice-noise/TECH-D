@@ -26,6 +26,11 @@ public class CameraManager : Singleton<CameraManager>
 
     private Animator animator;
 
+    public delegate void CameraStateChanged();
+
+    public static event CameraStateChanged OnCameraStateChanged;
+
+
     private void Awake() {
         animator = GetComponent<Animator>();
         
@@ -57,6 +62,10 @@ public class CameraManager : Singleton<CameraManager>
     public void SwitchCameraMode(CameraState cameraState) {
         animator.Play(cameraState.ToString());
         currentCameraState = cameraState;
+
+        if (OnCameraStateChanged != null) {
+            OnCameraStateChanged();
+        }
     }
 
     public void SwitchCameraTarget(Transform newTarget) {
