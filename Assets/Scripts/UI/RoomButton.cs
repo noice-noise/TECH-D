@@ -16,38 +16,40 @@ public class RoomButton : MonoBehaviour {
         InitRoomButton();
     }
 
-    public void InitRoomButton() {
-        
-
-
+    private void InitRoomButton() {
 
         if (buildingReference == null) {
-            GetUIText();
-
-            string titleCaseBuildingName = ToTitleCase();
-
-            Transform targetBuilding = GameObject.Find(titleCaseBuildingName).transform;
-            
-            if (targetBuilding == null) {
-                Building building = FindRoom(uiText);
-                targetBuilding = GameObject.Find(building.buildingName).transform;
-            }
-
-            if (targetBuilding != null) {
-                Debug.Log("Reference: " + targetBuilding.name);
-                buildingReference = targetBuilding;
-            } else {
-                Debug.LogError("Building reference not found.");
-            }
+            CheckUIText();
+            GetBuildingReference(uiText);
         }
 
         HandleSelectableBuildingTag();
     }
 
+    private void GetBuildingReference(string titleCaseBuildingName) {
+        Transform targetBuilding = GameObject.Find(titleCaseBuildingName).transform;
+        
+        if (targetBuilding == null) {
+            targetBuilding = FindTarget();
+        }
+
+        if (targetBuilding != null) {
+            Debug.Log("Reference: " + targetBuilding.name);
+            buildingReference = targetBuilding;
+        } else {
+            Debug.LogError("Building reference not found.");
+        }
+    }
+
+    public Transform FindTarget() {
+        Building building = FindTransform(uiText);
+        return GameObject.Find(building.buildingName).transform;
+    }
+
     /// <summary>
     /// Some buttons use native Text or TextMeshPro, thus if no Text detected, look for TextMeshPro.
     /// </summary>
-    private void GetUIText() {
+    private void CheckUIText() {
         var textTransform = transform.Find("Text");
         var textComponent = transform.Find("Text").GetComponent<Text>();
 
@@ -58,6 +60,8 @@ public class RoomButton : MonoBehaviour {
         if (textComponent == null || uiText.Trim().Length == 0) {
             uiText = textTransform.GetComponent<TextMeshProUGUI>().text;
         }
+
+        uiText = ToTitleCase(uiText);
     }
 
     // If the current transform reference is the primary Building transform with "SelectableTag"
@@ -68,7 +72,7 @@ public class RoomButton : MonoBehaviour {
         }
     }
 
-    private Building FindRoom(string targetRoomText) {
+    private Building FindTransform(string targetRoomText) {
         foreach (var building in UIManager.Instance.mapData.buildingData) {
             foreach (var room in building.roomChildren) {
                 if (room.roomName.Equals(targetRoomText)) {
@@ -83,11 +87,15 @@ public class RoomButton : MonoBehaviour {
     /// <summary>
     /// first letter of needs to be upper because UI.Extensions.AutoCompleteBox displays options in all lowercase for some reason, thus our code needs to adjust
     /// </summary>
-    private string ToTitleCase() {
-        return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(uiText.ToLower());
+    private string ToTitleCase(string text) {
+        return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(text.ToLower());
     }
 
     private void OnClick() {
         UIManager.Instance.HandleButtonClick(transform);
+    }
+
+    public void UpdateRoomReferenceWith(string referenceName) {
+        GetBuildingReference(referenceName);
     }
 }
