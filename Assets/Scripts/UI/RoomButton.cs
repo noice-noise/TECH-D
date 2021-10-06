@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,27 +7,29 @@ public class RoomButton : MonoBehaviour {
 
     public Button button;
     public Transform buildingReference;
-    private Text uiText;
+    private string uiText;
 
     private void Start() {
-        InitRoomButton();
-    }
-
-    private void InitRoomButton() {
-        
         button = this.GetComponent<Button>();
         button.onClick.AddListener(OnClick);
 
+        InitRoomButton();
+    }
+
+    public void InitRoomButton() {
+        
+
+
 
         if (buildingReference == null) {
-            uiText = transform.Find("Text").GetComponent<Text>();
+            GetUIText();
 
             string titleCaseBuildingName = ToTitleCase();
 
             Transform targetBuilding = GameObject.Find(titleCaseBuildingName).transform;
             
             if (targetBuilding == null) {
-                Building building = FindRoom(uiText.text);
+                Building building = FindRoom(uiText);
                 targetBuilding = GameObject.Find(building.buildingName).transform;
             }
 
@@ -39,6 +42,22 @@ public class RoomButton : MonoBehaviour {
         }
 
         HandleSelectableBuildingTag();
+    }
+
+    /// <summary>
+    /// Some buttons use native Text or TextMeshPro, thus if no Text detected, look for TextMeshPro.
+    /// </summary>
+    private void GetUIText() {
+        var textTransform = transform.Find("Text");
+        var textComponent = transform.Find("Text").GetComponent<Text>();
+
+        if (textComponent != null) {
+            uiText = textComponent.text;
+        }
+
+        if (textComponent == null || uiText.Trim().Length == 0) {
+            uiText = textTransform.GetComponent<TextMeshProUGUI>().text;
+        }
     }
 
     // If the current transform reference is the primary Building transform with "SelectableTag"
@@ -65,7 +84,7 @@ public class RoomButton : MonoBehaviour {
     /// first letter of needs to be upper because UI.Extensions.AutoCompleteBox displays options in all lowercase for some reason, thus our code needs to adjust
     /// </summary>
     private string ToTitleCase() {
-        return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(uiText.text.ToLower());
+        return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(uiText.ToLower());
     }
 
     private void OnClick() {
