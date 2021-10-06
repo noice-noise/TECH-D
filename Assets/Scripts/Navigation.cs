@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.AI;
 
 public class Navigation : Singleton<Navigation> {
 
@@ -18,9 +19,13 @@ public class Navigation : Singleton<Navigation> {
     public Texture2D normalCursor;
     public Texture2D selectableCursor;
 
+    public Transform navMeshAgentTransform;
+    public AgentController agent;
+
 
     private void Awake() {
         mainCamera = Camera.main;
+        agent = navMeshAgentTransform.GetComponent<AgentController>();
     }
 
     private void Update() {
@@ -53,14 +58,14 @@ public class Navigation : Singleton<Navigation> {
 
         if (Physics.Raycast(ray, out hit)) {
             var selected = hit.collider;
+            // agent.SetAgentDestination(hit.point);
             if (selected != null && selected.gameObject.layer == LayerMask.NameToLayer("SelectableBuilding")) {
                 SetCursorSelectable();
                 if (selectButtonPressed) {
 
-                    // var toFocus = hit.transform.parent.transform.parent.transform.Find("Focus");
+                    agent.SetAgentDestination(hit.point);
+
                     var toFocus = FindParentBuilding(hit.transform).Find("Focus");
-                    // var toFocus = FindParentBuilding(hit.transform).Find("Model").GetChild(0).transform;
-                    // var toFocus = hit.transform.Find("Model").GetChild(0).transform;
                     if (toFocus == null) {
                         Debug.Log("No focusable object.");
                         return;
