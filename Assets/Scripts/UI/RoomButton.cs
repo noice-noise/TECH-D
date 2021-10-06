@@ -9,7 +9,11 @@ public class RoomButton : MonoBehaviour {
     private Text uiText;
 
     private void Start() {
+        InitRoomButton();
+    }
 
+    private void InitRoomButton() {
+        
         button = this.GetComponent<Button>();
         button.onClick.AddListener(OnClick);
 
