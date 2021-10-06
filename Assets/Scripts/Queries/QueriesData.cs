@@ -9,6 +9,7 @@ public class QueriesData : ScriptableObject {
 [System.Serializable]
 public class Category {
     public string title;
+    public string referenceTransformString;
     public List<Query> queries;
 }
 
