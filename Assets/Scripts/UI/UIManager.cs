@@ -180,10 +180,7 @@ public class UIManager : Singleton<UIManager> {
 
             var targetTransform = button.GetComponent<RoomButton>().buildingReference;
             Navigation.Instance.SelectAndUpdateUI(targetTransform);
-            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
         }
-
-        
     }
 
     private void ToggleSearchVisibility(Transform targetTransform, bool targetState) {
