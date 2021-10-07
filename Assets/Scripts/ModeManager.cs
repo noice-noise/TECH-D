@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,9 @@ public class ModeManager : Singleton<ModeManager> {
 
     [SerializeField] private TechDMode currentMode;
 
+    public GameObject modeIndicator;
+    public TextMeshProUGUI modeIndicatorText;
+
     public GameObject interactiveModeButton;
     public GameObject tourModeButton;
     public GameObject pathFindingModeButton;
@@ -20,6 +24,10 @@ public class ModeManager : Singleton<ModeManager> {
     
 
     private void Awake() {
+
+        var textTrans = modeIndicator.transform.Find("Text");
+        modeIndicatorText = textTrans.GetComponent<TextMeshProUGUI>();
+
         var im = interactiveModeButton.GetComponent<Button>();
         im.onClick.AddListener(delegate { HandleModesChange(TechDMode.Interactive); });
 
@@ -36,12 +44,15 @@ public class ModeManager : Singleton<ModeManager> {
         switch(currentMode) {
             case TechDMode.Interactive:
                 HandleInteractiveMode();
+                modeIndicatorText.text = "Interactive Mode";
                 break;
             case TechDMode.Tour:
                 HandleTourMode();
+                modeIndicatorText.text = "Tour Mode";
                 break;
             case TechDMode.PathFinding:
                 HandlePathFindingMode();
+                modeIndicatorText.text = "Path Finding Mode";
                 break;
             default:
                 Debug.LogError("Mode invalid.");
@@ -58,33 +69,19 @@ public class ModeManager : Singleton<ModeManager> {
         HandleModeStart(currentMode);
     }
 
-    public void HandleModes() {
-        switch(currentMode) {
-            case TechDMode.Interactive:
-                HandleInteractiveMode();
-                break;
-            case TechDMode.Tour:
-                HandleTourMode();
-                break;
-            case TechDMode.PathFinding:
-                HandlePathFindingMode();
-                break;
-            default:
-                Debug.LogError("Mode invalid.");
-                break;
-        }
-    }
-
     private void HandleModeStart(TechDMode toStart) {
         switch(toStart) {
             case TechDMode.Interactive:
                 StartInteractiveMode();
+                modeIndicatorText.text = "Interactive Mode";
                 break;
             case TechDMode.Tour:
                 StartTourMode();
+                modeIndicatorText.text = "Tour Mode";
                 break;
             case TechDMode.PathFinding:
                 StartPathFindingMode();
+                modeIndicatorText.text = "Path Finding Mode";
                 break;
             default:
                 Debug.LogError("Mode invalid.");
@@ -113,12 +110,14 @@ public class ModeManager : Singleton<ModeManager> {
     private void StartTourMode() {
         if (!TourMode.Instance.onTourMode) {
             TourMode.Instance.HandleTourModeToggle();
+            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
         }
     }
 
     private void StopTourMode() {
         if (TourMode.Instance.onTourMode) {
             TourMode.Instance.HandleTourModeToggle();
+            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
         }
     }
 
