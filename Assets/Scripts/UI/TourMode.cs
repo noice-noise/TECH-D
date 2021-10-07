@@ -33,7 +33,6 @@ public class TourMode : Singleton<TourMode>
     }
 
     private void Update() {
-        HandleTerminateConditions();
         HandleAllInputs();
         HandleTourAutoSwitch();
     }
@@ -57,17 +56,8 @@ public class TourMode : Singleton<TourMode>
     private void HandleTourModeState() {
         if (!onTourMode) {
             StopNextTourTargetCoroutine();
-            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.MapView);
         } else if (onTourMode) {
             SelectCurrentTourTarget();
-            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
-        }
-    }
-
-    private void HandleTerminateConditions() {
-        if (OnMapView()) {
-            StopNextTourTargetCoroutine();
-            onTourMode = false;
         }
     }
 
@@ -161,11 +151,6 @@ public class TourMode : Singleton<TourMode>
 
     private void MaxCounter() {
         tourCounter = tourList.Count() - 1;
-    }
-
-
-    private bool OnMapView() {
-        return CameraManager.Instance.currentCameraState == CameraManager.CameraState.MapView;
     }
 
     private void DisplayTourList() {
