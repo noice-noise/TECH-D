@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-public class TourMode : MonoBehaviour {
+public class TourMode : Singleton<TourMode> {
     private GameObject world;
     private List<Transform> tourList;
 
@@ -32,22 +32,32 @@ public class TourMode : MonoBehaviour {
     }
 
     private void Update() {
-        HandleSelectionUpdates();
         HandleTerminateConditions();
         HandleAllInputs();
         HandleTourAutoSwitch();
+        HandleTourModeState();
     }
 
-    private void HandleSelectionUpdates() {
-        if (UIManager.Instance.currentlySelectedBuilding != null) {
-            
+    public void ToggleTourMode() {
+        onTourMode = !onTourMode;
+    }
+
+    private void HandleTourModeToggle() {
+        ToggleTourMode();
+        HandleTourModeState();
+    }
+
+    private void OnTourModeKeyDown() {
+        if (Input.GetKeyDown(tourModeHotKey)) {
+            HandleTourModeToggle();
         }
     }
+
 
     private void HandleTourModeState() {
         if (!onTourMode) {
             StopNextTourTargetCoroutine();
-            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
+            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.MapView);
         } else if (onTourMode) {
             SelectCurrentTourTarget();
             CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
@@ -83,18 +93,6 @@ public class TourMode : MonoBehaviour {
     private void HandleAllInputs() {
         OnTourModeKeyDown();
         HandleTourHotkeys();
-    }
-
-    private void OnTourModeKeyDown() {
-        if (Input.GetKeyDown(tourModeHotKey)) {
-            HandleTourModeToggle();
-        }
-    }
-
-    public void HandleTourModeToggle() {
-        onTourMode = !onTourMode;
-        // Debug.Log("TourMode: " + onTourMode);
-        HandleTourModeState();
     }
 
     private void HandleTourHotkeys() {
