@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ModeManager : MonoBehaviour {
+public class ModeManager : Singleton<ModeManager> {
 
     public enum TechDMode {
         Interactive, Tour, PathFinding
@@ -17,31 +17,71 @@ public class ModeManager : MonoBehaviour {
     public GameObject pathFindingModeButton;
 
     public GameObject navMeshAgent;
+    
 
     private void Awake() {
         var im = interactiveModeButton.GetComponent<Button>();
-        im.onClick.AddListener(delegate { HandleModes(TechDMode.Interactive); });
+        im.onClick.AddListener(delegate { HandleModesChange(TechDMode.Interactive); });
 
         var tm = tourModeButton.GetComponent<Button>();
-        tm.onClick.AddListener(delegate { HandleModes(TechDMode.Tour); });
+        tm.onClick.AddListener(delegate { HandleModesChange(TechDMode.Tour); });
 
         var pfm = pathFindingModeButton.GetComponent<Button>();
-        pfm.onClick.AddListener(delegate { HandleModes(TechDMode.PathFinding); });
+        pfm.onClick.AddListener(delegate { HandleModesChange(TechDMode.PathFinding); });
 
-        // AgentController navMeshAgent.GetComponent<AgentController>();
+        CameraManager.OnCameraTargetChanged += HandleTargetChange;
     }
 
-    public void HandleModes(TechDMode newMode) {
-        HandleModeTermination(currentMode);
-        currentMode = newMode;
-
-
-        switch(newMode) {
+    private void HandleTargetChange() {
+        switch(currentMode) {
             case TechDMode.Interactive:
-                StopInteractiveMode();
+                HandleInteractiveMode();
                 break;
             case TechDMode.Tour:
-                StopInteractiveMode();
+                HandleTourMode();
+                break;
+            case TechDMode.PathFinding:
+                HandlePathFindingMode();
+                break;
+            default:
+                Debug.LogError("Mode invalid.");
+                break;
+        }
+    }
+
+    public void HandleModesChange(TechDMode newMode) {
+
+        if (newMode == currentMode) return;
+
+        HandleModeTermination(currentMode);
+        currentMode = newMode;
+        HandleModeStart(currentMode);
+    }
+
+    public void HandleModes() {
+        switch(currentMode) {
+            case TechDMode.Interactive:
+                HandleInteractiveMode();
+                break;
+            case TechDMode.Tour:
+                HandleTourMode();
+                break;
+            case TechDMode.PathFinding:
+                HandlePathFindingMode();
+                break;
+            default:
+                Debug.LogError("Mode invalid.");
+                break;
+        }
+    }
+
+    private void HandleModeStart(TechDMode toStart) {
+        switch(toStart) {
+            case TechDMode.Interactive:
+                StartInteractiveMode();
+                break;
+            case TechDMode.Tour:
+                StartTourMode();
                 break;
             case TechDMode.PathFinding:
                 StartPathFindingMode();
@@ -59,7 +99,7 @@ public class ModeManager : MonoBehaviour {
                 StopInteractiveMode();
                 break;
             case TechDMode.Tour:
-                StopInteractiveMode();
+                StopTourMode();
                 break;
             case TechDMode.PathFinding:
                 StopPathFindingMode();
@@ -70,16 +110,28 @@ public class ModeManager : MonoBehaviour {
         }
     }
 
+    private void StartTourMode() {
+        if (!TourMode.Instance.onTourMode) {
+            TourMode.Instance.HandleTourModeToggle();
+        }
+    }
+
+    private void StopTourMode() {
+        if (TourMode.Instance.onTourMode) {
+            TourMode.Instance.HandleTourModeToggle();
+        }
+    }
 
     public void StartInteractiveMode() {
-
+        HandleInteractiveMode();
     }
 
     public void StopInteractiveMode() {
-
+        
     }
 
     public void StartPathFindingMode() {
+        CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
         AgentController.Instance.StartAgentBehavior();
     }
 
@@ -93,6 +145,14 @@ public class ModeManager : MonoBehaviour {
     }
 
     public void HandleTourMode() {
-        TourMode.Instance.HandleTourModeToggle();
+        
+    }
+
+    public void HandleInteractiveMode() {
+        CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
+    }
+
+    public void HandlePathFindingMode() {
+        
     }
 }
