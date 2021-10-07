@@ -17,7 +17,7 @@ public class AgentController : Singleton<AgentController> {
     private void Start() {
 
         lineRenderer.positionCount = 0;
-        
+
         CameraManager.OnCameraTargetChanged += TargetChanged;
     }
 
@@ -32,7 +32,6 @@ public class AgentController : Singleton<AgentController> {
     }
 
     private void Update() {
-
 
         if (agent.hasPath) {
             DrawPath();
