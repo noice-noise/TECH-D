@@ -54,7 +54,6 @@ public class Navigation : Singleton<Navigation> {
 
         if (Physics.Raycast(ray, out hit)) {
             var selected = hit.collider;
-            // agent.SetAgentDestination(hit.point);
             if (selected != null && selected.gameObject.layer == LayerMask.NameToLayer("SelectableBuilding")) {
                 SetCursorSelectable();
                 if (selectButtonPressed) {
@@ -105,11 +104,11 @@ public class Navigation : Singleton<Navigation> {
     }
 
     public void SetCursorSelectable() {
-        Cursor.SetCursor(selectableCursor, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(selectableCursor, Vector2.zero, CursorMode.ForceSoftware);
     }
 
     public void SetCursorNormal() {
-        Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.ForceSoftware);
     }
 
     private void HandleInputs() {
