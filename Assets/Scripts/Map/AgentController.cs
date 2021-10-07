@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,25 +15,24 @@ public class AgentController : Singleton<AgentController> {
     public LineRenderer lineRenderer;
     [SerializeField] private float lineHeightOffset = 2f;
 
+    public Transform originMark;
+    public Transform followMark;
+    public Transform targetMark;
+
     private void Start() {
-
         lineRenderer.positionCount = 0;
+        CameraManager.OnCameraTargetChanged += OnTargetChanged;
 
-        CameraManager.OnCameraTargetChanged += TargetChanged;
+        followMark.SetParent(transform);
+        // followMark.position = new Vector3(0, 0, 0);
+        SetOriginPosition(transform.position);
     }
 
     private void OnDisable() {
-        CameraManager.OnCameraTargetChanged -= TargetChanged;
-    }
-
-    private void TargetChanged() {
-        target = CameraManager.Instance.currentTarget;
-        Debug.Log("Target Changed: " + target.parent.name);
-        SetAgentDestination(target.position);
+        CameraManager.OnCameraTargetChanged -= OnTargetChanged;
     }
 
     private void Update() {
-
         if (agent.hasPath) {
             DrawPath();
         }
@@ -59,5 +59,30 @@ public class AgentController : Singleton<AgentController> {
 
             lineRenderer.SetPosition(i, pointPosition);
         }
+    }
+
+    private void OnTargetChanged() {
+        target = CameraManager.Instance.currentTarget;
+        Debug.Log("Target Changed: " + target.parent.name);
+        SetAgentDestination(target.position);
+        HandleTargetMark();
+    }
+
+    private void HandleTargetMark() {
+        // targetMark.transform.SetParent(target);
+        SetTargetPosition(target.position);
+    }
+
+
+    private void SetOriginPosition(Vector3 position) {
+        originMark.position = position;
+    }
+
+    private void SetTargetPosition(Vector3 position) {
+        targetMark.position = position;
+    }
+
+    private void SetFollowPosition(Vector3 position) {
+        followMark.position = position;
     }
 }

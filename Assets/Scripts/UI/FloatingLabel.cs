@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FloatingLabel : MonoBehaviour {
+
+    public bool allowShowAndHide = true;
+
     private void OnEnable() {
         CameraManager.OnCameraStateChanged += HandleCameraStateChange;
     }
@@ -14,10 +17,14 @@ public class FloatingLabel : MonoBehaviour {
 
     public void HandleCameraStateChange() {
         if (CameraManager.Instance.currentCameraState == CameraManager.CameraState.FocusedView) {
-            HideLabel();
+            if (allowShowAndHide) {
+                HideLabel();
+            }
         } else {
-            if (gameObject.activeSelf == false) {
-                ShowLabel();
+            if (allowShowAndHide) {
+                if (gameObject.activeSelf == false) {
+                    ShowLabel();
+                }
             }
         }
     }

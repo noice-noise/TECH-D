@@ -10,6 +10,8 @@ public class CamFollow : MonoBehaviour
     private TextMeshProUGUI text;
     private Camera cam;
 
+    [SerializeField] private bool allowFollow = true;
+
     private void Awake() {
         cam = Camera.main;
         text = GetComponentInChildren<TextMeshProUGUI>();
@@ -20,6 +22,8 @@ public class CamFollow : MonoBehaviour
     }
 
     private void Update() {
-        transform.LookAt(cam.transform);
+        if (allowFollow) {
+            transform.LookAt(cam.transform);
+        }
     }
 }
