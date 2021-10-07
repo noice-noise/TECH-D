@@ -19,12 +19,15 @@ public class AgentController : Singleton<AgentController> {
     public Transform followMark;
     public Transform targetMark;
 
+    [SerializeField] private bool canMove = false;
+    [SerializeField] private bool enableMarkers = false;
+    [SerializeField] private bool canDrawPath = false;
+
     private void Start() {
         lineRenderer.positionCount = 0;
         CameraManager.OnCameraTargetChanged += OnTargetChanged;
 
         followMark.SetParent(transform);
-        // followMark.position = new Vector3(0, 0, 0);
         SetOriginPosition(transform.position);
     }
 
@@ -32,17 +35,42 @@ public class AgentController : Singleton<AgentController> {
         CameraManager.OnCameraTargetChanged -= OnTargetChanged;
     }
 
+    public void EnableMovement() {
+        canMove = true;
+    }
+
+    public void DisableMovement() {
+        canMove = false;
+    }
+
     private void Update() {
+        if (canDrawPath) {
+            HandleDrawPath();
+        } else {
+            lineRenderer.enabled = false;
+        }
+
+        if (enableMarkers) {
+            SetAllMarkerActiveSelf(true);
+        } else {
+            SetAllMarkerActiveSelf(false);
+        }
+    }
+
+    private void SetAllMarkerActiveSelf(bool state) {
+        originMark.gameObject.SetActive(state);
+        targetMark.gameObject.SetActive(state);
+        followMark.gameObject.SetActive(state);
+    }
+
+    private void HandleDrawPath() {
         if (agent.hasPath) {
-            targetMark.gameObject.SetActive(true);
+            lineRenderer.enabled = true;
             DrawPath();
         }
     }
 
-    public void SetAgentDestination(Vector3 target) {
-        // Debug.Log("Request move");
-        agent.SetDestination(target);
-    }
+
 
     public void DrawPath() {
         Vector3[] pathCorners = agent.path.corners;
@@ -64,16 +92,42 @@ public class AgentController : Singleton<AgentController> {
 
     private void OnTargetChanged() {
         target = CameraManager.Instance.currentTarget;
+        if (target.CompareTag("FocusedViewTarget")) {
+            target = target.parent;
+        }
         Debug.Log("Target Changed: " + target.parent.name);
-        SetAgentDestination(target.position);
+        
+        if (canMove) {
+            SetAgentDestination(target.position);
+        }
+
         HandleTargetMark();
     }
 
     private void HandleTargetMark() {
-        // targetMark.transform.SetParent(target);
         SetTargetPosition(target.position);
     }
 
+    public void StartAgentBehavior() {
+        canMove = true;
+        enableMarkers = true;
+        canDrawPath = true;
+        SetAllMarkerActiveSelf(true);
+        agent.isStopped = false;
+        agent.SetDestination(target.position);
+    }
+
+    public void StopAgentBehavior() {
+        canMove = false;
+        enableMarkers = false;
+        canDrawPath = false;
+        SetAllMarkerActiveSelf(false);
+        agent.isStopped = true;
+    }
+
+    public void SetAgentDestination(Vector3 target) {
+        agent.SetDestination(target);
+    }
 
     private void SetOriginPosition(Vector3 position) {
         originMark.position = position;
