@@ -18,7 +18,9 @@ public class CamFollow : MonoBehaviour
     }
 
     private void Start() {
-        text.SetText(transform.parent.transform.name);
+        if (text!= null && transform.parent != null) {
+            text.SetText(transform.parent.transform.name);
+        }
     }
 
     private void Update() {
