@@ -175,7 +175,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
 --- !u!114 &1174084649768959170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
+  allowFollow: 1
 --- !u!114 &320045710459305734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ebbc04abed1a549b4dd68862b49d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowShowAndHide: 1
 --- !u!1 &1174084650149936163
 GameObject:
   m_ObjectHideFlags: 0
