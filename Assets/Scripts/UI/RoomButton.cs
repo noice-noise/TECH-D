@@ -34,7 +34,7 @@ public class RoomButton : MonoBehaviour {
         }
 
         if (targetBuilding != null) {
-            Debug.Log("Reference: " + targetBuilding.name);
+            // Debug.Log("Reference: " + targetBuilding.name);
             buildingReference = targetBuilding;
         } else {
             Debug.LogError("Building reference not found.");

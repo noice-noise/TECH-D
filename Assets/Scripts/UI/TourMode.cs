@@ -93,7 +93,7 @@ public class TourMode : MonoBehaviour {
 
     public void HandleTourModeToggle() {
         onTourMode = !onTourMode;
-        Debug.Log("TourMode: " + onTourMode);
+        // Debug.Log("TourMode: " + onTourMode);
         HandleTourModeState();
     }
 
