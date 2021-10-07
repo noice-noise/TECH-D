@@ -12,6 +12,8 @@ public class ModeManager : MonoBehaviour {
     public GameObject tourModeButton;
     public GameObject pathFindingModeButton;
 
+    public GameObject navMeshAgent;
+
     private void Awake() {
         var im = interactiveModeButton.GetComponent<Button>();
         im.onClick.AddListener(delegate { HandleInteractiveMode(); });
@@ -52,13 +54,13 @@ public class ModeManager : MonoBehaviour {
     public void HandleTourMode() {
         // run tour animation (path finding modifed)
         Debug.Log("2");
-        TourMode.Instance.ToggleTourMode();
+        TourMode.Instance.HandleTourModeToggle();
         currentMode = TechDMode.Tour;
     }
 
     public void HandlePathFindingMode() {
         // disables auto focused view, allows follow agent, 
-        Debug.Log("3");
+
         currentMode = TechDMode.PathFinding;
     }
 }
