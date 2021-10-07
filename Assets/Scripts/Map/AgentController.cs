@@ -95,7 +95,7 @@ public class AgentController : Singleton<AgentController> {
             target = target.parent;
         }
         
-        Debug.Log("Target Changed: " + target.parent.name);
+        // Debug.Log("Target Changed: " + target.parent.name);
         
         if (canMove) {
             SetAgentDestination(target.position);
