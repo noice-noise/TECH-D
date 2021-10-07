@@ -19,13 +19,9 @@ public class Navigation : Singleton<Navigation> {
     public Texture2D normalCursor;
     public Texture2D selectableCursor;
 
-    public Transform navMeshAgentTransform;
-    public AgentController agent;
-
 
     private void Awake() {
         mainCamera = Camera.main;
-        agent = navMeshAgentTransform.GetComponent<AgentController>();
     }
 
     private void Update() {
@@ -62,8 +58,6 @@ public class Navigation : Singleton<Navigation> {
             if (selected != null && selected.gameObject.layer == LayerMask.NameToLayer("SelectableBuilding")) {
                 SetCursorSelectable();
                 if (selectButtonPressed) {
-
-                    agent.SetAgentDestination(hit.point);
 
                     var toFocus = FindParentBuilding(hit.transform).Find("Focus");
                     if (toFocus == null) {
