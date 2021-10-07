@@ -34,6 +34,7 @@ public class AgentController : Singleton<AgentController> {
 
     private void Update() {
         if (agent.hasPath) {
+            targetMark.gameObject.SetActive(true);
             DrawPath();
         }
     }
