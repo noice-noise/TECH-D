@@ -27,8 +27,10 @@ public class CameraManager : Singleton<CameraManager>
     private Animator animator;
 
     public delegate void CameraStateChanged();
-
     public static event CameraStateChanged OnCameraStateChanged;
+
+    public delegate void CameraTargetChanged();
+    public static event CameraStateChanged OnCameraTargetChanged;
 
 
     private void Awake() {
@@ -72,15 +74,27 @@ public class CameraManager : Singleton<CameraManager>
         if (newTarget == null)
             return;
 
-        if (autoSwitchCameraMode && currentCameraState == CameraState.MapView)
+        if (autoSwitchCameraMode && currentCameraState == CameraState.MapView) {
             SwitchCameraMode(CameraState.TopView);
+        }
 
         currentTarget = newTarget;
+        
+        SwitchTopViewTarget(newTarget);
+        SwitchFocusedViewTarget(newTarget);
+
+        if (OnCameraTargetChanged != null) {
+            OnCameraTargetChanged();
+        }
+    }
+
+    internal void SwitchTopViewTarget(Transform newTarget) {
         topViewCamera.m_Follow = newTarget;
         topViewCamera.m_LookAt = newTarget;
+    }
+
+    internal void SwitchFocusedViewTarget(Transform newTarget) {
         focusedViewCamera.m_Follow = newTarget;
         focusedViewCamera.m_LookAt = newTarget;
     }
-
-
 }
