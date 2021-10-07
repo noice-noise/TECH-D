@@ -4,14 +4,15 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-public class TourMode : Singleton<TourMode> {
+public class TourMode : Singleton<TourMode>
+{
     private GameObject world;
     private List<Transform> tourList;
 
     private int tourCounter;
     private Transform currentlySelected;
 
-    public bool onTourMode = false;
+    public bool onTourMode { set; get; } = false;
     public bool autoSwitch = true;
     private bool onCountdown = false;
 
