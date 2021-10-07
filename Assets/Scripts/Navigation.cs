@@ -8,7 +8,6 @@ using UnityEngine.AI;
 
 public class Navigation : Singleton<Navigation> {
 
-
     private Camera mainCamera;
     
     [Header("Variables")]
