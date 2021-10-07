@@ -70,8 +70,6 @@ public class AgentController : Singleton<AgentController> {
         }
     }
 
-
-
     public void DrawPath() {
         Vector3[] pathCorners = agent.path.corners;
 
@@ -92,9 +90,11 @@ public class AgentController : Singleton<AgentController> {
 
     private void OnTargetChanged() {
         target = CameraManager.Instance.currentTarget;
+
         if (target.CompareTag("FocusedViewTarget")) {
             target = target.parent;
         }
+        
         Debug.Log("Target Changed: " + target.parent.name);
         
         if (canMove) {
