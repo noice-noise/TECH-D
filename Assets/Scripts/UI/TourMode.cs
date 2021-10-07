@@ -35,16 +35,15 @@ public class TourMode : Singleton<TourMode> {
         HandleTerminateConditions();
         HandleAllInputs();
         HandleTourAutoSwitch();
-        HandleTourModeState();
     }
 
-    public void ToggleTourMode() {
-        onTourMode = !onTourMode;
-    }
-
-    private void HandleTourModeToggle() {
+    public void HandleTourModeToggle() {
         ToggleTourMode();
         HandleTourModeState();
+    }
+
+    private void ToggleTourMode() {
+        onTourMode = !onTourMode;
     }
 
     private void OnTourModeKeyDown() {
