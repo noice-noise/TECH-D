@@ -11,23 +11,36 @@ public class ModeManager : Singleton<ModeManager> {
         Interactive, Tour, PathFinding
     }
 
-    [SerializeField] private TechDMode currentMode;
-
+    [Header("Indicator")]
     public GameObject modeIndicator;
     private TextMeshProUGUI modeIndicatorText;
 
+    private TechDMode currentMode;
+
+    [Header("ModeManager Components")]
     public GameObject interactiveModeButton;
     public GameObject tourModeButton;
     public GameObject pathFindingModeButton;
 
+    [Header("Mode Components")]
     public GameObject navMeshAgent;
-    public GameObject pathFindingControls;
+    public GameObject pathFindingIndicator;
+    public GameObject tourModeIndicator;
+
+    public GameObject[] DisableOnTourMode;
 
 
     private void Awake() {
 
         var textTrans = modeIndicator.transform.Find("Text");
         modeIndicatorText = textTrans.GetComponent<TextMeshProUGUI>();
+
+        if (navMeshAgent == null) {
+            navMeshAgent = GameObject.FindGameObjectWithTag("Agent");
+        }
+
+        pathFindingIndicator.SetActive(false);
+        tourModeIndicator.SetActive(false);
 
         var im = interactiveModeButton.GetComponent<Button>();
         im.onClick.AddListener(delegate { HandleModesChange(TechDMode.Interactive); });
@@ -108,20 +121,6 @@ public class ModeManager : Singleton<ModeManager> {
         }
     }
 
-    private void StartTourMode() {
-        if (!TourMode.Instance.onTourMode) {
-            TourMode.Instance.HandleTourModeToggle();
-            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
-        }
-    }
-
-    private void StopTourMode() {
-        if (TourMode.Instance.onTourMode) {
-            TourMode.Instance.HandleTourModeToggle();
-            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
-        }
-    }
-
     public void StartInteractiveMode() {
         HandleInteractiveMode();
     }
@@ -130,16 +129,32 @@ public class ModeManager : Singleton<ModeManager> {
         
     }
 
+    private void StartTourMode() {
+        if (!TourMode.Instance.onTourMode) {
+            tourModeIndicator.SetActive(true);
+            TourMode.Instance.HandleTourModeToggle();
+            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
+        }
+    }
+
+    private void StopTourMode() {
+        if (TourMode.Instance.onTourMode) {
+            tourModeIndicator.SetActive(false);
+            TourMode.Instance.HandleTourModeToggle();
+            CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
+        }
+    }
+
     public void StartPathFindingMode() {
         navMeshAgent.SetActive(true);
-        pathFindingControls.SetActive(true);
+        pathFindingIndicator.SetActive(true);
         CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
         AgentController.Instance.StartAgentBehavior();
     }
 
     public void StopPathFindingMode() {
         AgentController.Instance.StopAgentBehavior();
-        pathFindingControls.SetActive(false);
+        pathFindingIndicator.SetActive(false);
     }
 
     public void FollowAgent() {
@@ -153,7 +168,19 @@ public class ModeManager : Singleton<ModeManager> {
     }
 
     public void HandleTourMode() {
-        
+        if (TourMode.Instance.onTourMode) {
+            if (DisableOnTourMode.Length > 0) {
+                foreach (var item in DisableOnTourMode) {
+                    item.SetActive(false);
+                }
+            }
+        } else {
+            if (DisableOnTourMode.Length > 0) {
+                foreach (var item in DisableOnTourMode) {
+                    item.SetActive(true);
+                }
+            }
+        }
     }
 
     public void HandleInteractiveMode() {
