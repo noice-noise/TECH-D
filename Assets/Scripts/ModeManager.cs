@@ -14,14 +14,15 @@ public class ModeManager : Singleton<ModeManager> {
     [SerializeField] private TechDMode currentMode;
 
     public GameObject modeIndicator;
-    public TextMeshProUGUI modeIndicatorText;
+    private TextMeshProUGUI modeIndicatorText;
 
     public GameObject interactiveModeButton;
     public GameObject tourModeButton;
     public GameObject pathFindingModeButton;
 
     public GameObject navMeshAgent;
-    
+    public GameObject pathFindingControls;
+
 
     private void Awake() {
 
@@ -130,17 +131,25 @@ public class ModeManager : Singleton<ModeManager> {
     }
 
     public void StartPathFindingMode() {
+        navMeshAgent.SetActive(true);
+        pathFindingControls.SetActive(true);
         CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
         AgentController.Instance.StartAgentBehavior();
     }
 
     public void StopPathFindingMode() {
         AgentController.Instance.StopAgentBehavior();
+        pathFindingControls.SetActive(false);
     }
 
     public void FollowAgent() {
         CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
         CameraManager.Instance.SwitchTopViewTarget(navMeshAgent.transform);
+    }
+
+    public void FollowAgentViaFocused() {
+        CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
+        CameraManager.Instance.SwitchFocusedViewTarget(navMeshAgent.transform.Find("Follow"));
     }
 
     public void HandleTourMode() {
@@ -152,6 +161,6 @@ public class ModeManager : Singleton<ModeManager> {
     }
 
     public void HandlePathFindingMode() {
-        
+        FollowAgentViaFocused();
     }
 }
