@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 public class TourMode : Singleton<TourMode>
 {
@@ -14,9 +15,13 @@ public class TourMode : Singleton<TourMode>
 
     public bool onTourMode { set; get; } = false;
     public bool autoSwitch = true;
-    private bool onCountdown = false;
 
     [SerializeField] private float duration = 5f;
+
+
+    private bool onCountdown = false;
+    public float countdownTimer = 0f;
+    public float countdownPercent = 0f;
 
     public KeyCode tourModeHotKey = KeyCode.F9;
     public KeyCode nextTourModeHotKey = KeyCode.RightArrow;
@@ -35,6 +40,13 @@ public class TourMode : Singleton<TourMode>
     private void Update() {
         HandleAllInputs();
         HandleTourAutoSwitch();
+
+        if (onCountdown && countdownTimer > 0) {
+            countdownTimer -= Time.deltaTime;
+            countdownPercent = countdownTimer / duration;
+        } else {
+            countdownTimer = 0f;
+        }
     }
 
     public void HandleTourModeToggle() {
@@ -63,6 +75,7 @@ public class TourMode : Singleton<TourMode>
 
     private void HandleTourAutoSwitch() {
         if (onTourMode && autoSwitch && !onCountdown) {
+            countdownTimer = duration;
             StartCoroutine("NextTourTargetCoroutine");
         }
     }
