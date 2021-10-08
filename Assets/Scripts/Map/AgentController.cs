@@ -89,19 +89,22 @@ public class AgentController : Singleton<AgentController> {
     }
 
     private void OnTargetChanged() {
-        target = CameraManager.Instance.currentTarget;
-
-        if (target.CompareTag("FocusedViewTarget")) {
-            target = target.parent;
-        }
-        
+        UpdateTarget();
         // Debug.Log("Target Changed: " + target.parent.name);
-        
+
         if (canMove) {
             SetAgentDestination(target.position);
         }
 
         HandleTargetMark();
+    }
+
+    private void UpdateTarget() {
+        target = CameraManager.Instance.currentTarget;
+
+        if (target.CompareTag("FocusedViewTarget")) {
+            target = target.parent;
+        }
     }
 
     private void HandleTargetMark() {
@@ -114,6 +117,7 @@ public class AgentController : Singleton<AgentController> {
         canDrawPath = true;
         SetAllMarkerActiveSelf(true);
         agent.isStopped = false;
+        UpdateTarget();
         agent.SetDestination(target.position);
     }
 
