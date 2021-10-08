@@ -161,6 +161,6 @@ public class ModeManager : Singleton<ModeManager> {
     }
 
     public void HandlePathFindingMode() {
-        FollowAgentViaFocused();
+        // FollowAgentViaFocused();
     }
 }
