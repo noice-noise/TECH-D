@@ -13,7 +13,7 @@ public class TourModeProgressBar : MonoBehaviour {
     }
 
     private void Update() {
-        if (TourMode.Instance.onTourMode) {
+        if (TourMode.Instance.onTourMode && TourMode.Instance.autoSwitch == true) {
             slider.value = TourMode.Instance.countdownPercent;
         }
     }
