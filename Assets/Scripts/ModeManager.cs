@@ -74,6 +74,23 @@ public class ModeManager : Singleton<ModeManager> {
         }
     }
 
+    public void HandleModesChangeWithInt(int newModeCount) {
+        switch(newModeCount) {
+            case 0:
+                HandleModesChange(TechDMode.Interactive);
+                break;
+            case 1:
+                HandleModesChange(TechDMode.Tour);
+                break;
+            case 2:
+                HandleModesChange(TechDMode.PathFinding);
+                break;
+            default:
+                Debug.LogError("Mode invalid.");
+                break;
+        }
+    }
+
     public void HandleModesChange(TechDMode newMode) {
 
         if (newMode == currentMode) return;
@@ -129,7 +146,7 @@ public class ModeManager : Singleton<ModeManager> {
         
     }
 
-    private void StartTourMode() {
+    public void StartTourMode() {
         if (!TourMode.Instance.onTourMode) {
             tourModeIndicator.SetActive(true);
             TourMode.Instance.HandleTourModeToggle();
@@ -137,7 +154,7 @@ public class ModeManager : Singleton<ModeManager> {
         }
     }
 
-    private void StopTourMode() {
+    public void StopTourMode() {
         if (TourMode.Instance.onTourMode) {
             tourModeIndicator.SetActive(false);
             TourMode.Instance.HandleTourModeToggle();
