@@ -142,6 +142,7 @@ public class ModeManager : Singleton<ModeManager> {
             tourModeIndicator.SetActive(false);
             TourMode.Instance.HandleTourModeToggle();
             CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
+            HandleTourMode();
         }
     }
 
