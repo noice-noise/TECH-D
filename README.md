@@ -3,6 +3,8 @@
 
 Technologian Electronic Help Desk  is an interactive stand-alone application that aims to provide students, parents, and visitors the tools and features to quickly and easily navigate university premises, building, services, and rooms.
 
+![demo-1.gif](/Media/demo-1.gif)
+
 ## Features
 
 - Map Navigation
