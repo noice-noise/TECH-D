@@ -11,6 +11,8 @@ public class ModeManager : Singleton<ModeManager> {
         Interactive, Tour, PathFinding
     }
 
+    public PathFindingMode pathFindingMode;
+
     [Header("Indicator")]
     public GameObject modeIndicator;
     private TextMeshProUGUI modeIndicatorText;
@@ -23,8 +25,8 @@ public class ModeManager : Singleton<ModeManager> {
     public Button pathFindingModeButton;
 
     [Header("Mode Components")]
-    public GameObject navMeshAgent;
-    public GameObject pathFindingIndicator;
+    // public GameObject navMeshAgent;
+    // public GameObject pathFindingIndicator;
     public GameObject tourModeIndicator;
 
     public GameObject[] disableObjectsOnTourMode;
@@ -32,14 +34,16 @@ public class ModeManager : Singleton<ModeManager> {
 
     private void Awake() {
 
+        pathFindingMode = pathFindingModeButton.gameObject.GetComponent<PathFindingMode>();
+
         var textTrans = modeIndicator.transform.Find("Text");
         modeIndicatorText = textTrans.GetComponent<TextMeshProUGUI>();
 
-        if (navMeshAgent == null) {
-            navMeshAgent = GameObject.FindGameObjectWithTag("Agent");
-        }
+        // if (navMeshAgent == null) {
+        //     navMeshAgent = GameObject.FindGameObjectWithTag("Agent");
+        // }
 
-        pathFindingIndicator.SetActive(false);
+        // pathFindingIndicator.SetActive(false);
         tourModeIndicator.SetActive(false);
 
         InitModeButtonListeners();
@@ -75,7 +79,7 @@ public class ModeManager : Singleton<ModeManager> {
                 modeIndicatorText.text = "Tour Mode";
                 break;
             case TechDMode.PathFinding:
-                HandlePathFindingMode();
+                pathFindingMode.HandlePathFindingMode();
                 modeIndicatorText.text = "Path Finding Mode";
                 break;
             default:
@@ -114,7 +118,7 @@ public class ModeManager : Singleton<ModeManager> {
                 tourModeButton.interactable = false;
                 break;
             case TechDMode.PathFinding:
-                StartPathFindingMode();
+                pathFindingMode.StartPathFindingMode();
                 modeIndicatorText.text = "Path Finding Mode";
                 pathFindingModeButton.interactable = false;
                 break;
@@ -136,7 +140,7 @@ public class ModeManager : Singleton<ModeManager> {
                 tourModeButton.interactable = true;
                 break;
             case TechDMode.PathFinding:
-                StopPathFindingMode();
+                pathFindingMode.StopPathFindingMode();
                 pathFindingModeButton.interactable = true;
                 break;
             default:
@@ -170,27 +174,7 @@ public class ModeManager : Singleton<ModeManager> {
         }
     }
 
-    public void StartPathFindingMode() {
-        navMeshAgent.SetActive(true);
-        pathFindingIndicator.SetActive(true);
-        CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
-        AgentController.Instance.StartAgentBehavior();
-    }
 
-    public void StopPathFindingMode() {
-        AgentController.Instance.StopAgentBehavior();
-        pathFindingIndicator.SetActive(false);
-    }
-
-    public void FollowAgent() {
-        CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
-        CameraManager.Instance.SwitchTopViewTarget(navMeshAgent.transform);
-    }
-
-    public void FollowAgentViaFocusedCamera() {
-        CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
-        CameraManager.Instance.SwitchFocusedViewTarget(navMeshAgent.transform.Find("Follow"));
-    }
 
     public void HandleInteractiveMode() {
         CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
@@ -210,9 +194,5 @@ public class ModeManager : Singleton<ModeManager> {
                 }
             }
         }
-    }
-
-    public void HandlePathFindingMode() {
-        // FollowAgentViaFocused();
     }
 }
