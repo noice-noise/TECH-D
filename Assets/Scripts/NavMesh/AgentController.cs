@@ -21,12 +21,14 @@ public class AgentController : Singleton<AgentController> {
     public Transform followMark;
     public Transform targetMark;
 
-    [SerializeField] private bool canMove = false;
-    [SerializeField] private bool enableMarkers = false;
-    [SerializeField] private bool canDrawPath = false;
+    public bool canMove { get; set; } = false;
+    public bool enableMarkers{ get; set; }  = false;
+    public bool showDrawPath { get; set; }  = false;
+    public bool canDrawPath { get; set; }  = true;
 
     private void Start() {
         lineRenderer.positionCount = 0;
+        agent.isStopped = true;
         CameraManager.OnCameraTargetChanged += OnTargetChanged;
 
         followMark.SetParent(transform);
@@ -37,16 +39,8 @@ public class AgentController : Singleton<AgentController> {
         CameraManager.OnCameraTargetChanged -= OnTargetChanged;
     }
 
-    public void EnableMovement() {
-        canMove = true;
-    }
-
-    public void DisableMovement() {
-        canMove = false;
-    }
-
     private void Update() {
-        if (canDrawPath) {
+        if (showDrawPath) {
             HandleDrawPath();
         } else {
             lineRenderer.enabled = false;
@@ -57,6 +51,12 @@ public class AgentController : Singleton<AgentController> {
         } else {
             SetAllMarkerActiveSelf(false);
         }
+
+        if (canMove && agent.hasPath) {
+            agent.isStopped = false;
+        } else {
+            agent.isStopped = true;
+        }
     }
 
     private void SetAllMarkerActiveSelf(bool state) {
@@ -66,7 +66,7 @@ public class AgentController : Singleton<AgentController> {
     }
 
     private void HandleDrawPath() {
-        if (agent.hasPath) {
+        if (canDrawPath && agent.hasPath) {
             lineRenderer.enabled = true;
             DrawPath();
         }
@@ -91,14 +91,17 @@ public class AgentController : Singleton<AgentController> {
     }
 
     private void OnTargetChanged() {
+        HandleAgentBehavior();
+    }
+
+    private void HandleAgentBehavior() {
         UpdateTarget();
-        // Debug.Log("Target Changed: " + target.parent.name);
+        SetDestination();
+        UpdateTargetMark();
+    }
 
-        if (canMove) {
-            SetAgentDestination(target.position);
-        }
-
-        HandleTargetMark();
+    private void SetDestination() {
+        agent.SetDestination(target.position);
     }
 
     private void UpdateTarget() {
@@ -109,39 +112,40 @@ public class AgentController : Singleton<AgentController> {
         }
     }
 
-    private void HandleTargetMark() {
+    private void UpdateTargetMark() {
         SetTargetPosition(target.position);
     }
 
-    public void StartAgentBehavior() {
-        canMove = true;
-        enableMarkers = true;
-        canDrawPath = true;
-        SetAllMarkerActiveSelf(true);
-        agent.isStopped = false;
-        UpdateTarget();
-        SetAgentDestination(target.position);
-        HandleEffects();
-    }
-
     private void HandleEffects() {
-        if (!agent.isStopped) {
+        if (agent.transform.hasChanged) {
             dust.Play();
         } else {
             dust.Stop();
         }
     }
 
+    public void StartAgentBehavior() {
+        enableMarkers = true;
+        showDrawPath = true;
+        SetAllMarkerActiveSelf(true);
+        
+        HandleEffects();
+    }
+
     public void StopAgentBehavior() {
-        canMove = false;
         enableMarkers = false;
-        canDrawPath = false;
+        showDrawPath = false;
         SetAllMarkerActiveSelf(false);
+        DisableAgentMovement();
+        HandleEffects();
+    }
+
+    private void EnableAgentMovement() {
         agent.isStopped = true;
     }
 
-    public void SetAgentDestination(Vector3 target) {
-        agent.SetDestination(target);
+    private void DisableAgentMovement() {
+        agent.isStopped = true;
     }
 
     private void SetOriginPosition(Vector3 position) {
