@@ -15,6 +15,8 @@ public class AgentController : Singleton<AgentController> {
     public LineRenderer lineRenderer;
     [SerializeField] private float lineHeightOffset = 2f;
 
+    public ParticleSystem dust;
+
     public Transform originMark;
     public Transform followMark;
     public Transform targetMark;
@@ -118,7 +120,16 @@ public class AgentController : Singleton<AgentController> {
         SetAllMarkerActiveSelf(true);
         agent.isStopped = false;
         UpdateTarget();
-        agent.SetDestination(target.position);
+        SetAgentDestination(target.position);
+        HandleEffects();
+    }
+
+    private void HandleEffects() {
+        if (!agent.isStopped) {
+            dust.Play();
+        } else {
+            dust.Stop();
+        }
     }
 
     public void StopAgentBehavior() {
