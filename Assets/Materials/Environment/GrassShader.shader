@@ -1,4 +1,4 @@
-﻿ // https://www.patreon.com/posts/grass-geometry-1-40090373
+﻿// Referenced from Minion's Art Grass shader and tool: https://www.youtube.com/watch?v=xKJHL8nQiuM
 
 Shader "Custom/Grass Geometry Shader 3" {
     Properties{

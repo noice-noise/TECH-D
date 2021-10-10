@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UnityEditor;
 
-// Minion's art: https://www.patreon.com/posts/grass-geometry-2-40077798
+// Referenced from Minion's Art Grass shader and tool: https://www.youtube.com/watch?v=xKJHL8nQiuM
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]

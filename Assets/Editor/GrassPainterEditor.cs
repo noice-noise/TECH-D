@@ -2,6 +2,8 @@
 using UnityEditorInternal;
 using UnityEngine;
  
+// Referenced from Minion's Art Grass shader and tool: https://www.youtube.com/watch?v=xKJHL8nQiuM
+
 [CustomEditor(typeof(GeometryGrassPainter))]
 public class GrassPainterEditor : Editor
 {
