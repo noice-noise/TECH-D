@@ -18,9 +18,9 @@ public class ModeManager : Singleton<ModeManager> {
     private TechDMode currentMode;
 
     [Header("ModeManager Components")]
-    public GameObject interactiveModeButton;
-    public GameObject tourModeButton;
-    public GameObject pathFindingModeButton;
+    public Button interactiveModeButton;
+    public Button tourModeButton;
+    public Button pathFindingModeButton;
 
     [Header("Mode Components")]
     public GameObject navMeshAgent;
@@ -42,14 +42,17 @@ public class ModeManager : Singleton<ModeManager> {
         pathFindingIndicator.SetActive(false);
         tourModeIndicator.SetActive(false);
 
-        var im = interactiveModeButton.GetComponent<Button>();
-        im.onClick.AddListener(delegate { HandleModesChange(TechDMode.Interactive); });
+        // var im = interactiveModeButton.GetComponent<Button>();
+        // im.onClick.AddListener(delegate { HandleModesChange(TechDMode.Interactive); });
+        interactiveModeButton.onClick.AddListener(delegate { HandleModesChange(TechDMode.Interactive); });
 
-        var tm = tourModeButton.GetComponent<Button>();
-        tm.onClick.AddListener(delegate { HandleModesChange(TechDMode.Tour); });
+        // var tm = tourModeButton.GetComponent<Button>();
+        // tm.onClick.AddListener(delegate { HandleModesChange(TechDMode.Tour); });
+        tourModeButton.onClick.AddListener(delegate { HandleModesChange(TechDMode.Tour); });
 
-        var pfm = pathFindingModeButton.GetComponent<Button>();
-        pfm.onClick.AddListener(delegate { HandleModesChange(TechDMode.PathFinding); });
+        // var pfm = pathFindingModeButton.GetComponent<Button>();
+        // pfm.onClick.AddListener(delegate { HandleModesChange(TechDMode.PathFinding); });
+        pathFindingModeButton.onClick.AddListener(delegate { HandleModesChange(TechDMode.PathFinding); });
 
         CameraManager.OnCameraTargetChanged += HandleTargetChange;
     }
@@ -93,7 +96,9 @@ public class ModeManager : Singleton<ModeManager> {
 
     public void HandleModesChange(TechDMode newMode) {
 
-        if (newMode == currentMode) return;
+        if (newMode == currentMode) {
+            return;
+        }
 
         HandleModeTermination(currentMode);
         currentMode = newMode;
@@ -105,14 +110,17 @@ public class ModeManager : Singleton<ModeManager> {
             case TechDMode.Interactive:
                 StartInteractiveMode();
                 modeIndicatorText.text = "Interactive Mode";
+                interactiveModeButton.interactable = false;
                 break;
             case TechDMode.Tour:
                 StartTourMode();
                 modeIndicatorText.text = "Tour Mode";
+                tourModeButton.interactable = false;
                 break;
             case TechDMode.PathFinding:
                 StartPathFindingMode();
                 modeIndicatorText.text = "Path Finding Mode";
+                pathFindingModeButton.interactable = false;
                 break;
             default:
                 Debug.LogError("Mode invalid.");
@@ -125,12 +133,15 @@ public class ModeManager : Singleton<ModeManager> {
         switch(toTerminate) {
             case TechDMode.Interactive:
                 StopInteractiveMode();
+                interactiveModeButton.interactable = true;
                 break;
             case TechDMode.Tour:
                 StopTourMode();
+                tourModeButton.interactable = true;
                 break;
             case TechDMode.PathFinding:
                 StopPathFindingMode();
+                pathFindingModeButton.interactable = true;
                 break;
             default:
                 Debug.LogError("Mode invalid.");
