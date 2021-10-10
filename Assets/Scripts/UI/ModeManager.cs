@@ -27,7 +27,7 @@ public class ModeManager : Singleton<ModeManager> {
     public GameObject pathFindingIndicator;
     public GameObject tourModeIndicator;
 
-    public GameObject[] DisableOnTourMode;
+    public GameObject[] disableObjectsOnTourMode;
 
 
     private void Awake() {
@@ -42,19 +42,26 @@ public class ModeManager : Singleton<ModeManager> {
         pathFindingIndicator.SetActive(false);
         tourModeIndicator.SetActive(false);
 
-        // var im = interactiveModeButton.GetComponent<Button>();
-        // im.onClick.AddListener(delegate { HandleModesChange(TechDMode.Interactive); });
-        interactiveModeButton.onClick.AddListener(delegate { HandleModesChange(TechDMode.Interactive); });
-
-        // var tm = tourModeButton.GetComponent<Button>();
-        // tm.onClick.AddListener(delegate { HandleModesChange(TechDMode.Tour); });
-        tourModeButton.onClick.AddListener(delegate { HandleModesChange(TechDMode.Tour); });
-
-        // var pfm = pathFindingModeButton.GetComponent<Button>();
-        // pfm.onClick.AddListener(delegate { HandleModesChange(TechDMode.PathFinding); });
-        pathFindingModeButton.onClick.AddListener(delegate { HandleModesChange(TechDMode.PathFinding); });
+        InitModeButtonListeners();
 
         CameraManager.OnCameraTargetChanged += HandleTargetChange;
+    }
+
+    private void InitModeButtonListeners() {
+        interactiveModeButton.onClick.AddListener(delegate { HandleModesChange(TechDMode.Interactive); });
+        tourModeButton.onClick.AddListener(delegate { HandleModesChange(TechDMode.Tour); });
+        pathFindingModeButton.onClick.AddListener(delegate { HandleModesChange(TechDMode.PathFinding); });
+    }
+
+    public void HandleModesChange(TechDMode newMode) {
+
+        if (newMode == currentMode) {
+            return;
+        }
+
+        HandleModeTermination(currentMode);
+        currentMode = newMode;
+        HandleModeStart(currentMode);
     }
 
     private void HandleTargetChange() {
@@ -92,17 +99,6 @@ public class ModeManager : Singleton<ModeManager> {
                 Debug.LogError("Mode invalid.");
                 break;
         }
-    }
-
-    public void HandleModesChange(TechDMode newMode) {
-
-        if (newMode == currentMode) {
-            return;
-        }
-
-        HandleModeTermination(currentMode);
-        currentMode = newMode;
-        HandleModeStart(currentMode);
     }
 
     private void HandleModeStart(TechDMode toStart) {
@@ -198,14 +194,14 @@ public class ModeManager : Singleton<ModeManager> {
 
     public void HandleTourMode() {
         if (TourMode.Instance.onTourMode) {
-            if (DisableOnTourMode.Length > 0) {
-                foreach (var item in DisableOnTourMode) {
+            if (disableObjectsOnTourMode.Length > 0) {
+                foreach (var item in disableObjectsOnTourMode) {
                     item.SetActive(false);
                 }
             }
         } else {
-            if (DisableOnTourMode.Length > 0) {
-                foreach (var item in DisableOnTourMode) {
+            if (disableObjectsOnTourMode.Length > 0) {
+                foreach (var item in disableObjectsOnTourMode) {
                     item.SetActive(true);
                 }
             }
