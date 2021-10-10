@@ -13,9 +13,9 @@ public class Settings : MonoBehaviour {
 
     private void HandleKeyInputs() {
         if (Input.GetKeyDown(KeyCode.F12)) {
-            ModeManager.Instance.FollowAgent();
+
         } else if (Input.GetKeyDown(KeyCode.F11)) {
-            ModeManager.Instance.FollowAgentViaFocusedCamera();
+
         }
     }
 }
