@@ -48,12 +48,12 @@ public class ModeManager : Singleton<ModeManager> {
     }
 
     private void InitModeButtonListeners() {
-        interactiveModeButton.onClick.AddListener(delegate { HandleModesChange(TechDMode.Interactive); });
-        tourModeButton.onClick.AddListener(delegate { HandleModesChange(TechDMode.Tour); });
-        pathFindingModeButton.onClick.AddListener(delegate { HandleModesChange(TechDMode.PathFinding); });
+        interactiveModeButton.onClick.AddListener(delegate { HandleModeChange(TechDMode.Interactive); });
+        tourModeButton.onClick.AddListener(delegate { HandleModeChange(TechDMode.Tour); });
+        pathFindingModeButton.onClick.AddListener(delegate { HandleModeChange(TechDMode.PathFinding); });
     }
 
-    public void HandleModesChange(TechDMode newMode) {
+    public void HandleModeChange(TechDMode newMode) {
 
         if (newMode == currentMode) {
             return;
@@ -87,13 +87,13 @@ public class ModeManager : Singleton<ModeManager> {
     public void HandleModesChangeWithInt(int newModeCount) {
         switch(newModeCount) {
             case 0:
-                HandleModesChange(TechDMode.Interactive);
+                HandleModeChange(TechDMode.Interactive);
                 break;
             case 1:
-                HandleModesChange(TechDMode.Tour);
+                HandleModeChange(TechDMode.Tour);
                 break;
             case 2:
-                HandleModesChange(TechDMode.PathFinding);
+                HandleModeChange(TechDMode.PathFinding);
                 break;
             default:
                 Debug.LogError("Mode invalid.");
@@ -150,7 +150,7 @@ public class ModeManager : Singleton<ModeManager> {
     }
 
     public void StopInteractiveMode() {
-        
+        // no specific implementation aside from being the default
     }
 
     public void StartTourMode() {
@@ -187,9 +187,13 @@ public class ModeManager : Singleton<ModeManager> {
         CameraManager.Instance.SwitchTopViewTarget(navMeshAgent.transform);
     }
 
-    public void FollowAgentViaFocused() {
+    public void FollowAgentViaFocusedCamera() {
         CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
         CameraManager.Instance.SwitchFocusedViewTarget(navMeshAgent.transform.Find("Follow"));
+    }
+
+    public void HandleInteractiveMode() {
+        CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
     }
 
     public void HandleTourMode() {
@@ -206,10 +210,6 @@ public class ModeManager : Singleton<ModeManager> {
                 }
             }
         }
-    }
-
-    public void HandleInteractiveMode() {
-        CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
     }
 
     public void HandlePathFindingMode() {
