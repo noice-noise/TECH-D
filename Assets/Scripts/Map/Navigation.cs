@@ -122,16 +122,19 @@ public class Navigation : Singleton<Navigation> {
         if (Input.GetKey(KeyCode.F1))
         {
             SwitchMapView();
+            ModeManager.Instance.HandleModeChange(ModeManager.TechDMode.Interactive);
         }
 
         if (Input.GetKeyDown(KeyCode.F2))
         {
             SwitchTopView();
+            ModeManager.Instance.HandleModeChange(ModeManager.TechDMode.Interactive);
         }
 
         if (Input.GetKeyDown(KeyCode.F3))
         {
             SwitchFocusedView();
+            ModeManager.Instance.HandleModeChange(ModeManager.TechDMode.Interactive);
         }
 
         if (Input.GetMouseButtonDown(0)) {
