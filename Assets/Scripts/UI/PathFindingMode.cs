@@ -27,7 +27,9 @@ public class PathFindingMode : MonoBehaviour {
     private bool onAerialFollow;
     private bool onFocusedFollow;
 
-    [SerializeField] private bool canMove;
+    // will be toggled upon StartPathFinding, so agent will stay still initially
+    [SerializeField] private bool canMove;  
+
     [SerializeField] private bool showPath;
     [SerializeField] private bool showMarkers;
 
@@ -98,7 +100,7 @@ public class PathFindingMode : MonoBehaviour {
 
     public void StartPathFindingMode() {
         onPathFindingMode = true;
-        navMeshAgentObject.SetActive(true);
+        navMeshAgent.canMove = canMove;
         pathFindingIndicator.SetActive(true);
         CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
         AgentController.Instance.StartAgentBehavior();
@@ -107,8 +109,11 @@ public class PathFindingMode : MonoBehaviour {
 
     public void StopPathFindingMode() {
         onPathFindingMode = false;
-        AgentController.Instance.StopAgentBehavior();
+        onCoroutineCountdown = false;
+        StopCoroutine("RestoreFollowState");
         pathFindingIndicator.SetActive(false);
+        AgentController.Instance.StopAgentBehavior();
+        navMeshAgent.canMove = false;
     }
     
     public void HandlePathFindingMode() {
@@ -177,9 +182,9 @@ public class PathFindingMode : MonoBehaviour {
         navMeshAgent.canMove = canMove;
         
         if (canMove) {
-            movementToggleText.text = "Lock";
+            movementToggleText.text = "Stop Character";
         } else {
-            movementToggleText.text = "Move";
+            movementToggleText.text = "Move Character";
         }
     }
 
@@ -189,12 +194,19 @@ public class PathFindingMode : MonoBehaviour {
         if (followModeActive) {
             if (onAerialFollow) {
                 focusedFollowToggle.interactable = false;
-            }  else if (onFocusedFollow) {
+            }
+            
+            if (onFocusedFollow) {
                 aerialFollowToggle.interactable = false;
             }
         } else {
-            aerialFollowToggle.interactable = true;
-            focusedFollowToggle.interactable = true;
+            if (!onAerialFollow) {
+                focusedFollowToggle.interactable = true;
+            }
+            
+            if (!onFocusedFollow) {
+                aerialFollowToggle.interactable = true;
+            }
         }
     }
 
