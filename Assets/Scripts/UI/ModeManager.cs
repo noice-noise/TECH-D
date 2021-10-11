@@ -122,7 +122,6 @@ public class ModeManager : Singleton<ModeManager> {
     }
 
     private void HandleModeTermination(TechDMode toTerminate) {
-
         switch(toTerminate) {
             case TechDMode.Interactive:
                 StopInteractiveMode();
@@ -166,8 +165,6 @@ public class ModeManager : Singleton<ModeManager> {
             HandleTourMode();
         }
     }
-
-
 
     public void HandleInteractiveMode() {
         CameraManager.Instance.autoSwitchCameraMode = true;
