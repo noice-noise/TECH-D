@@ -24,7 +24,7 @@ public class PathFindingMode : MonoBehaviour {
     private CinemachineVirtualCamera followCamera;
     private bool followModeActive;
     
-    private bool onAerialFollow = true;
+    private bool onAerialFollow;
     private bool onFocusedFollow;
 
     [SerializeField] private bool canMove;
@@ -38,10 +38,20 @@ public class PathFindingMode : MonoBehaviour {
     public bool onPathFindingMode = false;
     private bool onCoroutineCountdown;
     [SerializeField] float restoreFocusDuration = 1.5f;
-    
 
     private void Awake() {
+        InitPathFindingMode();
+    }
 
+    private void InitPathFindingMode() {
+        InitNavmeshAgent();
+        InitButtonAndListeners();
+
+        followCamera = CameraManager.Instance.topViewCamera;
+        pathFindingIndicator.SetActive(false);
+    }
+
+    private void InitNavmeshAgent() {
         // initialize navmesh agent and related components
         if (navMeshAgentObject == null) {
             navMeshAgentObject = GameObject.FindGameObjectWithTag("Agent");
@@ -49,8 +59,9 @@ public class PathFindingMode : MonoBehaviour {
 
         navMeshTargetFollow = navMeshAgentObject.transform.Find("Follow");
         navMeshAgent = navMeshAgentObject.GetComponent<AgentController>();
+    }
 
-        // initialize button and listeners
+    private void InitButtonAndListeners() {
         if (aerialFollowToggle != null) {
             aerialFollowToggle.onClick.AddListener(delegate { ToggleAerialFollow(); });
             aerialFollowText = aerialFollowToggle.transform.Find("Text").GetComponent<TextMeshProUGUI>();
@@ -65,22 +76,14 @@ public class PathFindingMode : MonoBehaviour {
             movementToggle.onClick.AddListener(delegate { ToggleMovement(); });
             movementToggleText = movementToggle.transform.Find("Text").GetComponent<TextMeshProUGUI>();
         }
-
-        // initialize pathFindingIndicator pane
-        pathFindingIndicator.SetActive(false);
     }
 
     private void Update() {
         if (onPathFindingMode) {
             HandleFocusRestoration();
-            HandleFollowMode();
             HandleAgentMode();
             HandleCameraReset();
         }
-    }
-
-    private void HandleFollowMode() {
-
     }
 
     private void HandleFocusRestoration() {
