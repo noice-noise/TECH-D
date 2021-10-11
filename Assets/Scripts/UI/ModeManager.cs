@@ -25,8 +25,6 @@ public class ModeManager : Singleton<ModeManager> {
     public Button pathFindingModeButton;
 
     [Header("Mode Components")]
-    // public GameObject navMeshAgent;
-    // public GameObject pathFindingIndicator;
     public GameObject tourModeIndicator;
 
     public GameObject[] disableObjectsOnTourMode;
@@ -39,11 +37,6 @@ public class ModeManager : Singleton<ModeManager> {
         var textTrans = modeIndicator.transform.Find("Text");
         modeIndicatorText = textTrans.GetComponent<TextMeshProUGUI>();
 
-        // if (navMeshAgent == null) {
-        //     navMeshAgent = GameObject.FindGameObjectWithTag("Agent");
-        // }
-
-        // pathFindingIndicator.SetActive(false);
         tourModeIndicator.SetActive(false);
 
         InitModeButtonListeners();
@@ -177,6 +170,7 @@ public class ModeManager : Singleton<ModeManager> {
 
 
     public void HandleInteractiveMode() {
+        CameraManager.Instance.autoSwitchCameraMode = true;
         CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
     }
 
