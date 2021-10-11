@@ -13,6 +13,7 @@ public class Navigation : Singleton<Navigation> {
     [Header("Variables")]
     public Transform currentlyFocusedBuilding; // note that camera focus and building focus are different
     private bool selectButtonPressed;
+    private bool moveAgentButtonPressed;
 
     [Header("Cursor")]
     public Texture2D normalCursor;
@@ -64,7 +65,14 @@ public class Navigation : Singleton<Navigation> {
                     }
                     SelectAndUpdateUI(toFocus);
                 }
-            } else {
+            } else if (selected != null && ModeManager.Instance.pathFindingMode.onPathFindingMode) {
+                if (moveAgentButtonPressed) {
+                    AgentController.Instance.HandleAgentBehavior();
+                    AgentController.Instance.OverrideTarget(hit.point);
+                    AgentController.Instance.SetDestination();
+                }
+            }
+            else {
                 SetCursorNormal();
             }
         }
@@ -132,6 +140,18 @@ public class Navigation : Singleton<Navigation> {
 
         if (Input.GetMouseButtonUp(0)) {
             selectButtonPressed = false;
+        }
+
+        if (Input.GetMouseButtonDown(1)) {
+            moveAgentButtonPressed = true;
+        }
+
+        if (Input.GetMouseButtonUp(1)) {
+            moveAgentButtonPressed = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F5)) {
+            SystemManager.Instance.RestartSystem();
         }
     }
 

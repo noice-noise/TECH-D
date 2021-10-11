@@ -11,6 +11,7 @@ public class AgentController : Singleton<AgentController> {
 
     public NavMeshAgent agent;
     private Transform target;
+    private Transform freeMoveTransform;
 
     public LineRenderer lineRenderer;
     [SerializeField] private float lineHeightOffset = 2f;
@@ -27,9 +28,11 @@ public class AgentController : Singleton<AgentController> {
     public bool canDrawPath { get; set; }  = true;
 
     private void Start() {
+        freeMoveTransform = Instantiate(new GameObject(), Vector3.zero, Quaternion.identity).transform;
         lineRenderer.positionCount = 0;
         agent.isStopped = true;
         CameraManager.OnCameraTargetChanged += OnTargetChanged;
+
 
         followMark.SetParent(transform);
         SetOriginPosition(transform.position);
@@ -94,14 +97,20 @@ public class AgentController : Singleton<AgentController> {
         HandleAgentBehavior();
     }
 
-    private void HandleAgentBehavior() {
+    public void HandleAgentBehavior() {
         UpdateTarget();
         SetDestination();
         UpdateTargetMark();
     }
 
-    private void SetDestination() {
+    public void SetDestination() {
         agent.SetDestination(target.position);
+    }
+
+    public void OverrideTarget(Vector3 newTarget) {
+        target = freeMoveTransform; // assign a dummy transform instead of the cam target
+        target.position = newTarget;
+        SetTargetPosition(newTarget);
     }
 
     private void UpdateTarget() {
