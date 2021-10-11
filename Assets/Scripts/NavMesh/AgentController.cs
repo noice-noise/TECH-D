@@ -150,7 +150,7 @@ public class AgentController : Singleton<AgentController> {
     }
 
     private void EnableAgentMovement() {
-        agent.isStopped = true;
+        agent.isStopped = false;
     }
 
     private void DisableAgentMovement() {
