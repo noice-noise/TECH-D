@@ -70,6 +70,29 @@ public class CameraManager : Singleton<CameraManager>
         }
     }
 
+    /// <summary>
+    /// Switch specified CinemachineVirtualCamera's target.
+    /// 0 MapView, 1 TopView, 2 FocusedView
+    /// </summary>
+    /// <param name="camNumber"></param>
+    /// <param name="newTarget"></param>
+    public void SwitchVirtualCameraTarget(int camNumber, Transform newTarget) {
+        switch (camNumber) {
+            case 0:
+                SwitchMapViewTarget(newTarget);
+                break;
+            case 1:
+                SwitchTopViewTarget(newTarget);
+                break;
+            case 2:
+                SwitchFocusedViewTarget(newTarget);
+                break;
+            default:
+                Debug.LogError("Camera number invalid.");
+                break;
+        }
+    }
+
     public void SwitchCameraTarget(Transform newTarget) {
         if (newTarget == null)
             return;
@@ -86,6 +109,15 @@ public class CameraManager : Singleton<CameraManager>
         if (OnCameraTargetChanged != null) {
             OnCameraTargetChanged();
         }
+    }
+
+    /// <summary>
+    /// It is recommended not to use this method, for map view camera must not be changed outside editor.
+    /// </summary>
+    /// <param name="newTarget"></param>
+    internal void SwitchMapViewTarget(Transform newTarget) {
+        topViewCamera.m_Follow = newTarget;
+        topViewCamera.m_LookAt = newTarget;
     }
 
     internal void SwitchTopViewTarget(Transform newTarget) {
