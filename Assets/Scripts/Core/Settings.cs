@@ -3,19 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Settings : MonoBehaviour {
+public class Settings : Singleton<Settings> {
 
-    public Transform navMeshAgent;
+    private Resolution[] resolutions;
+
+    private void Start() {
+        resolutions =  Screen.resolutions;
+    }
 
     private void Update() {
         HandleKeyInputs();
     }
 
     private void HandleKeyInputs() {
-        if (Input.GetKeyDown(KeyCode.F12)) {
 
-        } else if (Input.GetKeyDown(KeyCode.F11)) {
-
-        }
     }
+
+    public void SetFullScreen(bool isFullScreen) {
+        Screen.fullScreen = isFullScreen;
+    }
+
+    public void SetQuality(int qualityIndex) {
+        Debug.Log("Quality set to: " + qualityIndex + ": " + QualitySettings.names);
+        QualitySettings.SetQualityLevel(qualityIndex, true);
+    }
+
 }
