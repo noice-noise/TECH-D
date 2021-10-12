@@ -156,6 +156,22 @@ public class Navigation : Singleton<Navigation> {
         if (Input.GetKeyDown(KeyCode.F5)) {
             SystemManager.Instance.RestartSystem();
         }
+
+        if (Input.GetKeyDown(KeyCode.F6)) {
+            Settings.Instance.SetQuality(0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F7)) {
+            Settings.Instance.SetQuality(2);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F8)) {
+            Settings.Instance.SetQuality(5);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F12)) {
+            Settings.Instance.SetFullScreen(false);
+        }
     }
 
     private void SwitchFocusedView() {
