@@ -27,12 +27,11 @@ public class AgentController : Singleton<AgentController> {
     public bool showDrawPath { get; set; }  = false;
     public bool canDrawPath { get; set; }  = true;
 
-    private void Start() {
+    private void Awake () {
         freeMoveTransform = Instantiate(new GameObject(), Vector3.zero, Quaternion.identity).transform;
         lineRenderer.positionCount = 0;
         agent.isStopped = true;
         CameraManager.OnCameraTargetChanged += OnTargetChanged;
-
 
         followMark.SetParent(transform);
         SetOriginPosition(transform.position);
@@ -43,22 +42,41 @@ public class AgentController : Singleton<AgentController> {
     }
 
     private void Update() {
+        HandleLineRenderer();
+        HandleMovement();
+        HandleAllMarkers();
+        HandleEffects();
+    }
+
+    private void HandleLineRenderer() {
         if (showDrawPath) {
             HandleDrawPath();
         } else {
             lineRenderer.enabled = false;
         }
+    }
 
+    private void HandleMovement() {
+        if (canMove && agent.hasPath) {
+            agent.isStopped = false;
+        } else {
+            agent.isStopped = true;
+        }
+    }
+
+    private void HandleAllMarkers() {
         if (enableMarkers) {
             SetAllMarkerActiveSelf(true);
         } else {
             SetAllMarkerActiveSelf(false);
         }
+    }
 
-        if (canMove && agent.hasPath) {
-            agent.isStopped = false;
+    private void HandleEffects() {
+        if (canMove) {
+            dust.Play();
         } else {
-            agent.isStopped = true;
+            dust.Stop();
         }
     }
 
@@ -125,20 +143,10 @@ public class AgentController : Singleton<AgentController> {
         SetTargetPosition(target.position);
     }
 
-    private void HandleEffects() {
-        if (agent.transform.hasChanged) {
-            dust.Play();
-        } else {
-            dust.Stop();
-        }
-    }
-
     public void StartAgentBehavior() {
         enableMarkers = true;
         showDrawPath = true;
         SetAllMarkerActiveSelf(true);
-        
-        HandleEffects();
     }
 
     public void StopAgentBehavior() {
@@ -146,7 +154,6 @@ public class AgentController : Singleton<AgentController> {
         showDrawPath = false;
         SetAllMarkerActiveSelf(false);
         DisableAgentMovement();
-        HandleEffects();
     }
 
     private void EnableAgentMovement() {
