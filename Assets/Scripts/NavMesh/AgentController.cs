@@ -27,7 +27,7 @@ public class AgentController : Singleton<AgentController> {
     public bool showDrawPath { get; set; }  = false;
     public bool canDrawPath { get; set; }  = true;
 
-    private void Awake () {
+    private void Start () {
         freeMoveTransform = Instantiate(new GameObject(), Vector3.zero, Quaternion.identity).transform;
         lineRenderer.positionCount = 0;
         agent.isStopped = true;
