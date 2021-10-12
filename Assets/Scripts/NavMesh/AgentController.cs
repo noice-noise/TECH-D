@@ -10,8 +10,8 @@ using UnityEngine.AI;
 public class AgentController : Singleton<AgentController> {
 
     public NavMeshAgent agent;
+    public Transform freeMoveTransform;
     private Transform target;
-    private Transform freeMoveTransform;
 
     public LineRenderer lineRenderer;
     [SerializeField] private float lineHeightOffset = 2f;
@@ -28,7 +28,6 @@ public class AgentController : Singleton<AgentController> {
     public bool canDrawPath { get; set; }  = true;
 
     private void Start () {
-        freeMoveTransform = Instantiate(new GameObject(), Vector3.zero, Quaternion.identity).transform;
         lineRenderer.positionCount = 0;
         agent.isStopped = true;
         CameraManager.OnCameraTargetChanged += OnTargetChanged;
