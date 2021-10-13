@@ -4964,6 +4964,7 @@ GameObject:
   - component: {fileID: 5805421225147079272}
   - component: {fileID: 5805421225147079271}
   - component: {fileID: 5805421225147079277}
+  - component: {fileID: 105477921}
   m_Layer: 8
   m_Name: NavMeshAgent
   m_TagString: Agent
@@ -5059,7 +5060,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 10
+  m_Speed: 20
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 200
@@ -5087,6 +5088,7 @@ MonoBehaviour:
   freeMoveTransform: {fileID: 3217930395972802338}
   lineRenderer: {fileID: 5805421225147079277}
   lineHeightOffset: 4
+  lineAnimator: {fileID: 105477921}
   dust: {fileID: 6702379026742196832}
   originMark: {fileID: 0}
   followMark: {fileID: 1397005585}
@@ -5187,14 +5189,28 @@ LineRenderer:
       m_Mode: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
-    numCapVertices: 0
+    numCornerVertices: 10
+    numCapVertices: 10
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 1
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &105477921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5805421225147079270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e48df1b3e1528468dfdecb9e4d3067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationDelay: 0
+  animationDuration: 2
 --- !u!1 &6405657410670152847
 GameObject:
   m_ObjectHideFlags: 0
