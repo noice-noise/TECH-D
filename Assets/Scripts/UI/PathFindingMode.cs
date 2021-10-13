@@ -45,56 +45,11 @@ public class PathFindingMode : MonoBehaviour {
         InitPathFindingMode();
     }
 
-    private void InitPathFindingMode() {
-        InitNavmeshAgent();
-        InitButtonAndListeners();
-
-        followCamera = CameraManager.Instance.topViewCamera;
-        pathFindingIndicator.SetActive(false);
-    }
-
-    private void InitNavmeshAgent() {
-        // initialize navmesh agent and related components
-        if (navMeshAgentObject == null) {
-            navMeshAgentObject = GameObject.FindGameObjectWithTag("Agent");
-        }
-
-        navMeshTargetFollow = navMeshAgentObject.transform.Find("Follow");
-        navMeshAgent = navMeshAgentObject.GetComponent<AgentController>();
-    }
-
-    private void InitButtonAndListeners() {
-        if (aerialFollowToggle != null) {
-            aerialFollowToggle.onClick.AddListener(delegate { ToggleAerialFollow(); });
-            aerialFollowText = aerialFollowToggle.transform.Find("Text").GetComponent<TextMeshProUGUI>();
-        }
-
-        if (focusedFollowToggle != null) {
-            focusedFollowToggle.onClick.AddListener(delegate { ToggleFocusedFollow(); });
-            focusedFollowText = focusedFollowToggle.transform.Find("Text").GetComponent<TextMeshProUGUI>();
-        }
-
-        if (movementToggle != null) {
-            movementToggle.onClick.AddListener(delegate { ToggleMovement(); });
-            movementToggleText = movementToggle.transform.Find("Text").GetComponent<TextMeshProUGUI>();
-        }
-    }
-
     private void Update() {
         if (onPathFindingMode) {
             HandleFocusRestoration();
             HandleAgentMode();
             HandleCameraReset();
-        }
-    }
-
-    private void HandleFocusRestoration() {
-        bool isAgentFocusTarget = followCamera.m_Follow == navMeshAgent.transform;
-
-        if (followModeActive && !isAgentFocusTarget) {
-            if (!onCoroutineCountdown) {
-                StartCoroutine(RestoreFollowState(restoreFocusDuration));
-            }
         }
     }
 
@@ -104,7 +59,7 @@ public class PathFindingMode : MonoBehaviour {
         pathFindingIndicator.SetActive(true);
         CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.TopView);
         AgentController.Instance.StartAgentBehavior();
-        HandleAerialFollow();
+        HandleAllCameraFollow();
     }
 
     public void StopPathFindingMode() {
@@ -116,12 +71,38 @@ public class PathFindingMode : MonoBehaviour {
         navMeshAgent.canMove = false;
     }
     
-    public void HandlePathFindingMode() {
+    private void HandleAgentMode() {
+        if (!onAerialFollow) {
+            focusedFollowToggle.interactable = true;
+        }
+        
+        if (!onFocusedFollow) {
+            aerialFollowToggle.interactable = true;
+        }
 
+        if (followModeActive) {
+            if (onAerialFollow) {
+                focusedFollowToggle.interactable = false;
+            }
+            
+            if (onFocusedFollow) {
+                aerialFollowToggle.interactable = false;
+            }
+        }
+    }
+    
+    public void HandlePathFindingMode() {
+        // no specified implementation yet, currently on Update() 
     }
 
+    private void HandleAllCameraFollow() {
+        followModeActive = false;   // will be set true if any of the cam follow handlers are aci
+        HandleAerialFollow();
+        HandleFocusFollow();
+    }
     private void HandleAerialFollow() {
         if (onAerialFollow) {
+            Debug.Log("Aerial");
             followModeActive = true;
             followCamera = CameraManager.Instance.topViewCamera;
             targetCameraState = CameraManager.CameraState.TopView;
@@ -131,7 +112,6 @@ public class PathFindingMode : MonoBehaviour {
             aerialFollowText.text = "Aerial Following";
         } else {
             aerialFollowText.text = "Aerial Follow";
-            followModeActive = false;
         }
     }
 
@@ -146,7 +126,16 @@ public class PathFindingMode : MonoBehaviour {
             focusedFollowText.text = "Zoom Following";
         } else {
             focusedFollowText.text = "Zoom Follow";
-            followModeActive = false;
+        }
+    }
+
+    private void HandleFocusRestoration() {
+        bool isAgentFocusTarget = followCamera.m_Follow == navMeshAgent.transform;
+
+        if (followModeActive && !isAgentFocusTarget) {
+            if (!onCoroutineCountdown) {
+                StartCoroutine(RestoreFollowState(restoreFocusDuration));
+            }
         }
     }
 
@@ -188,28 +177,6 @@ public class PathFindingMode : MonoBehaviour {
         }
     }
 
-
-
-    private void HandleAgentMode() {
-        if (followModeActive) {
-            if (onAerialFollow) {
-                focusedFollowToggle.interactable = false;
-            }
-            
-            if (onFocusedFollow) {
-                aerialFollowToggle.interactable = false;
-            }
-        } else {
-            if (!onAerialFollow) {
-                focusedFollowToggle.interactable = true;
-            }
-            
-            if (!onFocusedFollow) {
-                aerialFollowToggle.interactable = true;
-            }
-        }
-    }
-
     /// <summary>
     /// Only one of either On Aerial and Focused follow must be active, thus they are reversed for every toggle.
     /// </summary>
@@ -230,6 +197,41 @@ public class PathFindingMode : MonoBehaviour {
         if (!followModeActive) {
             CameraManager.Instance.autoSwitchCameraMode = false;
             CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.MapView);
+        }
+    }
+    
+    private void InitPathFindingMode() {
+        InitNavmeshAgent();
+        InitButtonAndListeners();
+
+        followCamera = CameraManager.Instance.topViewCamera;
+        pathFindingIndicator.SetActive(false);
+    }
+
+    private void InitNavmeshAgent() {
+        // initialize navmesh agent and related components
+        if (navMeshAgentObject == null) {
+            navMeshAgentObject = GameObject.FindGameObjectWithTag("Agent");
+        }
+
+        navMeshTargetFollow = navMeshAgentObject.transform.Find("Follow");
+        navMeshAgent = navMeshAgentObject.GetComponent<AgentController>();
+    }
+
+    private void InitButtonAndListeners() {
+        if (aerialFollowToggle != null) {
+            aerialFollowToggle.onClick.AddListener(delegate { ToggleAerialFollow(); });
+            aerialFollowText = aerialFollowToggle.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+        }
+
+        if (focusedFollowToggle != null) {
+            focusedFollowToggle.onClick.AddListener(delegate { ToggleFocusedFollow(); });
+            focusedFollowText = focusedFollowToggle.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+        }
+
+        if (movementToggle != null) {
+            movementToggle.onClick.AddListener(delegate { ToggleMovement(); });
+            movementToggleText = movementToggle.transform.Find("Text").GetComponent<TextMeshProUGUI>();
         }
     }
 }
