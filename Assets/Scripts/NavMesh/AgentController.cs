@@ -15,8 +15,10 @@ public class AgentController : Singleton<AgentController> {
 
     public LineRenderer lineRenderer;
     [SerializeField] private float lineHeightOffset = 2f;
+    public LineAnimator lineAnimator;
 
     public ParticleSystem dust;
+
 
     public Transform originMark;
     public Transform followMark;
@@ -45,6 +47,10 @@ public class AgentController : Singleton<AgentController> {
         HandleMovement();
         HandleAllMarkers();
         HandleEffects();
+
+        if (Input.GetKeyDown(KeyCode.Tab)) {
+            lineAnimator.StartAnimationWithDelay();
+        }
     }
 
     private void HandleLineRenderer() {
@@ -117,7 +123,12 @@ public class AgentController : Singleton<AgentController> {
     public void HandleAgentBehavior() {
         UpdateTarget();
         SetDestination();
+        // StartLineAnimation();
         UpdateTargetMark();
+    }
+
+    private void StartLineAnimation() {
+        lineAnimator.StartAnimationWithDelay();
     }
 
     public void SetDestination() {
@@ -146,6 +157,7 @@ public class AgentController : Singleton<AgentController> {
         enableMarkers = true;
         showDrawPath = true;
         SetAllMarkerActiveSelf(true);
+        lineAnimator.StartAnimationWithDelay();
     }
 
     public void StopAgentBehavior() {
