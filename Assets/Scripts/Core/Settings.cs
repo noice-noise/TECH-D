@@ -9,6 +9,7 @@ public class Settings : Singleton<Settings> {
 
     private void Start() {
         resolutions =  Screen.resolutions;
+        SetQuality(0);
     }
 
     private void Update() {
