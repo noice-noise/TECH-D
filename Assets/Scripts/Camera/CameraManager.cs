@@ -116,8 +116,8 @@ public class CameraManager : Singleton<CameraManager>
     /// </summary>
     /// <param name="newTarget"></param>
     internal void SwitchMapViewTarget(Transform newTarget) {
-        topViewCamera.m_Follow = newTarget;
-        topViewCamera.m_LookAt = newTarget;
+        mapViewCamera.m_Follow = newTarget;
+        mapViewCamera.m_LookAt = newTarget;
     }
 
     internal void SwitchTopViewTarget(Transform newTarget) {
