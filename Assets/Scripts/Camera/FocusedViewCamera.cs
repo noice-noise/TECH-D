@@ -4,10 +4,17 @@ using System;
 
 public class FocusedViewCamera : MonoBehaviour {
 
+    [Header("Non-FocusedViewTarget tag")]
+    // this means regular lecture services/rooms
     public Vector3 adjustedFollowOffset = new Vector3(-10, 0, 0);
-    public Vector3 baseFollowOffset;
-
     public Vector3 adjustedTrackedObjectOffset = Vector3.zero;
+
+    [Header("With AgentFollowTarget tag")]
+    public Vector3 adjustedAgentFollowOffset = new Vector3(-10, 0, 0);
+    public Vector3 adjustedAgentTrackedObjectOffset = Vector3.zero;
+
+    [Header("Original Follow Offset")]
+    public Vector3 baseFollowOffset;
     public Vector3 baseTrackedObjectOffset;
 
     private CinemachineVirtualCamera focusedViewCamera;
@@ -29,10 +36,16 @@ public class FocusedViewCamera : MonoBehaviour {
     }
 
     private void HandleFocusedOffset() {
-        if (currentTarget != null && !currentTarget.CompareTag("FocusedViewTarget")) {
+
+        if (currentTarget != null && currentTarget.CompareTag("AgentFollowTarget")) {
+            AdjustAimOffset(focusedViewCamera, adjustedAgentFollowOffset);
+            AdjustTrackedOffset(focusedViewCamera, adjustedAgentTrackedObjectOffset);
+        }
+        else if (currentTarget != null && !currentTarget.CompareTag("FocusedViewTarget")) {
             AdjustAimOffset(focusedViewCamera, adjustedFollowOffset);
             AdjustTrackedOffset(focusedViewCamera, adjustedTrackedObjectOffset);
-        } else {
+        } 
+        else {
             RestoreAimOffset(focusedViewCamera, baseFollowOffset);
             RestoreTrackedOffset(focusedViewCamera, baseTrackedObjectOffset);
         }
