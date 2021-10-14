@@ -27,8 +27,6 @@ public class BackBuildingButton : MonoBehaviour {
     }
 
     public void OnBackButtonClicked() {
-
-
         if (current == null ) {
             return;
         }
