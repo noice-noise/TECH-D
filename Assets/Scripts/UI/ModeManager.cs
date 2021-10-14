@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ModeManager : Singleton<ModeManager> {
+    // TODO This class needs refactoring, Modes-related methods should be delegated not handled.
+    // Refactor goal: Only high-level mode change should be handled in this class.
 
     public enum TechDMode {
         Interactive, Tour, PathFinding
