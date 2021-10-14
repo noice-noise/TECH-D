@@ -46,11 +46,6 @@ public class AgentController : Singleton<AgentController> {
         HandleLineRenderer();
         HandleMovement();
         HandleAllMarkers();
-        HandleEffects();
-
-        if (Input.GetKeyDown(KeyCode.Tab)) {
-            lineAnimator.StartAnimationWithDelay();
-        }
     }
 
     private void HandleLineRenderer() {
@@ -78,11 +73,12 @@ public class AgentController : Singleton<AgentController> {
     }
 
     private void HandleEffects() {
-        if (canMove) {
-            dust.Play();
-        } else {
-            dust.Stop();
-        }
+        dust.Play();
+        // if (canMove) {
+        //     dust.Play();
+        // } else {
+        //     dust.Stop();
+        // }
     }
 
     private void SetAllMarkerActiveSelf(bool state) {
