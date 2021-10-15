@@ -38,13 +38,7 @@ public class MapOrientation : MonoBehaviour {
         dropdown = GetComponent<TMP_Dropdown>();
         dropdown.ClearOptions();
         dropdown.AddOptions(optionsList);
-        // dropdown.;
-    }
-
-    private void PopulateOptionsList() {
-        optionsList = new List<string>();
-        optionsList.Add("North-West");
-        optionsList.Add("South-East");
+        dropdown.value = 1;     // Select North-West option first
     }
 
     private void Start() {
@@ -96,5 +90,11 @@ public class MapOrientation : MonoBehaviour {
         }
 
         HandleOrientation();
+    }
+
+    private void PopulateOptionsList() {
+        optionsList = new List<string>();
+        optionsList.Add("South-East");
+        optionsList.Add("North-West");
     }
 }
