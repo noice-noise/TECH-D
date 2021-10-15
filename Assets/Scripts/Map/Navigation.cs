@@ -158,9 +158,9 @@ public class Navigation : Singleton<Navigation> {
             moveAgentButtonPressed = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.F5)) {
-            SystemManager.Instance.RestartSystem();
-        }
+        // if (Input.GetKeyDown(KeyCode.F5)) {
+        //     SystemManager.Instance.RestartSystem();
+        // }
 
         if (Input.GetKeyDown(KeyCode.F6)) {
             Settings.Instance.SetQuality(0);
