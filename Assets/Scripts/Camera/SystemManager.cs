@@ -8,7 +8,7 @@ public class SystemManager : Singleton<SystemManager> {
 
     public GameObject startObject;
 
-    private void Update() {
+    private void Start() {
         SelectStartingView();
     }
 
