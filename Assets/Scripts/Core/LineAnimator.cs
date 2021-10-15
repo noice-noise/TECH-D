@@ -7,7 +7,7 @@ public class LineAnimator : MonoBehaviour {
 
     // TODO Disallow changes in line origin and target while animating
     public bool allowAnimator = true;
-    private bool isAnimating = false;
+    // private bool isAnimating = false;
 
     private Vector3[] linePoints;
     private int pointsCount;
@@ -48,12 +48,10 @@ public class LineAnimator : MonoBehaviour {
     }
 
     private IEnumerator AnimateLine() {
-        Debug.Log("Start animating.");
-        isAnimating = true;
+        // isAnimating = true;
         float segmentDuration = animationDuration / pointsCount;
 
         for (int i = 0; i < pointsCount - 1; i++) {
-            Debug.Log("Enter.");
             float startTime = Time.time;
 
             Vector3 startPosition = linePoints[i];
@@ -73,8 +71,6 @@ public class LineAnimator : MonoBehaviour {
             }
         }
 
-        isAnimating = false;
-        Debug.Log("Done animating.");
-        // Debug.Log("Exit");
+        // isAnimating = false;
     }
 }
