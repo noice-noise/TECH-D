@@ -25,7 +25,11 @@ public class LineAnimator : MonoBehaviour {
     }
 
     public void StartAnimationWithDelay() {
-        StartCoroutine(DelayAction(animationDelay));
+        if (allowAnimator) {
+            StartCoroutine(DelayAction(animationDelay));
+        } else {
+            Debug.Log("Line animator is inactive.");
+        }
     }
 
     private IEnumerator DelayAction(float timeDelay){
