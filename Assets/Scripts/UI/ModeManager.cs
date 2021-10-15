@@ -35,15 +35,19 @@ public class ModeManager : Singleton<ModeManager> {
     private void Awake() {
 
         pathFindingMode = pathFindingModeButton.gameObject.GetComponent<PathFindingMode>();
-
         var textTrans = modeIndicator.transform.Find("Text");
         modeIndicatorText = textTrans.GetComponent<TextMeshProUGUI>();
-
-        tourModeIndicator.SetActive(false);
-
         InitModeButtonListeners();
-
         CameraManager.OnCameraTargetChanged += HandleTargetChange;
+    }
+
+    private void Start() {
+        InitModeManager();
+    }
+
+    public void InitModeManager() {
+        interactiveModeButton.interactable = false;
+        tourModeIndicator.SetActive(false);
     }
 
     private void InitModeButtonListeners() {
