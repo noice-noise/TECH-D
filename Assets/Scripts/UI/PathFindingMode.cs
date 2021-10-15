@@ -29,17 +29,19 @@ public class PathFindingMode : MonoBehaviour {
 
     // will be toggled upon StartPathFinding, so agent will stay still initially
     [SerializeField] private bool canMove;  
-
     [SerializeField] private bool showPath;
     [SerializeField] private bool showMarkers;
 
     private TextMeshProUGUI aerialFollowText;
     private TextMeshProUGUI focusedFollowText;
     private TextMeshProUGUI movementToggleText;
+    private TextMeshProUGUI showPathToggleText;
+    private TextMeshProUGUI showMarkersToggleText;
 
     public bool onPathFindingMode = false;
     private bool onCoroutineCountdown;
     [SerializeField] float restoreFocusDuration = 1.5f;
+
 
     private void Awake() {
         InitPathFindingMode();
@@ -96,7 +98,7 @@ public class PathFindingMode : MonoBehaviour {
     }
 
     private void HandleAllCameraFollow() {
-        followModeActive = false;   // will be set true if any of the cam follow handlers are aci
+        followModeActive = false;   // will be set true if any of the cam follow handlers are active
         HandleAerialFollow();
         HandleFocusFollow();
     }
@@ -183,14 +185,46 @@ public class PathFindingMode : MonoBehaviour {
     private void ToggleAerialFollow() {
         onAerialFollow = !onAerialFollow;
         HandleAerialFollow();
+        AdjustFollowModeActiveStatus(onAerialFollow);
     }
-    
+
+    private void AdjustFollowModeActiveStatus(bool followBool) {
+        if (followBool) {
+            followModeActive = true;
+        } else {
+            followModeActive = false;
+        }
+    }
+
     /// <summary>
     /// Only one of either On Aerial and Focused follow must be active, thus they are reversed for every toggle.
     /// </summary>
     private void ToggleFocusedFollow() {
         onFocusedFollow = !onFocusedFollow;
         HandleFocusFollow();
+        AdjustFollowModeActiveStatus(onFocusedFollow);
+    }
+
+    private void ToggleMarker() {
+        showMarkers = !showMarkers;
+        navMeshAgent.enableMarkers = showMarkers;
+        
+        if (showMarkers) {
+            showMarkersToggleText.text = "Hide Markers";
+        } else {
+            showMarkersToggleText.text = "Show Markers";
+        }
+    }
+
+    private void TogglePath() {
+        showPath = !showPath;
+        navMeshAgent.showDrawPath = showPath;
+        
+        if (showPath) {
+            showPathToggleText.text = "Hide Path";
+        } else {
+            showPathToggleText.text = "Show Path";
+        }
     }
 
     private void HandleCameraReset() {
@@ -232,6 +266,16 @@ public class PathFindingMode : MonoBehaviour {
         if (movementToggle != null) {
             movementToggle.onClick.AddListener(delegate { ToggleMovement(); });
             movementToggleText = movementToggle.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+        }
+
+        if (showMarkersToggle != null) {
+            showMarkersToggle.onClick.AddListener(delegate { ToggleMarker(); });
+            showMarkersToggleText = showMarkersToggle.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+        }
+
+        if (showPathToggle != null) {
+            showPathToggle.onClick.AddListener(delegate { TogglePath(); });
+            showPathToggleText = showPathToggle.transform.Find("Text").GetComponent<TextMeshProUGUI>();
         }
     }
 }
