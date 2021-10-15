@@ -77,7 +77,6 @@ public class MapOrientation : MonoBehaviour {
                 break;
         }
 
-        Debug.Log("Wew?");
         CameraManager.Instance.SwitchCameraModeWith(mapViewCameraInt);
     }
 
