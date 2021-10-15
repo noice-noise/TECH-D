@@ -119,12 +119,7 @@ public class AgentController : Singleton<AgentController> {
     public void HandleAgentBehavior() {
         UpdateTarget();
         SetDestination();
-        // StartLineAnimation();
         UpdateTargetMark();
-    }
-
-    private void StartLineAnimation() {
-        lineAnimator.StartAnimationWithDelay();
     }
 
     public void SetDestination() {
