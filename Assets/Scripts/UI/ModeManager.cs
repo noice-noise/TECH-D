@@ -46,7 +46,8 @@ public class ModeManager : Singleton<ModeManager> {
     }
 
     public void InitModeManager() {
-        interactiveModeButton.interactable = false;
+        StartInteractiveMode();
+        // interactiveModeButton.interactable = false;
         tourModeIndicator.SetActive(false);
     }
 
