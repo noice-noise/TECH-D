@@ -25,7 +25,6 @@ public class Settings : Singleton<Settings> {
     }
 
     public void SetQuality(int qualityIndex) {
-        Debug.Log("Quality set to: " + qualityIndex + ": " + QualitySettings.names);
         QualitySettings.SetQualityLevel(qualityIndex, true);
     }
 
