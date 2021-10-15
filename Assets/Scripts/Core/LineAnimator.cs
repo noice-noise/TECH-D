@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class LineAnimator : MonoBehaviour {
 
+    // TODO Disallow changes in line origin and target while animating
+    public bool allowAnimator = true;
     private bool isAnimating = false;
 
     private Vector3[] linePoints;
