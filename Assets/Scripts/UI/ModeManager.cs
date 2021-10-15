@@ -29,7 +29,9 @@ public class ModeManager : Singleton<ModeManager> {
     [Header("Mode Components")]
     public GameObject tourModeIndicator;
 
+    public GameObject[] disableObjectsOnInteractive;
     public GameObject[] disableObjectsOnTourMode;
+    public GameObject[] disableObjectsOnPathFindingMode;
 
 
     private void Awake() {
@@ -66,6 +68,32 @@ public class ModeManager : Singleton<ModeManager> {
         HandleModeTermination(currentMode);
         currentMode = newMode;
         HandleModeStart(currentMode);
+        HandleObjectDisabling();
+    }
+
+    private void HandleObjectDisabling() {
+        Debug.Log("haiyahh");
+        DisableObjectsDuring(TourMode.Instance.onTourMode, disableObjectsOnTourMode);
+        DisableObjectsDuring(pathFindingMode.onPathFindingMode, disableObjectsOnPathFindingMode);
+    }
+
+    private void DisableObjectsDuring(bool modeActive, GameObject[] objList) {
+        Debug.Log("wew?");
+        if (modeActive) {
+        Debug.Log("obj");
+            if (objList.Length > 0) {
+                Debug.Log("s: " + TourMode.Instance.onTourMode);
+                foreach (var item in objList) {
+                    item.SetActive(false);
+                }
+            }
+        } else {
+            if (objList.Length > 0) {
+                foreach (var item in objList) {
+                    item.SetActive(true);
+                }
+            }
+        }
     }
 
     private void HandleTargetChange() {
@@ -179,18 +207,6 @@ public class ModeManager : Singleton<ModeManager> {
     }
 
     public void HandleTourMode() {
-        if (TourMode.Instance.onTourMode) {
-            if (disableObjectsOnTourMode.Length > 0) {
-                foreach (var item in disableObjectsOnTourMode) {
-                    item.SetActive(false);
-                }
-            }
-        } else {
-            if (disableObjectsOnTourMode.Length > 0) {
-                foreach (var item in disableObjectsOnTourMode) {
-                    item.SetActive(true);
-                }
-            }
-        }
+
     }
 }
