@@ -124,6 +124,10 @@ public class Navigation : Singleton<Navigation> {
     }
 
     private void HandleInputs() {
+        if (Input.GetKeyDown(KeyCode.BackQuote)) {
+            UIManager.Instance.ToggleHelpPanel();
+        }
+
         if (Input.GetKey(KeyCode.F1))
         {
             SwitchMapView();
