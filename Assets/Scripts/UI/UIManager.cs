@@ -13,6 +13,7 @@ public class UIManager : Singleton<UIManager> {
     [Header("Hierarchy")]
     public GameObject mainCanvas;
     public GameObject world;
+    public GameObject help;
 
     [Header("UI")]
     public Transform leftNav;
@@ -252,6 +253,11 @@ public class UIManager : Singleton<UIManager> {
 
             } 
         }
+    }
+
+    public void ToggleHelpPanel() {
+        // lazily show or hide
+        help.SetActive(!help.activeSelf);
     }
 
     public void BackToParentBuilding() {
