@@ -1,12 +1,10 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
-using System;
-using UnityEngine.UIElements;
 using UnityEngine.UI.Extensions;
-using DG.Tweening;
+
 
 public class UIManager : Singleton<UIManager> {
     
@@ -32,18 +30,10 @@ public class UIManager : Singleton<UIManager> {
     public GameObject roomsButtonPrefab;
     public GameObject quickSearchPrefab;
 
-    public Transform currentlyActivePanel;  // TODO: delegate to NAV
     public Transform currentlySelectedBuilding;
     private IEnumerable<Transform> worldChildren;
 
     public MapData mapData;
-    public bool uIFullscreen = false;
-
-    [Header("Tweening")]
-
-    public Ease ease;
-    public float duration;
-    public float distance;
 
     private void Start() {
         worldChildren = world.transform.Cast<Transform>();
@@ -98,7 +88,6 @@ public class UIManager : Singleton<UIManager> {
 
         if (focusTransform == null) {
             SetListParentActive(list, false);
-            // Debug.Log("No FocusableServices transform.");
             return;
         }
 
@@ -106,7 +95,6 @@ public class UIManager : Singleton<UIManager> {
 
         if (focusableServiceRooms != null && focusableServiceRooms.Count == 0) {
             SetListParentActive(list, false);
-            // Debug.Log("No focusable services.");
             return;
         }
         
@@ -117,28 +105,7 @@ public class UIManager : Singleton<UIManager> {
         }
     }
 
-    public void HandleUIFullscreen() {
-        uIFullscreen = !uIFullscreen;
-
-
-        // if (uIFullscreen) {
-
-        // } else {
-
-        // }
-
-        leftNav
-            .DOMoveX(distance, duration)
-            .SetEase(ease);
-
-        distance *= -1;
-    }
-
     private void SetListParentActive(Transform list, bool parentState) {
-        // if (list.childCount == 0) {
-        //     return;
-        // }
-
         var obj = list.parent.parent.gameObject;
         obj.SetActive(parentState);
     }
