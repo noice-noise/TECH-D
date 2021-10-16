@@ -27,7 +27,6 @@ public class TourModeHeader : MonoBehaviour {
     private void HandleHeaderUpdate() {
         var target = UIManager.Instance.currentlySelectedBuilding;
         if (target == null) return;
-        Debug.Log("NN: " + target.name);
         text.text = target.name;
     }
 }

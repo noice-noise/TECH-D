@@ -100,18 +100,14 @@ public class ModeManager : Singleton<ModeManager> {
     }
 
     private void HandleObjectDisabling() {
-        Debug.Log("haiyahh");
         DisableObjectsDuring(onInteractiveMode, disableObjectsOnInteractive);
         DisableObjectsDuring(TourMode.Instance.onTourMode, disableObjectsOnTourMode);
         DisableObjectsDuring(pathFindingMode.onPathFindingMode, disableObjectsOnPathFindingMode);
     }
 
     private void DisableObjectsDuring(bool modeActive, GameObject[] objList) {
-        Debug.Log("wew?");
         if (modeActive) {
-        Debug.Log("obj");
             if (objList.Length > 0) {
-                Debug.Log("s: " + TourMode.Instance.onTourMode);
                 foreach (var item in objList) {
                     item.SetActive(false);
                 }
