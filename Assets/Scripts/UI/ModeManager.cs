@@ -13,6 +13,7 @@ public class ModeManager : Singleton<ModeManager> {
         Interactive, Tour, PathFinding
     }
 
+    public bool onInteractiveMode;
     public PathFindingMode pathFindingMode;
 
     [Header("Indicator")]
@@ -49,8 +50,35 @@ public class ModeManager : Singleton<ModeManager> {
 
     public void InitModeManager() {
         StartInteractiveMode();
-        // interactiveModeButton.interactable = false;
         tourModeIndicator.SetActive(false);
+    }
+
+    /// <summary>
+    /// Interactive = 0, Tour = 1, PathFinding = 2
+    /// </summary>
+    /// <param name="modeInt"></param>
+    public void RequestModeChange(int modeInt) {
+        TechDMode requestModeValue;
+
+        switch (modeInt)
+        {
+            case 0:
+                requestModeValue = TechDMode.Interactive;
+                break;
+            case 1:
+                requestModeValue = TechDMode.Tour;
+                break;
+            case 2:
+                requestModeValue = TechDMode.PathFinding;
+                break;
+            default:
+                requestModeValue = TechDMode.Interactive;
+                break;
+        }
+
+        if (currentMode != requestModeValue) {
+            HandleModeChange(requestModeValue);
+        }
     }
 
     private void InitModeButtonListeners() {
@@ -73,6 +101,7 @@ public class ModeManager : Singleton<ModeManager> {
 
     private void HandleObjectDisabling() {
         Debug.Log("haiyahh");
+        DisableObjectsDuring(onInteractiveMode, disableObjectsOnInteractive);
         DisableObjectsDuring(TourMode.Instance.onTourMode, disableObjectsOnTourMode);
         DisableObjectsDuring(pathFindingMode.onPathFindingMode, disableObjectsOnPathFindingMode);
     }
@@ -176,15 +205,16 @@ public class ModeManager : Singleton<ModeManager> {
         }
     }
 
-    public void StartInteractiveMode() {
+    private void StartInteractiveMode() {
+        onInteractiveMode = true;
         HandleInteractiveMode();
     }
 
-    public void StopInteractiveMode() {
-        // no specific implementation aside from being the default
+    private void StopInteractiveMode() {
+        onInteractiveMode = true;
     }
 
-    public void StartTourMode() {
+    private void StartTourMode() {
         if (!TourMode.Instance.onTourMode) {
             tourModeIndicator.SetActive(true);
             TourMode.Instance.HandleTourModeToggle();
@@ -201,12 +231,25 @@ public class ModeManager : Singleton<ModeManager> {
         }
     }
 
-    public void HandleInteractiveMode() {
+    private void HandleInteractiveMode() {
         CameraManager.Instance.autoSwitchCameraMode = true;
         CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
     }
 
-    public void HandleTourMode() {
+    private void HandleTourMode() {
 
+    }
+
+    public bool OnInteractiveMode() {
+        return onInteractiveMode;
+    }
+
+    public bool OnTourMode() {
+        return TourMode.Instance.onTourMode;
+
+    }
+
+    public bool OnPathFindingMode() {
+        return pathFindingMode.onPathFindingMode;
     }
 }

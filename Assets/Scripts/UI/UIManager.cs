@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 using UnityEngine.UI.Extensions;
-
+using System;
 
 public class UIManager : Singleton<UIManager> {
     
@@ -193,6 +193,7 @@ public class UIManager : Singleton<UIManager> {
     public void HandleBuildingPane() {
         DisplayAllBuildingPane();
         CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.MapView);
+
     }
 
     private void DisplayAllBuildingPane() {

@@ -33,10 +33,15 @@ public class TopNavigationManager : MonoBehaviour {
 
     private void InitListeners(GameObject navButton) {
         navButton.GetComponent<Button>().onClick.AddListener( 
-            delegate { SelectionHandler(navButton); });
+            delegate { 
+                SelectionHandler(navButton);
+            });
     }
 
     public void SelectionHandler(GameObject button) {
+        if (ModeManager.Instance.OnTourMode()) {
+            ModeManager.Instance.RequestModeChange(0);
+        }
 
         if (button != null) {
             if (button.Equals(navButton.Home)) {
