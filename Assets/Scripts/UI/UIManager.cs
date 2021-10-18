@@ -71,8 +71,8 @@ public class UIManager : Singleton<UIManager> {
             bool isBuildingType = currentlySelectedBuilding.CompareTag("SelectableBuilding");
 
             if (isBuildingType) {
-                description.SetText("A university building with services and rooms.");
-            } 
+                description.SetText("A university building with services and rooms. Further information about the building will be updated soon.");
+            }
 
             // Set description to empty if parent is null, then TERMINATE function
             if (currentlySelectedBuilding.parent == null) {
@@ -85,9 +85,9 @@ public class UIManager : Singleton<UIManager> {
             bool isRoomType = currentlySelectedBuilding.parent != null && currentlySelectedBuilding.parent.name.Equals("FocusableRooms");
 
             if (isServiceType) {
-                description.SetText("A service.");
+                description.SetText("A building service to support Teknoys with their day to day student life. Further information about the service will be updated soon.");
             } else if (isRoomType) {
-                description.SetText("A lecture room.");
+                description.SetText("A lecture room where Teknoys learn to be good their chosen crafts. Further information about the lecture room will be updated soon.");
             }
         }
     }
