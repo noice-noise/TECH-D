@@ -47,6 +47,54 @@ public class UIManager : Singleton<UIManager> {
         UpdateBody();
     }
 
+    /// <summary>
+    /// Update UI Header Title and Description based on MapData
+    /// </summary>
+    private void UpdateHeader() {
+        var title = leftNavTitle.GetComponent<TextMeshProUGUI>();
+        string buildingName = currentlySelectedBuilding.transform.name;
+        title.SetText(buildingName);
+
+        var description = leftNavDescription.GetComponent<TextMeshProUGUI>();
+        bool descriptionAvailable = false;
+
+        // Get information from MapData
+        foreach (var item in mapData.buildingData) {
+            if (item.buildingName.Trim().Equals(buildingName.Trim())) {
+                description.SetText(item.description);
+                descriptionAvailable = true;
+            }
+        }
+
+        // Set default description if there's no available data
+        if (!descriptionAvailable) {
+            bool isBuildingType = currentlySelectedBuilding.CompareTag("SelectableBuilding");
+
+            if (isBuildingType) {
+                description.SetText("A university building with services and rooms.");
+            } 
+
+            // Set description to empty if parent is null, then TERMINATE function
+            if (currentlySelectedBuilding.parent == null) {
+                description.SetText("");
+                return;
+            }
+
+            // Set default description based on type
+            bool isServiceType = currentlySelectedBuilding.parent.name.Equals("FocusableServices");
+            bool isRoomType = currentlySelectedBuilding.parent != null && currentlySelectedBuilding.parent.name.Equals("FocusableRooms");
+
+            if (isServiceType) {
+                description.SetText("A service.");
+            } else if (isRoomType) {
+                description.SetText("A lecture room.");
+            }
+        }
+    }
+
+    /// <summary>
+    /// Update the UI Body which contains Services or Rooms sections and buttons
+    /// </summary>
     private void UpdateBody() {
 
         SetListParentActive(listInServicesList, true);
@@ -60,26 +108,6 @@ public class UIManager : Singleton<UIManager> {
         UpdatePanelContents(listInServicesList, "FocusableServices");
         UpdatePanelContents(listInRoomsList, "FocusableRooms");
 
-    }
-
-    private void UpdateHeader() {
-        var title = leftNavTitle.GetComponent<TextMeshProUGUI>();
-        string buildingName = currentlySelectedBuilding.transform.name;
-        title.SetText(buildingName);
-
-        var description = leftNavDescription.GetComponent<TextMeshProUGUI>();
-        bool descriptionAvailable = false;
-
-        foreach (var item in mapData.buildingData) {
-            if (item.buildingName.Trim().Equals(buildingName.Trim())) {
-                description.SetText(item.description);
-                descriptionAvailable = true;
-            }
-        }
-
-        if (!descriptionAvailable) {
-            description.SetText("");
-        }
     }
 
     private void UpdatePanelContents(Transform list, string transformName) {
@@ -218,7 +246,6 @@ public class UIManager : Singleton<UIManager> {
                 } else {
                     CreateButton(child, listInRoomsList, roomsButtonPrefab);
                 }
-
             } 
         }
     }
