@@ -47,7 +47,7 @@ public class RoomButton : MonoBehaviour {
     }
 
     /// <summary>
-    /// Some buttons use native Text or TextMeshPro, thus if no Text detected, look for TextMeshPro.
+    /// Check for UI type Text otherwise check for TextMeshPro
     /// </summary>
     private void CheckUIText() {
         var textTransform = transform.Find("Text");
