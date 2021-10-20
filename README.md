@@ -1,7 +1,7 @@
 # TECH-D
 
 
-Technologian Electronic Help Desk  is an interactive stand-alone application that aims to provide students, parents, and visitors the tools and features to quickly and easily navigate university premises, building, services, and rooms.
+Technologian Electronic Help Desk is an interactive stand-alone application that aims to provide students, parents, and visitors the tools and features to quickly and easily navigate university premises, buildings, services, and rooms.
 
 
 <p align="center">
@@ -28,18 +28,18 @@ Technologian Electronic Help Desk  is an interactive stand-alone application tha
 # Team
 
 - Cabreros, Ashley
-- Comeros, Raul Jr.
+- [Comeros, Raul Jr.](https://github.com/noice-noise)
 - Dela Cruz, Hans Eubert
-- Seblos, Samantha Jane
+- [Seblos, Samantha Jane](https://github.com/SammyJaneBS)
 - Quiros, Paul John
 - Villamor, Jason
 
 
 ## Disclaimer
 
-This prototype version is currently underdevelopment and is based from our alma mater. Any information, models, and functions may or may not be accurate. 
+This prototype version is currently in progress. Any information, models, and functions may or may not be accurate. 
 
-This project is not officially endorsed by the CIT University. For official help and information, please visit the official website.
+The CIT University does not officially endorse this project. For official help and information, please visit the official [website](https://cit.edu/).
 
 
 ## Packages
