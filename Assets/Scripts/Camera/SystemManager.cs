@@ -7,9 +7,27 @@ using UnityEngine.SceneManagement;
 public class SystemManager : Singleton<SystemManager> {
 
     public GameObject startObject;
+    public GameObject[] mainControls;
 
     private void Start() {
         SelectStartingView();
+        DisableMainControls();
+    }
+
+    public void DisableMainControls() {
+        if (mainControls.Length > 0) {
+            foreach (var item in mainControls) {
+                item.SetActive(false);
+            }
+        }
+    }
+
+    public void EnableMainControls() {
+        if (mainControls.Length > 0) {
+            foreach (var item in mainControls) {
+                item.SetActive(true);
+            }
+        }
     }
 
     private void SelectStartingView() {
