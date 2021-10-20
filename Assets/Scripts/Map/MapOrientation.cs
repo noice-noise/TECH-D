@@ -94,7 +94,7 @@ public class MapOrientation : MonoBehaviour {
 
     private void PopulateOptionsList() {
         optionsList = new List<string>();
-        optionsList.Add("South-East");
-        optionsList.Add("North-West");
+        optionsList.Add("Facing Back Gate");
+        optionsList.Add("Facing Front Gate");
     }
 }

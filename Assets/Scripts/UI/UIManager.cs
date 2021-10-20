@@ -251,8 +251,11 @@ public class UIManager : Singleton<UIManager> {
     }
 
     public void ToggleHelpPanel() {
-        // lazily show or hide
-        help.SetActive(!help.activeSelf);
+        // only show help toggle if on University Map
+        if (leftNav.gameObject.activeSelf == true) {
+            // lazily show or hide
+            help.SetActive(!help.activeSelf);
+        }
     }
 
     public void BackToParentBuilding() {

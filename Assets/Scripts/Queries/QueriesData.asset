@@ -70,10 +70,20 @@ MonoBehaviour:
           A confirmation mail will be sent to the applicant."
   - title: Payments
     referenceTransformString: Accounting
-    queries: []
+    queries:
+    - title: 
+      sections:
+      - title: Unavailable
+        contents: Information for this query is currently not available yet. Kindly
+          visit cit.edu for updates.
   - title: Refunds
     referenceTransformString: Accounting
-    queries: []
+    queries:
+    - title: 
+      sections:
+      - title: Unavailable
+        contents: Information for this query is currently not available yet. Kindly
+          visit cit.edu for updates.
   - title: Made4Learning
     referenceTransformString: Enrollment Technical Office
     queries:
@@ -92,7 +102,12 @@ MonoBehaviour:
           3. Done.'
   - title: Grades
     referenceTransformString: Main Building
-    queries: []
+    queries:
+    - title: 
+      sections:
+      - title: Unavailable
+        contents: Information for this query is currently not available yet. Kindly
+          visit cit.edu for updates.
   - title: Staff
     referenceTransformString: Main Building
     queries:
@@ -185,7 +200,17 @@ MonoBehaviour:
           Academy\r\nRotaract Club of Metro Cebu CIT \u2013 U chapter"
   - title: Scholarships
     referenceTransformString: O A S
-    queries: []
+    queries:
+    - title: 
+      sections:
+      - title: Unavailable
+        contents: Information for this query is currently not available yet. Kindly
+          visit cit.edu for updates.
   - title: Suggestion Box
     referenceTransformString: Executive Office
-    queries: []
+    queries:
+    - title: 
+      sections:
+      - title: Unavailable
+        contents: Information for this query is currently not available yet. Kindly
+          visit cit.edu for updates.
