@@ -169,7 +169,7 @@ public class PathFindingMode : MonoBehaviour {
         }
     }
 
-    private void ToggleMovement() {
+    public void ToggleMovement() {
         canMove = !canMove;
         navMeshAgent.canMove = canMove;
         
@@ -183,7 +183,7 @@ public class PathFindingMode : MonoBehaviour {
     /// <summary>
     /// Only one of either On Aerial and Focused follow must be active, thus they are reversed for every toggle.
     /// </summary>
-    private void ToggleAerialFollow() {
+    public void ToggleAerialFollow() {
         onAerialFollow = !onAerialFollow;
         HandleAerialFollow();
         AdjustFollowModeActiveStatus(onAerialFollow);
@@ -200,13 +200,13 @@ public class PathFindingMode : MonoBehaviour {
     /// <summary>
     /// Only one of either On Aerial and Focused follow must be active, thus they are reversed for every toggle.
     /// </summary>
-    private void ToggleFocusedFollow() {
+    public void ToggleFocusedFollow() {
         onFocusedFollow = !onFocusedFollow;
         HandleFocusFollow();
         AdjustFollowModeActiveStatus(onFocusedFollow);
     }
 
-    private void ToggleMarker() {
+    public void ToggleMarker() {
         showMarkers = !showMarkers;
         navMeshAgent.enableMarkers = showMarkers;
         
@@ -217,7 +217,7 @@ public class PathFindingMode : MonoBehaviour {
         }
     }
 
-    private void TogglePath() {
+    public void TogglePath() {
         showPath = !showPath;
         navMeshAgent.showDrawPath = showPath;
         
