@@ -15,9 +15,9 @@ public class SystemManager : Singleton<SystemManager> {
     /// Thus, be mindful in creating awake or early initialization in this script.
     /// </summary>
     private void Start() {
+        SelectStartingView();
         InitWelcomeFrame();
         DisableMainControls();
-        SelectStartingView();
     }
 
     private void Update() {
