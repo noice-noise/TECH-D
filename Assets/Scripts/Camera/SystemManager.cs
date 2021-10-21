@@ -7,11 +7,19 @@ using UnityEngine.SceneManagement;
 public class SystemManager : Singleton<SystemManager> {
 
     public GameObject startObject;
+    public GameObject welcomeFrame;
     public GameObject[] mainControls;
 
     private void Start() {
         SelectStartingView();
+        InitWelcomeFrame();
         DisableMainControls();
+    }
+
+    private void InitWelcomeFrame() {
+        if (welcomeFrame != null && welcomeFrame.activeSelf == false) {
+            welcomeFrame.SetActive(true);
+        }
     }
 
     public void DisableMainControls() {
