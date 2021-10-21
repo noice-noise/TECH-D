@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 499845841404844050}
   - component: {fileID: 499845841404844051}
-  m_Layer: 0
+  - component: {fileID: 408313433}
+  - component: {fileID: 408313434}
+  m_Layer: 8
   m_Name: SystemManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,6 +46,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentlyFocusedBuilding: {fileID: 0}
-  selectButtonPressed: 0
-  normalCursor: {fileID: 2800000, guid: daf0aadd71cde6941be5ecaf980b6485, type: 3}
-  selectableCursor: {fileID: 2800000, guid: 434b59d49d1627f469f99654a21ee791, type: 3}
+  normalCursor: {fileID: 2800000, guid: b2d0e422d1cec034f80d8e9607ad24ed, type: 3}
+  selectableCursor: {fileID: 2800000, guid: 5b9ef588b0d3e2740833c89bfaf5ad15, type: 3}
+--- !u!114 &408313433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499845841404844048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd4064d1e25cd6d45b449d0265c08a44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &408313434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499845841404844048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926f52f8e9240844ea74554246f2a7b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startObject: {fileID: 0}
+  welcomeFrame: {fileID: 0}
+  mainControls:
+  - {fileID: 0}
