@@ -19,9 +19,13 @@ public class Navigation : Singleton<Navigation> {
     public Texture2D normalCursor;
     public Texture2D selectableCursor;
 
+    public ModeManager ModeManager;
+    public AgentController AgentController;
 
     private void Awake() {
         mainCamera = Camera.main;
+        ModeManager = ModeManager.Instance;
+        AgentController = AgentController.Instance;
     }
 
     private void Update() {
@@ -65,11 +69,16 @@ public class Navigation : Singleton<Navigation> {
                     }
                     SelectAndUpdateUI(toFocus);
                 }
-            } else if (selected != null && ModeManager.Instance.pathFindingMode.onPathFindingMode) {
+            } else if (selected != null && ModeManager.pathFindingMode.onPathFindingMode) {
                 if (moveAgentButtonPressed) {
-                    AgentController.Instance.HandleAgentBehavior();
-                    AgentController.Instance.OverrideTarget(hit.point);
-                    AgentController.Instance.SetDestination();
+                    if (!AgentController.canMove) {
+                        ModeManager.pathFindingMode.ToggleMovement();
+                        ModeManager.pathFindingMode.ToggleAerialFollow();
+                    }
+
+                    AgentController.HandleAgentBehavior();
+                    AgentController.OverrideTarget(hit.point);
+                    AgentController.SetDestination();
                 }
             }
             else {
