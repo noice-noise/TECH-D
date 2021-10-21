@@ -19,8 +19,8 @@ public class Navigation : Singleton<Navigation> {
     public Texture2D normalCursor;
     public Texture2D selectableCursor;
 
-    public ModeManager ModeManager;
-    public AgentController AgentController;
+    private ModeManager ModeManager;
+    private AgentController AgentController;
 
     private void Awake() {
         mainCamera = Camera.main;
