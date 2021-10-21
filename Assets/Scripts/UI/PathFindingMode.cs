@@ -67,7 +67,8 @@ public class PathFindingMode : MonoBehaviour {
     public void StopPathFindingMode() {
         onPathFindingMode = false;
         onCoroutineCountdown = false;
-        StopCoroutine("RestoreFollowState");
+        // StopCoroutine("RestoreFollowState");
+        StopAllCoroutines();
         pathFindingIndicator.SetActive(false);
         AgentController.Instance.StopAgentBehavior();
         navMeshAgent.canMove = false;
