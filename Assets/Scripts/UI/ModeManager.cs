@@ -19,6 +19,8 @@ public class ModeManager : Singleton<ModeManager> {
     [Header("Indicator")]
     public GameObject modeIndicator;
     private TextMeshProUGUI modeIndicatorText;
+    public GameObject messageIndicator;
+    private TextMeshProUGUI messageIndicatorText;
 
     private TechDMode currentMode;
 
@@ -30,6 +32,7 @@ public class ModeManager : Singleton<ModeManager> {
     [Header("Mode Components")]
     public GameObject tourModeIndicator;
 
+
     public GameObject[] disableObjectsOnInteractive;
     public GameObject[] disableObjectsOnTourMode;
     public GameObject[] disableObjectsOnPathFindingMode;
@@ -38,8 +41,13 @@ public class ModeManager : Singleton<ModeManager> {
     private void Awake() {
 
         pathFindingMode = pathFindingModeButton.gameObject.GetComponent<PathFindingMode>();
+
         var textTrans = modeIndicator.transform.Find("Text");
         modeIndicatorText = textTrans.GetComponent<TextMeshProUGUI>();
+
+        textTrans = messageIndicator.transform.Find("Text");
+        messageIndicatorText = textTrans.GetComponent<TextMeshProUGUI>();
+
         InitModeButtonListeners();
         CameraManager.OnCameraTargetChanged += HandleTargetChange;
     }
@@ -164,16 +172,19 @@ public class ModeManager : Singleton<ModeManager> {
                 StartInteractiveMode();
                 modeIndicatorText.text = "Interactive Mode";
                 interactiveModeButton.interactable = false;
+                messageIndicatorText.text = "Select a building.";
                 break;
             case TechDMode.Tour:
                 StartTourMode();
                 modeIndicatorText.text = "Tour Mode";
                 tourModeButton.interactable = false;
+                messageIndicatorText.text = "Select another mode to stop Tour Mode.";
                 break;
             case TechDMode.PathFinding:
                 pathFindingMode.StartPathFindingMode();
-                modeIndicatorText.text = "Path Finding Mode";
                 pathFindingModeButton.interactable = false;
+                modeIndicatorText.text = "Path Finding Mode";
+                messageIndicatorText.text = "Press or Hold [RIGHT] Mouse Button to freely walk anywhere.";
                 break;
             default:
                 Debug.LogError("Mode invalid.");
