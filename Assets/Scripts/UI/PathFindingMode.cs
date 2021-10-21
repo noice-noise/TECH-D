@@ -105,7 +105,6 @@ public class PathFindingMode : MonoBehaviour {
     }
     private void HandleAerialFollow() {
         if (onAerialFollow) {
-            Debug.Log("Aerial");
             followModeActive = true;
             followCamera = CameraManager.Instance.topViewCamera;
             targetCameraState = CameraManager.CameraState.TopView;
@@ -204,6 +203,14 @@ public class PathFindingMode : MonoBehaviour {
         onFocusedFollow = !onFocusedFollow;
         HandleFocusFollow();
         AdjustFollowModeActiveStatus(onFocusedFollow);
+    }
+
+    public void RemoveFollowStates() {
+        onAerialFollow = false;
+        onFocusedFollow = false;
+        followModeActive = false;
+        HandleAerialFollow();
+        HandleFocusFollow();
     }
 
     public void ToggleMarker() {

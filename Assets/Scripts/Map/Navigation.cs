@@ -73,6 +73,7 @@ public class Navigation : Singleton<Navigation> {
                 if (moveAgentButtonPressed) {
                     if (!AgentController.canMove) {
                         ModeManager.pathFindingMode.ToggleMovement();
+                        ModeManager.pathFindingMode.RemoveFollowStates();
                         ModeManager.pathFindingMode.ToggleAerialFollow();
                     }
 
