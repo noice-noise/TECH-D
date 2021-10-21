@@ -68,10 +68,10 @@ public class UIManager : Singleton<UIManager> {
 
         // Set default description if there's no available data
         if (!descriptionAvailable) {
-            bool isBuildingType = currentlySelectedBuilding.CompareTag("SelectableBuilding");
-
-            if (isBuildingType) {
-                description.SetText("A university building with services and rooms. Further information about the building will be updated soon.");
+            bool isSelectableBuilding = currentlySelectedBuilding.CompareTag("SelectableBuilding");
+            
+            if (isSelectableBuilding) {
+                description.SetText("No detailed information yet. Further information about this building will be updated soon.");
             }
 
             // Set description to empty if parent is null, then TERMINATE function
@@ -240,7 +240,8 @@ public class UIManager : Singleton<UIManager> {
 
         foreach(Transform child in worldChildren) {
             if (child.CompareTag("SelectableBuilding")) {
-
+                // a building with FocusableRooms will be considered a university Building 
+                // otherwise, it will be considered "Vicinity" or a building outside university premises
                 if (child.Find("FocusableRooms") != null) {
                     CreateButton(child, listInServicesList, roomsButtonPrefab);
                 } else {
