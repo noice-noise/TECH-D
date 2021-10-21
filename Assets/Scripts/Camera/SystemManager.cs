@@ -10,10 +10,20 @@ public class SystemManager : Singleton<SystemManager> {
     public GameObject welcomeFrame;
     public GameObject[] mainControls;
 
+    /// <summary>
+    /// System Manager script is set to be executed "very late" (See Project Execution Settings).
+    /// Thus, be mindful in creating awake or early initialization in this script.
+    /// </summary>
     private void Start() {
-        SelectStartingView();
         InitWelcomeFrame();
         DisableMainControls();
+        SelectStartingView();
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.P)) {
+            SelectStartingView();
+        }
     }
 
     private void InitWelcomeFrame() {
