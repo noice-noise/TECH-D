@@ -200,7 +200,6 @@ public class UIManager : Singleton<UIManager> {
 
         List<string> availableOptions = quickSearchPrefab.GetComponent<AutoCompleteComboBox>().AvailableOptions = searchList;    
         GameObject search = Instantiate(quickSearchPrefab, searchContainer, false);
-        // search.SetActive(false);
     }
 
     private List<string> GetChildTransforms(Transform source, string focusableStringID) {
