@@ -239,8 +239,8 @@ public class ModeManager : Singleton<ModeManager> {
     }
 
     private void HandleInteractiveMode() {
-        CameraManager.Instance.autoSwitchCameraMode = true;
-        CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
+        // CameraManager.Instance.autoSwitchCameraMode = true;
+        // CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
     }
 
     private void HandleTourMode() {
