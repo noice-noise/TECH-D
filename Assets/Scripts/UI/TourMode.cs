@@ -122,6 +122,7 @@ public class TourMode : Singleton<TourMode>
         currentlySelected = tourList[tourCounter];
         Navigation.Instance.SelectAndUpdateUI(currentlySelected);
     }
+    
 
     /// <summary>
     /// Populates the tour list based on the order of GameObjects on "World"

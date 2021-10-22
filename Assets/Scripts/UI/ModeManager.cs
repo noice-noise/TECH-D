@@ -13,7 +13,7 @@ public class ModeManager : Singleton<ModeManager> {
         Interactive, Tour, PathFinding
     }
 
-    public bool onInteractiveMode;
+    private bool onInteractiveMode;
     public PathFindingMode pathFindingMode;
 
     [Header("Indicator")]
