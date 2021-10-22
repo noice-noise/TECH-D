@@ -50,6 +50,8 @@ public class SystemManager : Singleton<SystemManager> {
 
     private void SelectStartingView() {
         Navigation.Instance.SelectAndUpdateUI(startObject.transform);
+        CameraManager.Instance.SwitchCameraMode(CameraManager.CameraState.FocusedView);
+        ModeManager.Instance.HandleModeChange(ModeManager.TechDMode.Interactive);
     }
 
     public void RestartSystem() {
