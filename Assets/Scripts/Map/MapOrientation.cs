@@ -39,14 +39,16 @@ public class MapOrientation : MonoBehaviour {
         dropdown.ClearOptions();
         dropdown.AddOptions(optionsList);
         dropdown.value = 1;     // Select North-West option first
+
     }
 
     private void Start() {
-        dropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-    }
-
-    private void Update() {
-
+        dropdown.onValueChanged.AddListener(
+            delegate { 
+                DropdownValueChanged(); 
+                ModeManager.Instance.pathFindingMode.RemoveFollowStates();  
+            }
+        );
     }
 
     private void HandleOrientation() {
