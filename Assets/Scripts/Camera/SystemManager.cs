@@ -20,12 +20,6 @@ public class SystemManager : Singleton<SystemManager> {
         DisableMainControls();
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.P)) {
-            SelectStartingView();
-        }
-    }
-
     private void InitWelcomeFrame() {
         if (welcomeFrame != null && welcomeFrame.activeSelf == false) {
             welcomeFrame.SetActive(true);
