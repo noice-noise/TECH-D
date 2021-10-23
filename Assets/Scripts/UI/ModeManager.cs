@@ -21,6 +21,7 @@ public class ModeManager : Singleton<ModeManager> {
     private TextMeshProUGUI modeIndicatorText;
     public GameObject messageIndicator;
     private TextMeshProUGUI messageIndicatorText;
+    private string defaultMessage;
 
     private TechDMode currentMode;
 
@@ -36,7 +37,6 @@ public class ModeManager : Singleton<ModeManager> {
     public GameObject[] disableObjectsOnInteractive;
     public GameObject[] disableObjectsOnTourMode;
     public GameObject[] disableObjectsOnPathFindingMode;
-
 
     private void Awake() {
 
@@ -172,19 +172,19 @@ public class ModeManager : Singleton<ModeManager> {
                 StartInteractiveMode();
                 modeIndicatorText.text = "Interactive Mode";
                 interactiveModeButton.interactable = false;
-                messageIndicatorText.text = "Select a building.";
+                defaultMessage = "Select a building.";
                 break;
             case TechDMode.Tour:
                 StartTourMode();
                 modeIndicatorText.text = "Tour Mode";
                 tourModeButton.interactable = false;
-                messageIndicatorText.text = "Select another mode to stop Tour Mode.";
+                defaultMessage = "Select another mode to stop Tour Mode.";
                 break;
             case TechDMode.PathFinding:
                 pathFindingMode.StartPathFindingMode();
                 pathFindingModeButton.interactable = false;
                 modeIndicatorText.text = "Path Finding Mode";
-                messageIndicatorText.text = "Press or Hold [RIGHT] Mouse Button to freely walk anywhere.";
+                defaultMessage = "Press or Hold [RIGHT] Mouse Button to freely walk anywhere.";
                 break;
             default:
                 Debug.LogError("Mode invalid.");
@@ -258,5 +258,13 @@ public class ModeManager : Singleton<ModeManager> {
 
     public bool OnPathFindingMode() {
         return pathFindingMode.onPathFindingMode;
+    }
+
+    public void SetMessageIndicatorText(string text) {
+        messageIndicatorText.text = text;
+    }
+    
+    public void DisplayDefaultMessage() {
+        messageIndicatorText.text = defaultMessage;
     }
 }

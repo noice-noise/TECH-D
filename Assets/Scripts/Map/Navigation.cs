@@ -60,9 +60,12 @@ public class Navigation : Singleton<Navigation> {
             var selected = hit.collider;
             if (selected != null && selected.gameObject.layer == LayerMask.NameToLayer("SelectableBuilding")) {
                 SetCursorSelectable();
+                var parentBuilding = FindParentBuilding(hit.transform);
+                ModeManager.Instance.SetMessageIndicatorText("Select " + parentBuilding.name);
+                
                 if (selectButtonPressed) {
 
-                    var toFocus = FindParentBuilding(hit.transform).Find("Focus");
+                    var toFocus = parentBuilding.Find("Focus");
                     if (toFocus == null) {
                         Debug.Log("No focusable object.");
                         return;
@@ -70,6 +73,8 @@ public class Navigation : Singleton<Navigation> {
                     SelectAndUpdateUI(toFocus);
                 }
             } else if (selected != null) {
+                ModeManager.Instance.DisplayDefaultMessage();
+
                 if (moveAgentButtonPressed) {
                     ModeManager.HandleModeChange(ModeManager.TechDMode.PathFinding);
                     
@@ -96,7 +101,7 @@ public class Navigation : Singleton<Navigation> {
     /// while camera will get the "Focus" as a target.
     /// </summary>
     public void SelectAndUpdateUI(Transform targetTransform) {
-
+        Debug.Log(targetTransform.parent.name);
         if (targetTransform == null) {
             return;
         }
