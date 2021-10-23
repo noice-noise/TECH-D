@@ -69,8 +69,10 @@ public class Navigation : Singleton<Navigation> {
                     }
                     SelectAndUpdateUI(toFocus);
                 }
-            } else if (selected != null && ModeManager.pathFindingMode.onPathFindingMode) {
+            } else if (selected != null) {
                 if (moveAgentButtonPressed) {
+                    ModeManager.HandleModeChange(ModeManager.TechDMode.PathFinding);
+                    
                     if (!AgentController.canMove) {
                         ModeManager.pathFindingMode.ToggleMovement();
                         ModeManager.pathFindingMode.RemoveFollowStates();
