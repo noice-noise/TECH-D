@@ -31,6 +31,8 @@ public class MapOrientation : MonoBehaviour {
     [SerializeField]
     private bool allowMapOrientation;
 
+    public TopViewCamera topViewCamera;
+
     private void Awake() {
 
         PopulateOptionsList();
@@ -39,16 +41,18 @@ public class MapOrientation : MonoBehaviour {
         dropdown.ClearOptions();
         dropdown.AddOptions(optionsList);
         dropdown.value = 1;     // Select North-West option first
-
     }
 
     private void Start() {
         dropdown.onValueChanged.AddListener(
             delegate { 
-                DropdownValueChanged(); 
-                ModeManager.Instance.pathFindingMode.RemoveFollowStates();  
+                DropdownValueChanged();
             }
         );
+    }
+
+    public int Value() {
+        return dropdown.value;
     }
 
     private void HandleOrientation() {
@@ -72,13 +76,12 @@ public class MapOrientation : MonoBehaviour {
             default:
                 break;
         }
-
-        CameraManager.Instance.SwitchCameraModeWith(mapViewCameraInt);
     }
 
     public void DropdownValueChanged() {
+        currentValue = dropdown.value;
         // implementation is currently for NW and SE, others are authored for extensibility
-        switch (dropdown.value)
+        switch (currentValue)
         {
             case 0:
                 orientation = Orientation.SouthEast;
