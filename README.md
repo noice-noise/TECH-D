@@ -1,5 +1,7 @@
 # TECH-D
 
+![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/noice-noise/TECH-D?include_prereleases&sort=semver&style=flat-square)
+![itch.io demo](https://img.shields.io/badge/demo-ready-birghtgreen)
 
 Technologian Electronic Help Desk is an interactive stand-alone application that aims to provide students, parents, and visitors the tools and features to quickly and easily navigate university premises, buildings, services, and rooms.
 
