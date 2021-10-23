@@ -11,41 +11,55 @@ public class TourMode : Singleton<TourMode>
     private List<Transform> tourList;
 
     private int tourCounter;
-    private Transform currentlySelected;
+    // private Transform currentlySelected;
 
     public bool onTourMode { set; get; } = false;
     public bool autoSwitch = true;
 
-    [SerializeField] private float duration = 5f;
+    [Tooltip("Duration of auto switch")]
+    [SerializeField] private float idleDuration = 5f;   // duration while on normal cycle
+    [Tooltip("Duration of auto switch if user tries to visit specific Services/Rooms")]
+    [SerializeField] private float cycleDuration = 10f;
 
-
+    private float duration;
     private bool onCountdown = false;
     public float countdownTimer = 0f;
     public float countdownPercent = 0f;
 
-    public KeyCode tourModeHotKey = KeyCode.F9;
     public KeyCode nextTourModeHotKey = KeyCode.RightArrow;
     public KeyCode prevTourModeHotKey = KeyCode.LeftArrow;
 
     private void Awake() {
-        UpdateTourList();
+        InitTourList();
+        duration = idleDuration;
+
+        CameraManager.OnCameraTargetChanged += HandleTargetChange;
     }
 
-    public void UpdateTourList() {
+    private void HandleTargetChange() {
+        if (onTourMode) {
+            StopNextTourTargetCoroutine();
+            HandleAutoSwitchDuration();
+            HandleTourAutoSwitch();
+        }
+    }
+
+    public void InitTourList() {
         world = GameObject.FindGameObjectWithTag("World");
         tourList = new List<Transform>();
         PopulateTourList();
     }
 
     private void Update() {
-        HandleAllInputs();
-        HandleTourAutoSwitch();
+        if (onTourMode) {
+            HandleTourAutoSwitch();
 
-        if (onCountdown && countdownTimer > 0) {
-            countdownTimer -= Time.deltaTime;
-            countdownPercent = countdownTimer / duration;
-        } else {
-            countdownTimer = 0f;
+            if (onCountdown && countdownTimer > 0) {
+                countdownTimer -= Time.deltaTime;
+                countdownPercent = countdownTimer / duration;
+            } else {
+                countdownTimer = 0f;
+            }
         }
     }
 
@@ -57,13 +71,6 @@ public class TourMode : Singleton<TourMode>
     private void ToggleTourMode() {
         onTourMode = !onTourMode;
     }
-
-    private void OnTourModeKeyDown() {
-        if (Input.GetKeyDown(tourModeHotKey)) {
-            HandleTourModeToggle();
-        }
-    }
-
 
     private void HandleTourModeState() {
         if (!onTourMode) {
@@ -80,6 +87,15 @@ public class TourMode : Singleton<TourMode>
         }
     }
 
+    private void HandleAutoSwitchDuration() {
+        bool notAFocusableBuilding = !CameraManager.Instance.currentTarget.CompareTag("FocusedViewTarget");
+        if (notAFocusableBuilding) {
+            duration = cycleDuration;
+        } else {
+            duration = idleDuration;
+        }
+    }
+
     IEnumerator NextTourTargetCoroutine() {
         onCountdown = true;
         yield return new WaitForSeconds(duration);
@@ -93,34 +109,54 @@ public class TourMode : Singleton<TourMode>
         StopCoroutine("NextTourTargetCoroutine");
     }
 
-    private void HandleAllInputs() {
-        OnTourModeKeyDown();
-        HandleTourHotkeys();
+    public void NextTour() {
+        UpdateCurrentTarget();
+        StopNextTourTargetCoroutine();
+        IncrementCounter();
+        SelectCurrentTourTarget();
+        HandleTourAutoSwitch();
     }
 
-    private void HandleTourHotkeys() {
-        if (onTourMode) {
-            if (Input.GetKeyDown(prevTourModeHotKey)) {
-                PreviousTour();
-            } else if (Input.GetKeyDown(nextTourModeHotKey)) {
-                NextTour();
+    public void PreviousTour() {
+        UpdateCurrentTarget();
+        StopNextTourTargetCoroutine();
+        DecrementCounter();
+        SelectCurrentTourTarget();
+        HandleTourAutoSwitch();
+    }
+
+    private void UpdateCurrentTarget() {
+        Debug.Log("Update");
+        var targetTransform = CameraManager.Instance.currentTarget;
+        var currentTourTarget = tourList[tourCounter];
+        
+        if (targetTransform.CompareTag("FocusedViewTarget")) {
+            targetTransform = targetTransform.parent;
+        }
+
+        if (!currentTourTarget.Equals(targetTransform)) {
+            int index = FindIndexOf(targetTransform);
+
+            if (index != -1) {
+                tourCounter = index;
             }
         }
     }
 
-    public void NextTour() {
-        IncrementCounter();
-        SelectCurrentTourTarget();
-    }
+    private int FindIndexOf(Transform targetTransform) {
+        Debug.Log("Target: " + targetTransform.name);
+        for (int i = 0; i < tourList.Count; i++) {
+            if (tourList[i].Equals(targetTransform)) {
+                Debug.Log("Success");
+                return i;
+            }
+        }
 
-    public void PreviousTour() {
-        DecrementCounter();
-        SelectCurrentTourTarget();
+        return -1;  // invalid
     }
 
     private void SelectCurrentTourTarget() {
-        currentlySelected = tourList[tourCounter];
-        Navigation.Instance.SelectAndUpdateUI(currentlySelected);
+        Navigation.Instance.SelectAndUpdateUI(tourList[tourCounter]);
     }
     
 
