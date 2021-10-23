@@ -31,7 +31,7 @@ Technologian Electronic Help Desk is an interactive stand-alone application that
 - [Comeros, Raul Jr.](https://github.com/noice-noise)
 - Dela Cruz, Hans Eubert
 - [Seblos, Samantha Jane](https://github.com/SammyJaneBS)
-- Quiros, Paul John
+- [Quiros, Paul John](https://github.com/Apoool)
 - Villamor, Jason
 
 
