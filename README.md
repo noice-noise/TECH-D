@@ -6,8 +6,8 @@
 Technologian Electronic Help Desk is an interactive stand-alone application that aims to provide students, parents, and visitors the tools and features to quickly and easily navigate university premises, buildings, services, and rooms.
 
 ## Prototype Demo
-Live [Demo](https://noice-noise.itch.io/tech-d-demo)
-Password: tech-d-tester
+- [Live Demo](https://noice-noise.itch.io/tech-d-demo)
+- Password: `tech-d-tester`
 
 
 <p align="center">
