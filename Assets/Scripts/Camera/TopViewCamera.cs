@@ -28,13 +28,13 @@ public class TopViewCamera : MonoBehaviour {
         baseTrackedObjectOffset =  topViewCamera.GetCinemachineComponent<CinemachineComposer>().m_TrackedObjectOffset;
 
         // copy and modify top camera offsets with reversed x and z on adjustedFollow
-        adjustedFollowOffset = new Vector3(-1 * baseFollowOffset.x, baseFollowOffset.y, -1 * baseFollowOffset.z);
+        adjustedFollowOffset = new Vector3(baseFollowOffset.x, baseFollowOffset.y, -1 * baseFollowOffset.z);
         adjustedTrackedObjectOffset = new Vector3(baseTrackedObjectOffset.x, baseTrackedObjectOffset.y,baseTrackedObjectOffset.z);
 
         adjustedAgentFollowOffset = new Vector3(
                 -1 * (baseFollowOffset.x - 20), 
-                baseFollowOffset.y, 
-                -1 * (baseFollowOffset.z - 20));
+                baseFollowOffset.y - 20, 
+                -1 * (baseFollowOffset.z + 20));
 
         // adjustedAgentTrackedObjectOffset = new Vector3(baseTrackedObjectOffset.x, baseTrackedObjectOffset.y,baseTrackedObjectOffset.z);
     }
@@ -53,18 +53,16 @@ public class TopViewCamera : MonoBehaviour {
 
         if (value == southEastFacing) {
             HandleAllFollowOffsets();
-            HandleAllAgentOffsets();
         } else {
             RestoreAllOffsets();
         }
 
         if (ModeManager.Instance.OnPathFindingMode()) {
-            AdjustTrackedOffset(topViewCamera, adjustedAgentTrackedObjectOffset);
-            // if (value == southEastFacing) {
-            //     HandleAllAgentOffsets();
-            // } else {
-            //     AdjustTrackedOffset(topViewCamera, adjustedAgentTrackedObjectOffset);
-            // }
+            if (value == southEastFacing) {
+                HandleAllAgentOffsets();
+            } else {
+                AdjustTrackedOffset(topViewCamera, adjustedAgentTrackedObjectOffset);
+            }
         }
     }
 
