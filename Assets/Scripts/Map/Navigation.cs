@@ -174,10 +174,6 @@ public class Navigation : Singleton<Navigation> {
             moveAgentButtonPressed = false;
         }
 
-        // if (Input.GetKeyDown(KeyCode.F5)) {
-        //     SystemManager.Instance.RestartSystem();
-        // }
-
         if (Input.GetKeyDown(KeyCode.F6)) {
             Settings.Instance.SetQuality(0);
         }
@@ -188,6 +184,18 @@ public class Navigation : Singleton<Navigation> {
 
         if (Input.GetKeyDown(KeyCode.F8)) {
             Settings.Instance.SetQuality(5);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F9)) {
+            ModeManager.Instance.HandleModeChange(ModeManager.TechDMode.Interactive);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F10)) {
+            ModeManager.Instance.HandleModeChange(ModeManager.TechDMode.Tour);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F11)) {
+            ModeManager.Instance.HandleModeChange(ModeManager.TechDMode.PathFinding);
         }
 
         if (Input.GetKeyDown(KeyCode.F12)) {
