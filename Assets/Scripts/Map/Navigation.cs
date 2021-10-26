@@ -29,8 +29,8 @@ public class Navigation : Singleton<Navigation> {
     }
 
     private void Update() {
-        HandleInputs();
         HandleSelection();
+        HandleInputs();
     }
 
     public void HandleButtonClickedEvent(GameObject obj) {
@@ -71,10 +71,12 @@ public class Navigation : Singleton<Navigation> {
                         return;
                     }
                     SelectAndUpdateUI(toFocus);
+                    selectButtonPressed = false;
                 }
             } else if (selected != null) {
                 ModeManager.Instance.DisplayDefaultMessage();
-
+                SetCursorNormal();
+                
                 if (moveAgentButtonPressed) {
                     ModeManager.HandleModeChange(ModeManager.TechDMode.PathFinding);
                     
@@ -89,9 +91,6 @@ public class Navigation : Singleton<Navigation> {
                     AgentController.SetDestination();
                 }
             }
-            else {
-                SetCursorNormal();
-            }
         }
     }
 
@@ -101,7 +100,7 @@ public class Navigation : Singleton<Navigation> {
     /// while camera will get the "Focus" as a target.
     /// </summary>
     public void SelectAndUpdateUI(Transform targetTransform) {
-        Debug.Log(targetTransform.parent.name);
+
         if (targetTransform == null) {
             return;
         }
@@ -110,6 +109,7 @@ public class Navigation : Singleton<Navigation> {
             this.currentlyFocusedBuilding = targetTransform;
             var focus = targetTransform.Find("Focus");
             if (focus != null) {
+
                 targetTransform = focus;
             }
         }
