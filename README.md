@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="/Media/tech_d_banner.png" alt="banner" />
+</p>
+
 # TECH-D
 
 ![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/noice-noise/TECH-D?include_prereleases&sort=semver&style=flat-square)
@@ -9,6 +13,7 @@ Technologian Electronic Help Desk is an interactive stand-alone application that
 - [Live Demo](https://noice-noise.itch.io/tech-d-demo)
 - Password: `tech-d-tester`
 
+## Screenshots
 
 <p align="center">
   <img src="/Media/demo-1.gif" alt="animated" />
