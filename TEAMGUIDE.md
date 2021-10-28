@@ -96,6 +96,34 @@ Note:
 	- Open up the "Bevel" and choose "Round". You can adjust the "Depth" setting to change the thickness of the pipe;
 	(But there is also a cylinder to use it as a round or for a pipe but you need to get its perfect round measurement.
 
+#### Ashley
+Log 09-07-21: - Instead of a rough sketch and an image reference, learn to utilize accurate measurement.
+- To flip, rotate, mirror, and invert mesh, use transform.
+
+Log 09-10-21 Log:
+- Concentrate on one model. (Working on one model at a time)
+- Remove any unnecessary mesh, lights, or text from the scene.
+
+Log 09-11-21 Log:
+- Pay attention to the minor details when dealing with large projects.
+- When working with little projects, pay attention to the smallest details.
+- Develop a basic understanding of the modifier properties.
+
+Log 09-14-21: - Modeling a quadrilateral can be difficult; learn to model it by breaking it into four sections rather than as a whole.
+- Before modeling an existing structure, try to look at every visible detail and figure out where you should spend your effort.
+
+Log 09-29-21: - Use mesh minimally and learn to model efficiently.
+- Remove all materials and only apply textures after everything else has been completed.
+- Acquire familiarity with the materials property.
+- Using "recalculating normals" (A -> Shift N) rather than "joining all mesh" only, might sometimes destroy the model.
+
+Log 2021-5: - Don't rush your art; keep editing even if it's only a few minutes.
+- Don't stop on your momentum.
+- Continue to learn from others.
+- Always experiment with the tools available in Blender.
+- Experiment, experiment, and then experiment some more.
+- Understand and remember why you're doing this.
+
 
 ## Project Management
 `Author: Paul`
