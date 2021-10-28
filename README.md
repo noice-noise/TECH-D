@@ -18,10 +18,9 @@ Technologian Electronic Help Desk is an interactive stand-alone application that
 ## Screenshots
 
 <p align="center">
-  <img src="/Media/demo-1.gif" alt="animated" width="320" height="240"/>
-  <img src="/Media/demo-2.gif" alt="animated" width="320" height="240"/>
-  <img src="/Media/demo-3.gif" alt="animated" width="320" height="240"/>
-  <img src="/Media/demo-4.gif" alt="animated" width="320" height="240"/>
+  <img src="/Media/demo-1.gif" alt="animated" width="256" height="144"/>
+  <img src="/Media/demo-2.gif" alt="animated" width="256" height="144"/>
+  <img src="/Media/demo-3.gif" alt="animated" width="256" height="144"/>
 </p>
 
 
