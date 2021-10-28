@@ -1,11 +1,6 @@
 # TEAM GUIDE
 It is the team's responsibility to make the TECH-D project maintainable for future iterations. The ideas, notes, and tips found in this document are essential guides not standards. 
 
-#### Contents
-[[#Developers Guide]]
-[[#Modelers Guide]]
-[[#Project Management]]
-
 <br>
 
 ## Developers Guide
@@ -34,7 +29,6 @@ It is the team's responsibility to make the TECH-D project maintainable for futu
 - When building the project, 
 	- make sure that there are no errors
 	- proper version folder has been created (following [SemVer](https://semver.org/))
-	-  
 
 ### Script Improvements
 - Search
