@@ -43,7 +43,7 @@ Technologian Electronic Help Desk is an interactive stand-alone application that
 
 # Team
 
-- Cabreros, Ashley
+- [Cabreros, Ashley](https://www.linkedin.com/in/ashley-cabreros-71a01317b/)
 - [Comeros, Raul Jr.](https://github.com/noice-noise)
 - Dela Cruz, Hans Eubert
 - [Seblos, Samantha Jane](https://github.com/SammyJaneBS)
