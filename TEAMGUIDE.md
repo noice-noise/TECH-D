@@ -1,9 +1,9 @@
 # TEAM GUIDE
-It is the team's responsibility to make the TECH-D project maintainable for future iterations. The ideas, notes, and tips found in this document are essential guides not standards. 
+> It is the team's responsibility to make the TECH-D project maintainable for future iterations. The ideas, notes, and tips found in this document are essential guides not standards. 
 
 <br>
 
-## Developers Guide
+## Development
 `Author: Raul`
 ### Unity
 - When having trouble with NavMesh,
@@ -41,7 +41,7 @@ It is the team's responsibility to make the TECH-D project maintainable for futu
 	- It is fragile and unstable in the current version, curse my incompetence jk. It is recommended to find a simpler asset like PathCreator by Sebastian Lague
 
 
-## Modelers Guide
+## Modelling
 #### Hans
 - Shift + Tab for object snapping, very good for placements as it snaps into an edge of a polygon.
 
@@ -123,6 +123,22 @@ Log 2021-5: - Don't rush your art; keep editing even if it's only a few minutes.
 - Always experiment with the tools available in Blender.
 - Experiment, experiment, and then experiment some more.
 - Understand and remember why you're doing this.
+
+## Research
+Objective : Gather Exact and Reliable Data
+ - as a project researcher being patient and data seeker is a key to gather enough and reliable data specially those data that are not all available in the internet. 
+ - there are lot of factors to be used as a researcher such as gathering data in the internet, coming from reliable person, and putting all together as to form a reliable data.
+
+Documentator
+Objective : Precise and specific information and deatails to the system
+ - writing some document is one of the most important thing because it describe the overall project and helps the project to be has it's own originality and not be plagiarize quickly.
+
+Tester
+Objective : Find the defects, improvements and lots of dry run
+ - testing is one of the ways to know different ups and downs of the system.
+ - is like shadowing users, it helps the developer of the team to know the needs of the user to be satisfied, important features, critical problems , feedbacks, wants of the user and different problems to be fixed from minimal problems to critcal problems.
+
+
 
 
 ## Project Management
