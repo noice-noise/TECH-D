@@ -18,9 +18,9 @@ Technologian Electronic Help Desk is an interactive stand-alone application that
 ## Screenshots
 
 <p align="center">
-  <img src="/Media/demo-1.gif" alt="animated" width="256" height="144"/>
-  <img src="/Media/demo-2.gif" alt="animated" width="256" height="144"/>
-  <img src="/Media/demo-3.gif" alt="animated" width="256" height="144"/>
+  <img src="/Media/demo-1.gif" alt="gif-demo" width="256" height="144"/>
+  <img src="/Media/demo-2.gif" alt="gif-demo" width="256" height="144"/>
+  <img src="/Media/demo-3.gif" alt="gif-demo" width="256" height="144"/>
 </p>
 
 
@@ -35,9 +35,9 @@ Technologian Electronic Help Desk is an interactive stand-alone application that
 
 ## Constraints/Limitations
 
-- No real-time location or GPS tracking
-- Models are based from public domain data and maps
-- Navigation inside a building is not available yet
+- No real-time location or GPS tracking.
+- Models are based from public domain data and maps.
+- Navigation and preview inside a building are not available yet.
 
 
 # Team
@@ -52,9 +52,9 @@ Technologian Electronic Help Desk is an interactive stand-alone application that
 
 ## Disclaimer
 
-This prototype version is currently in progress. Any information, models, and functions may or may not be accurate. 
+This prototype version is currently in progress. Any information, models, and functions may or may not be accurate. Various free assets and open-sourced projects has been utilized in the development of this application.
 
-The CIT University does not officially endorse this project. For official help and information, please visit the official [website](https://cit.edu/).
+The CIT University does not officially endorse this project. For official help and information, please visit the official [university website](https://cit.edu/).
 
 
 ## Packages
