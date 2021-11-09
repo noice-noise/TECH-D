@@ -15,7 +15,7 @@ Alpha version is currently closed.
 - [Live Demo](https://noice-noise.itch.io/tech-d-demo)
 
 
-## Screenshots
+## Captures
 
 <p align="center">
   <img src="/Media/demo-1.gif" alt="gif-demo" width="256" height="144"/>
@@ -40,7 +40,7 @@ Alpha version is currently closed.
 - Navigation and preview inside a building are not available yet.
 
 
-# Team
+## Team
 
 - [Cabreros, Ashley](https://github.com/nonradicals)
 - [Comeros, Raul Jr.](https://github.com/noice-noise)
@@ -52,9 +52,10 @@ Alpha version is currently closed.
 
 ## Disclaimer
 
-This prototype version is currently in progress. Any information, models, and functions may or may not be accurate. Various free assets and open-sourced projects has been utilized in the development of this application.
+This prototype version is currently in progress. Any information, models, and functions may or may not be accurate. The Cebu Institute of Technology - University does not officially endorse this project. For official help and information, please visit the official [university website](https://cit.edu/).
 
-The CIT University does not officially endorse this project. For official help and information, please visit the official [university website](https://cit.edu/).
+# Resources
+Various free assets and open-sourced projects has been utilized in the development of this application.
 
 
 ## Packages
