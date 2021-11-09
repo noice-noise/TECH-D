@@ -11,8 +11,8 @@ Technologian Electronic Help Desk is an interactive stand-alone application that
 
 
 ## Prototype Demo
+Alpha version is currently closed.
 - [Live Demo](https://noice-noise.itch.io/tech-d-demo)
-- Password: `tech-d-tester`
 
 
 ## Screenshots
