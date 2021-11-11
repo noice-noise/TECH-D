@@ -7,7 +7,7 @@
 ![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/noice-noise/TECH-D?include_prereleases&sort=semver&style=flat-square)
 ![itch.io demo](https://img.shields.io/badge/demo-ready-birghtgreen)
 
-Technologian Electronic Help Desk is an interactive stand-alone application that aims to provide students, parents, and visitors the tools and features to quickly and easily navigate university premises, buildings, services, and rooms.
+Technologian Electronic Help Desk is an interactive application that helps students, parents, and visitors locate buildings, services, and rooms, find answers to their queries, or get to know the university.
 
 
 ## Prototype Demo
@@ -52,7 +52,7 @@ Alpha version is currently closed.
 
 ## Disclaimer
 
-This prototype version is currently in progress. Any information, models, and functions may or may not be accurate. The Cebu Institute of Technology - University does not officially endorse this project. For official help and information, please visit the official [university website](https://cit.edu/).
+The development of this student project is currently in progress. Any information, models, and functions may or may not be accurate. The Cebu Institute of Technology - University does not officially endorse this project. For official help and information, please visit the official [university website](https://cit.edu/).
 
 # Resources
 Various free assets and open-sourced projects has been utilized in the development of this application.
