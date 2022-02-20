@@ -78,6 +78,6 @@ Various free assets and open-sourced projects has been utilized in the developme
 
 ## Acknowledgments
 
-- [Font Awesome Free Version](https://fontawesome.com)
+- [Icons8 Free Version](https://icons8.com/)
 - [Google Material Design](https://material.io/tools/icons/?style=baseline)
 - [Metropolis Font by Chris Simpson](https://fontsarena.com/metropolis-by-chris-simpson/)
