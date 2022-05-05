@@ -9,13 +9,17 @@
 
 Technologian Electronic Help Desk is an interactive application that helps students, parents, and visitors locate buildings, services, and rooms, find answers to their queries, or get to know the university.
 
+<<<<<<< Updated upstream
 > Featured in [#TeknoFlex](https://www.instagram.com/p/CWLQ0o2JPhW/) which showcases student projects in our university's instagram.
 
 
+=======
+>>>>>>> Stashed changes
 ## Prototype Demo
-Alpha version is currently closed.
-- [Live Demo](https://noice-noise.itch.io/tech-d-demo)
 
+Alpha version is currently closed.
+
+- [Live Demo](https://noice-noise.itch.io/tech-d-demo)
 
 ## Captures
 
@@ -25,7 +29,6 @@ Alpha version is currently closed.
   <img src="/Media/demo-3.gif" alt="gif-demo" width="256" height="144"/>
 </p>
 
-
 ## Features
 
 - Map Navigation
@@ -34,31 +37,28 @@ Alpha version is currently closed.
 - Search (Building/Service/Room)
 - Queries (Directory/Guides/Related Services)
 
-
 ## Constraints/Limitations
 
 - No real-time location or GPS tracking.
 - Models are based from public domain data and maps.
 - Navigation and preview inside a building are not available yet.
 
-
 ## Team
 
 - [Cabreros, Ashley](https://github.com/nonradicals)
 - [Comeros, Raul Jr.](https://github.com/noice-noise)
-- [Dela Cruz, Hans Eubert](https://github.com/nonradicals)
+- [Dela Cruz, Hans Eubert](https://github.com/Bee-Gin-er16)
 - [Seblos, Samantha Jane](https://github.com/SammyJaneBS)
 - [Quiros, Paul John](https://github.com/Apoool)
 - [Villamor, Jason](https://github.com/Beljams)
-
 
 ## Disclaimer
 
 The development of this student project is currently in progress. Any information, models, and functions may or may not be accurate. The Cebu Institute of Technology - University does not officially endorse this project. For official help and information, please visit the official [university website](https://cit.edu/).
 
 # Resources
-Various free assets and open-sourced projects has been utilized in the development of this application.
 
+Various free assets and open-sourced projects has been utilized in the development of this application.
 
 ## Packages
 
@@ -68,13 +68,11 @@ Various free assets and open-sourced projects has been utilized in the developme
 - [RoadArchitect version of FritzsHero](https://github.com/FritzsHero/RoadArchitect/projects/1)
 - [DoTween](http://dotween.demigiant.com/)
 
-
 ## Assets
 
 - Car Kit by [Kenney](https://www.kenney.nl)
 - Concrete Building textures by [JulioVII](https://itch.io/profile/juliovii)
 - Leaves and Branch textures from [Raw Pixel](https://www.rawpixel.com/)
-
 
 ## Acknowledgments
 
