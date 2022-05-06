@@ -9,15 +9,11 @@
 
 Technologian Electronic Help Desk is an interactive application that helps students, parents, and visitors locate buildings, services, and rooms, find answers to their queries, or get to know the university.
 
-<<<<<<< Updated upstream
 > Featured in [#TeknoFlex](https://www.instagram.com/p/CWLQ0o2JPhW/) which showcases student projects in our university's instagram.
 
-
-=======
->>>>>>> Stashed changes
 ## Prototype Demo
 
-Alpha version is currently closed.
+Alpha version demo has been already closed.
 
 - [Live Demo](https://noice-noise.itch.io/tech-d-demo)
 
